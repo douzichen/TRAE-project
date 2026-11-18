@@ -21,7 +21,8 @@
 │   ├── 10-lessons.md      # 坑账本与避坑机制
 │   ├── 11-rollback.md     # 回滚机制
 │   ├── 12-context-budget.md # 上下文预算与按需加载
-│   └── 13-concurrency-and-lifecycle.md # 并发认领、裁决优先级与功能退役
+│   ├── 13-concurrency-and-lifecycle.md # 并发认领、裁决优先级与功能退役
+│   └── 14-project-bootstrap.md # 需求收集、项目创建、内网与数据红线
 ├── AGENTS-GLOBAL.md       # 跨项目长期记忆索引：权威来源、通用/特定层划分、新项目引导
 ├── README.md              # 本文件：目录结构与会话入口
 ├── CLAUDE.md / GEMINI.md  # 工具入口指针（由 scripts/tool_entrypoints.sh 生成）
@@ -37,7 +38,12 @@
 │
 ├── workflows/             # 技能串联而成的工作流
 │   ├── TEMPLATE.md        # 工作流模板（含流程图）
+│   ├── W-001-new-project.md # 需求收集 → PRD 冻结 → bootstrap → 骨架验收
 │   └── INDEX.md           # 工作流索引
+│
+├── templates/             # 可直接复制的模板（填写后落到对应目录）
+│   ├── RQ-CARD.md         # 需求卡片模板：编号、验收标准、例外与失败处理
+│   └── ADR-000-project-init.md # 新项目初始化决策模板（每个新项目复制一份）
 │
 ├── PITFALLS.md            # 坑账本：出坑即记账，落到防复发机制
 ├── reports/               # 三路独立审计报告目录（结构 / 可执行性 / 覆盖性）
@@ -81,6 +87,7 @@
 | `README.md` | 目录说明与入口，回答"东西该放哪" | 固定名称，唯一 |
 | `skills/` | 一个任务沉淀一个技能，含适用场景、步骤、验收 | `S-001-<英文短名>.md` |
 | `workflows/` | 多个技能按顺序串成的主线路径，含流程图 | `W-001-<英文短名>.md` |
+| `templates/` | 可直接复制的模板：需求卡片、新项目初始化决策；填写后落到对应目录，模板本身不放具体项目内容 | 固定名称，唯一 |
 | `PITFALLS.md` | 坑账本：返工/退回/回滚即记账，每条必须落到防复发机制 | `P-001` 起编号，一条一节 |
 | `docs/CLAIMS.md` | 并行认领台账：谁在改哪些文件/目录、预计何时结束；格式与生命周期规则见 `rules/13` | 固定名称，唯一 |
 | `reports/` | 三路独立审计报告（结构 / 可执行性 / 覆盖性），属审计资产，不删除 | `A-`、`B-`、`C-` 前缀 |

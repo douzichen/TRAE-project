@@ -20,6 +20,7 @@
 | 回滚手段 | [11](rules/11-rollback.md) |
 | 规则库体积、读不完怎么办、按需加载 | [12](rules/12-context-budget.md) |
 | 多 Agent 并行、结论冲突、功能下线 | [13](rules/13-concurrency-and-lifecycle.md) |
+| 需求收集、项目创建、内网与数据红线 | [14](rules/14-project-bootstrap.md) |
 | 跨册冲突核对（改任何规则前） | [docs/CONFLICT-MATRIX.md](docs/CONFLICT-MATRIX.md) |
 
 - 多条都像时，写入**最贴近的那一册**，并在其"相关分册"补链接；仍无法归类才考虑新建分册，且须先记入待确认事项请用户确认。
@@ -66,6 +67,7 @@
 | 11 | [回滚机制](rules/11-rollback.md) | 任何改动前 |
 | 12 | [上下文预算与按需加载](rules/12-context-budget.md) | 规则库增长或触达预算阈值时 |
 | 13 | [并发认领与生命周期](rules/13-concurrency-and-lifecycle.md) | 多 Agent 并行作业、需求变更或下线时 |
+| 14 | [项目创建与需求收集](rules/14-project-bootstrap.md) | 新项目立项、从需求收集到骨架跑通时 |
 
 ## 规则库结构约定（双向链接）
 

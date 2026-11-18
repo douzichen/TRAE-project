@@ -13,6 +13,7 @@
 | [ADR-005](ADR-005-first-self-audit-ruling.md) | 首次自检的三路审计裁定与修复分工 | 2026-11-18 | 部分被取代 |
 | [ADR-006](ADR-006-rule-change-two-tier.md) | 规则条款变更改为"是否改变含义"两级制 | 2026-11-18 | 已接受 |
 | [ADR-007](ADR-007-supersede-budget-threshold.md) | 以 160 行取代最小必读集预算阈值（取代 ADR-004/005 阈值条款） | 2026-11-18 | 已接受 |
+| [ADR-008](ADR-008-project-bootstrap-and-requirements-intake.md) | 项目启动与需求受理采用"规则＋skill＋模板＋workflow"四件套 | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 

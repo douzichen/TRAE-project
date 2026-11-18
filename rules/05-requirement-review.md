@@ -13,4 +13,4 @@
 
 - 上级总纲：[AGENTS.md](../AGENTS.md)
 - 参见：[01 用户背景](01-user-profile.md)
-- 参见：[06 问题与决策质量](06-quality.md)
+- 参见：[06 问题与决策质量](06-quality.md)、[14 项目创建与需求收集](14-project-bootstrap.md)

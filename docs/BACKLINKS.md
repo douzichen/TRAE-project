@@ -16,9 +16,11 @@
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/00-core.md
 - rules/05-requirement-review.md
 - rules/07-pending-and-handoff.md
+- rules/14-project-bootstrap.md
 
 ## 02-intake-and-dod.md
 
@@ -26,32 +28,40 @@
 - docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/00-core.md
 - rules/07-pending-and-handoff.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/14-project-bootstrap.md
 
 ## 03-skill-sync.md
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/09-precipitation.md
 
 ## 04-roles-and-dispatch.md
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/14-project-bootstrap.md
 
 ## 05-requirement-review.md
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/01-user-profile.md
 - rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/14-project-bootstrap.md
+- skills/S-003-requirements-intake.md
 
 ## 06-quality.md
 
@@ -61,15 +71,19 @@
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - docs/adr/ADR-006-rule-change-two-tier.md
 - docs/adr/ADR-007-supersede-budget-threshold.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/14-project-bootstrap.md
 - schedules/daily-retro.md
+- skills/S-002-project-bootstrap.md
 
 ## 07-pending-and-handoff.md
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
 - rules/13-concurrency-and-lifecycle.md
@@ -79,11 +93,14 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/03-skill-sync.md
 - rules/07-pending-and-handoff.md
 - rules/11-rollback.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/14-project-bootstrap.md
+- skills/S-003-requirements-intake.md
 
 ## 09-precipitation.md
 
@@ -121,4 +138,15 @@
 - docs/CLAIMS.md
 - docs/CONFLICT-MATRIX.md
 - rules/08-alignment-and-versioning.md
+- rules/14-project-bootstrap.md
+- skills/S-003-requirements-intake.md
+
+## 14-project-bootstrap.md
+
+- AGENTS.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- rules/05-requirement-review.md
+- skills/S-002-project-bootstrap.md
+- skills/S-003-requirements-intake.md
+- workflows/W-001-new-project.md
 
