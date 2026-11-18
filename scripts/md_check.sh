@@ -42,6 +42,11 @@ if [ "$ahead" -gt 0 ]; then
   echo "[SYNC] 分支领先远端 $ahead 个提交，未推送=同步未完成（推送后须核对 ahead 0）" >&2
 fi
 
+# 7) 关键铁律章节不得被误删（P-006/P-007 防复发：用户背景、指令复述、DoD 等核心章节）
+for sec in "## 用户背景" "## 执行前必读" "## 指令接收与边界确认" "## 任务完成的交付反馈清单" "## 需求定义审查" "## 问题与决策质量"; do
+  grep -qF "$sec" AGENTS.md || { echo "[P-004] AGENTS.md 缺失关键章节：$sec"; fail=1; }
+done
+
 if [ "$fail" -eq 0 ]; then
   echo "[P-004] md 完整性校验通过"
 else

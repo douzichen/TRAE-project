@@ -21,6 +21,15 @@
 │
 ├── PITFALLS.md            # 坑账本：出坑即记账，落到防复发机制
 │
+├── prompts/               # 提问库：用户提供的提问法原文存档（规则正文在 AGENTS.md）
+│   └── QUESTION-BANK.md   # 十条提问法原文 + 用户修订版 + 处置对照表
+│
+├── docs/                  # 项目文档
+│   └── adr/               # 决策记录：一条一文件，写清理由与否决项
+│       ├── INDEX.md       # ADR 索引
+│       ├── TEMPLATE.md    # ADR 模板
+│       └── ADR-001-adopt-ten-prompts.md
+│
 ├── deploy-key.pub         # Deploy key 公钥档案（可入库；私钥在 .secrets/，永不入库）
 │
 ├── scripts/               # 防复发自检脚本（挂 git hook 自动执行）
