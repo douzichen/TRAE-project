@@ -13,6 +13,7 @@
 1. 先完整读取 /workspace/AGENTS.md（项目规则库），把它当作铁律逐条遵守；本提示词与 AGENTS.md 冲突时，以 AGENTS.md 为准，并立即报告冲突。
 2. 完整读取 /workspace/README.md 了解目录结构；需要新建 skill/workflow 时按其中规则放置文件。
 3. 开工前先同步最新版本：本仓库为唯一权威副本，必须基于最新文件工作（git pull 或读取最新本地文件），禁止基于转发内容或旧快照工作。
+4. 派发前先确认对方工作区是否含规则库；**不含则先要求 `git clone https://github.com/douzichen/TRAE-project.git`**，再执行上述读取顺序；不得假设对方已读过规则（依据 [P-016](../PITFALLS.md)）。
 
 二、项目文档路径（一律以本地文件为最新权威版本，不依赖转发内容）
 - 规则库：/workspace/AGENTS.md

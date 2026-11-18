@@ -1,3 +1,5 @@
+> ⚠️ 实测未被宿主自动加载（2026-11-18，三次盲测均失败）；保留仅为兼容可能的后续版本，请勿视为生效入口。生效方式见 [docs/adr/ADR-011-no-auto-injection.md](../../docs/adr/ADR-011-no-auto-injection.md)。
+
 # TRAE 项目规则（入口指针）
 
 > 本文件是 TRAE 项目规则的入口指针，规则正文在仓库根 `AGENTS.md`，不复制正文。
