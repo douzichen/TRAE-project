@@ -35,6 +35,7 @@
 
 - AGENTS.md
 - rules/06-quality.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 05-requirement-review.md
 
@@ -65,6 +66,7 @@
 - rules/07-pending-and-handoff.md
 - rules/11-rollback.md
 - rules/12-context-budget.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 09-precipitation.md
 
@@ -82,9 +84,16 @@
 
 - AGENTS.md
 - rules/08-alignment-and-versioning.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 12-context-budget.md
 
 - AGENTS.md
+- docs/AGENT-ADAPTER.md
 - rules/00-core.md
+
+## 13-concurrency-and-lifecycle.md
+
+- AGENTS.md
+- rules/08-alignment-and-versioning.md
 

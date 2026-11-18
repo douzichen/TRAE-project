@@ -19,9 +19,13 @@
 │   ├── 08-alignment-and-versioning.md # 对齐红线与版本管理
 │   ├── 09-precipitation.md # 经验沉淀与工作流
 │   ├── 10-lessons.md      # 坑账本与避坑机制
-│   └── 11-rollback.md     # 回滚机制
+│   ├── 11-rollback.md     # 回滚机制
+│   ├── 12-context-budget.md # 上下文预算与按需加载
+│   └── 13-concurrency-and-lifecycle.md # 并发认领、裁决优先级与功能退役
 ├── AGENTS-GLOBAL.md       # 跨项目长期记忆索引：权威来源、通用/特定层划分、新项目引导
 ├── README.md              # 本文件：目录结构与会话入口
+├── CLAUDE.md / GEMINI.md  # 工具入口指针（由 scripts/tool_entrypoints.sh 生成）
+├── .cursorrules           # Cursor 入口指针（由 scripts/tool_entrypoints.sh 生成）
 ├── .gitignore             # 排除上传件、密钥、依赖等不入库内容
 │
 ├── schedules/             # 定时任务定义真源（调度器为运行时副本）
@@ -36,6 +40,7 @@
 │   └── INDEX.md           # 工作流索引
 │
 ├── PITFALLS.md            # 坑账本：出坑即记账，落到防复发机制
+├── reports/               # 三路独立审计报告目录（结构 / 可执行性 / 覆盖性）
 │
 ├── prompts/               # 提问库：用户提供的提问法原文存档（规则正文在 rules/06-quality.md）
 │   └── QUESTION-BANK.md   # 十条提问法原文 + 用户修订版 + 处置对照表
@@ -54,7 +59,9 @@
 │   ├── md_check.sh        # pre-commit：INDEX 登记、坑编号连续、标题去重、关键分册防误删
 │   ├── link_check.sh      # pre-commit：死链校验、双向链接结构、分册索引登记、生成反向链接
 │   ├── pre-push-check.sh  # pre-push：凭据自检与密钥自动恢复
-│   └── delivery_report.sh # pre-commit：每次提交生成交付反馈清单草稿（D-1/D-2/D-3/D-5）
+│   ├── delivery_report.sh # pre-commit：每次提交生成交付反馈清单草稿（D-1/D-2/D-3/D-5）
+│   ├── context_budget.sh  # pre-commit：最小必读集与分册行数预算校验
+│   └── secrets_scan.sh    # pre-commit：密钥/敏感信息扫描（即将新增）
 │
 ├── .githooks/             # git hooks（core.hooksPath 指向此处）
 │
@@ -73,6 +80,8 @@
 | `skills/` | 一个任务沉淀一个技能，含适用场景、步骤、验收 | `S-001-<英文短名>.md` |
 | `workflows/` | 多个技能按顺序串成的主线路径，含流程图 | `W-001-<英文短名>.md` |
 | `PITFALLS.md` | 坑账本：返工/退回/回滚即记账，每条必须落到防复发机制 | `P-001` 起编号，一条一节 |
+| `reports/` | 三路独立审计报告（结构 / 可执行性 / 覆盖性），属审计资产，不删除 | `A-`、`B-`、`C-` 前缀 |
+| `CLAUDE.md` / `GEMINI.md` / `.cursorrules` | 各工具入口指针，指向总纲、最小必读集与 12 册，由脚本生成，不手改 | 固定名称，由 `scripts/tool_entrypoints.sh` 生成 |
 | `deploy-key.pub` | Deploy key 公钥永久档案：GitHub 登记依据，环境丢失后凭此重新登记 | 固定名称，唯一 |
 | `scripts/` | 防复发自检脚本，挂 pre-commit / pre-push hook 自动拦截 | 一个检查一个脚本 |
 | `.secrets/` | 密钥、凭据等本机文件 | 不入库、不写入任何文档 |

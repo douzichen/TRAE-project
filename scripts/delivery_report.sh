@@ -9,15 +9,23 @@ changed=$( { git diff --cached --name-only; git diff --name-only; } | grep -v '^
 echo "===== 交付反馈清单（逐项对照 AGENTS.md，缺项=任务未完成）====="
 
 echo ""
-echo "## D-1 AGENTS.md 新增段 / 全文"
-if printf '%s\n' "$changed" | grep -qx 'AGENTS.md'; then
+echo "## D-1 规则文件（AGENTS.md / rules/*.md）新增段 / 全文"
+rulefiles=$(printf '%s\n' "$changed" | grep -E '^(AGENTS\.md|rules/[0-9]{2}-.*\.md)$' || true)
+if [ -n "$rulefiles" ]; then
   echo "### 一、本次新增/修改的段落"
-  git diff HEAD -- AGENTS.md | grep -E '^\+[^+]' | sed 's/^+//'
+  for f in $rulefiles; do
+    echo "--- $f ---"
+    git diff HEAD -- "$f" | grep -E '^\+[^+]' | sed 's/^+//'
+  done
   echo ""
   echo "### 二、改动后的全文"
-  cat AGENTS.md
+  for f in $rulefiles; do
+    echo "=== $f ==="
+    cat "$f"
+    echo ""
+  done
 else
-  echo "AGENTS.md 未改动 → 回复中须写明：AGENTS.md 未改动，无全文义务"
+  echo "规则库未改动 → 回复中须写明：规则库未改动，无全文义务"
 fi
 
 echo ""

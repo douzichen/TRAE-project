@@ -15,6 +15,10 @@ done
 echo "[P-010] 最小必读集合计 ${total} 行（上限 150）"
 [ "$total" -gt 150 ] && { echo "[P-010] 超限：最小必读集 ${total} 行 > 150，必须把细则移出常驻集（见 rules/12）"; fail=1; }
 
+n=$(count AGENTS.md)
+if [ "$n" -gt 100 ]; then echo "[P-010] 总纲 AGENTS.md 为 ${n} 行 > 100，必须精简（见 rules/12）"; fail=1; fi
+echo "[P-010] 总纲 ${n} 行（上限 100）"
+
 for f in rules/[0-9][0-9]-*.md; do
   [ -f "$f" ] || continue
   n=$(count "$f")

@@ -16,7 +16,7 @@
 ## 版本管理与历史留存
 
 - 项目采用 Git 单一仓库（monorepo）：文档、脚本、JSON、代码同仓管理，确保同一次提交内"文档与实现"处于同一版本，天然满足对齐要求。
-- 每个功能一个分支 + 一次合并：分支落地前须完成审查（含引用矩阵与审查结论），合并历史即"三件套审计"的存档。
+- **单 Agent 顺序作业时直推 main**；多 Agent 并行时必须按 [13 册](13-concurrency-and-lifecycle.md) 认领，必要时开分支，禁止对同一文件并行直推。分支落地前须完成审查（含引用矩阵与审查结论），合并历史即"三件套审计"的存档。
 - 口径版本用 tag 标记（如 `prd-v1.2`）；交接文档中引用 tag 与 commit，不靠口头描述。
 - 回滚即版本操作：改错了用 revert 或切回指定 commit，历史资料永久可追溯、可拉取恢复。
 - 仓库为唯一权威副本（remote 与本地镜像并行），本地不留未入库的"临时最终版"。
@@ -24,7 +24,8 @@
 
 ## 提交与推送的固定步骤（缺一步即未完成）
 
-1. `git add` 本轮改动 → 提交（pre-commit 自动跑 `md_check.sh` + `link_check.sh` + 生成交付草稿，任一失败即禁止提交）；
+0. 先跑 `scripts/context_budget.sh`（pre-commit 已自动执行，手工核对时需单跑）；
+1. `git add` 本轮改动 → 提交（pre-commit 自动跑 `md_check.sh` + `link_check.sh` + `context_budget.sh` + 生成交付草稿，任一失败即禁止提交）；
 2. `git push origin main`（pre-push 自动做凭据自检与密钥恢复）；
 3. 核对 `git status -sb` 显示分支与 `origin/main` 齐平，即 **ahead 0**；
 4. 核对远端哈希：`git rev-parse HEAD` 与 `git ls-remote origin main` 的值一致；
@@ -35,3 +36,4 @@
 - 上级总纲：[AGENTS.md](../AGENTS.md)
 - 参见：[07 待确认与交接](07-pending-and-handoff.md)
 - 参见：[11 回滚机制](11-rollback.md)
+- 参见：[13 并发认领与生命周期](13-concurrency-and-lifecycle.md)

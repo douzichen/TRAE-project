@@ -43,13 +43,32 @@ if [ "$ahead" -gt 0 ]; then
   echo "[SYNC] 分支领先远端 $ahead 个提交，未推送=同步未完成（推送后须核对 ahead 0）" >&2
 fi
 
-# 7) 关键铁律分册不得被误删（P-006/P-007 防复发：用户背景、复述、DoD、合规要求等核心条款）
+# 7) 关键铁律分册不得被误删，且必须有内容（P-006/P-007 防复发：只查文件存在拦不住整节被删）
 for f in rules/00-core.md rules/01-user-profile.md rules/02-intake-and-dod.md rules/05-requirement-review.md rules/06-quality.md rules/10-lessons.md; do
   [ -e "$f" ] || { echo "[P-004] 缺失关键分册：$f"; fail=1; }
 done
 for key in "rules/00-core.md" "rules/01-user-profile.md" "rules/02-intake-and-dod.md" "rules/05-requirement-review.md" "rules/06-quality.md" "rules/10-lessons.md"; do
   grep -qF "$key" AGENTS.md || { echo "[P-004] 总纲索引未登记：$key"; fail=1; }
 done
+
+# 7b) 内容级校验：关键分册必须含其核心条款关键词（防"章节被清空但文件还在"）
+for pair in "rules/01-user-profile.md:财税从业者" "rules/01-user-profile.md:提问只问业务" "rules/02-intake-and-dod.md:D-1" "rules/02-intake-and-dod.md:复述" "rules/05-requirement-review.md:政策" "rules/12-context-budget.md:未完整读取" "rules/13-concurrency-and-lifecycle.md:认领"; do
+  f=${pair%%:*}; k=${pair#*:}
+  [ -e "$f" ] || continue
+  grep -qF "$k" "$f" || { echo "[P-004] 核心条款缺失：$f 不含关键词「$k」"; fail=1; }
+done
+
+# 8) 审计资产只增不减（C-3：删掉末条坑或整份 ADR 也能过检 → 补此检查）
+cnt_now=$(grep -cE '^### P-[0-9]{3}' PITFALLS.md || true)
+cnt_head=$(git show HEAD:PITFALLS.md 2>/dev/null | grep -cE '^### P-[0-9]{3}' || true)
+if [ -n "$cnt_head" ] && [ "${cnt_now:-0}" -lt "${cnt_head:-0}" ]; then
+  echo "[P-010] 审计资产被删减：坑条目 $cnt_head → $cnt_now，账本只增不减"; fail=1
+fi
+adr_now=$(ls docs/adr/ADR-*.md 2>/dev/null | wc -l | tr -d ' ')
+adr_head=$(git ls-tree --name-only HEAD docs/adr/ 2>/dev/null | grep -c '^docs/adr/ADR-.*\.md$' || true)
+if [ -n "$adr_head" ] && [ "${adr_now:-0}" -lt "${adr_head:-0}" ]; then
+  echo "[P-010] 审计资产被删减：ADR $adr_head → $adr_now，决策记录只增不减"; fail=1
+fi
 
 if [ "$fail" -eq 0 ]; then
   echo "[P-004] md 完整性校验通过"
