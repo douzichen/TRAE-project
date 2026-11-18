@@ -71,4 +71,6 @@
 - 结论：本宿主不存在自动注入项目规则的位置——`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`、`.cursorrules`、`.trae/rules`（新建后仍无效）、`.cursor/rules`、`.github/copilot-instructions.md` 均未被自动加载，已金丝雀盲测 3 次全部失败。
 - 后果：规则只对"读过它"的会话有效；写进文件不等于生效。
 - 固定动作：① 新会话粘贴 [开工令](templates/SESSION-START.md)；② 派单首条消息显式写明"先读哪些文件"；③ 只认交付产物（D-1~D-7、影响面表、依据核验、引用矩阵），不认"我已读"。
+- 排查顺序：先确认工作区是否与规则库同源（是否已 clone `https://github.com/douzichen/TRAE-project.git`），再看是否符合"未确认加载"；不得把文件不在本机误判为机制失效。
+- 新工作区首次使用：先 `git clone` 到本地目录再粘开工令，否则必然读不到。
 - 详见 [ADR-011](docs/adr/ADR-011-no-auto-injection.md)。
