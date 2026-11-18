@@ -26,7 +26,7 @@
 ├── scripts/               # 防复发自检脚本（挂 git hook 自动执行）
 │   ├── md_check.sh        # pre-commit：INDEX 登记、坑编号连续、标题去重
 │   ├── pre-push-check.sh  # pre-push：凭据自检与密钥自动恢复
-│   └── agents_diff.sh     # AGENTS.md 改动时生成"新增段+全文"（P-002 半自动）
+│   └── delivery_report.sh # pre-commit：每次提交生成交付反馈清单草稿（D-1/D-2/D-3/D-5）
 │
 ├── .githooks/             # git hooks（core.hooksPath 指向此处）
 │
