@@ -21,5 +21,8 @@ root="$(git rev-parse --show-toplevel)"
 # [M4-b] 坑账本必填字段
 "$root/scripts/pitfall_check.sh" || exit 1
 
+# [D-7] 涉税/政策依据核验（依 ADR-010 以告警模式上线，按 P-015 零误报后转阻断）
+"$root/scripts/policy_guard.sh" || exit 1
+
 # 交付反馈清单机械代理：每次提交即生成 D-1/D-2/D-3/D-5 草稿（非阻断）
 "$root/scripts/delivery_report.sh" >&2

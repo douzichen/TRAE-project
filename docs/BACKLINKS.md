@@ -13,6 +13,7 @@
 
 ## 01-user-profile.md
 
+- AGENTS-GLOBAL.md
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
@@ -57,11 +58,13 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-010-policy-evidence-gate.md
 - rules/01-user-profile.md
 - rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
+- rules/15-delivery-dod.md
 - skills/S-003-requirements-intake.md
 
 ## 06-quality.md
@@ -159,6 +162,7 @@
 
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
+- docs/adr/ADR-010-policy-evidence-gate.md
 - rules/02-intake-and-dod.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
