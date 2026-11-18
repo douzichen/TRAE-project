@@ -18,6 +18,7 @@
 | [ADR-010](ADR-010-policy-evidence-gate.md) | 涉税/政策结论的依据核验门禁（业务类硬约束、技术类软约束） | 2026-11-18 | 已接受 |
 | [ADR-011](ADR-011-no-auto-injection.md) | 本宿主无自动注入，改为显式传递与可检产物 | 2026-11-18 | 已接受 |
 | [ADR-012](ADR-012-gate-script-portability.md) | 门禁脚本跨平台可移植性：机械拦截不可移植写法 | 2026-11-18 | 已接受 |
+| [ADR-013](ADR-013-handoff-snapshot.md) | 续窗衔接机制：CURRENT.md 快照随交付更新、不设归档目录 | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 

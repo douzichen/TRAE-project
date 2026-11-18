@@ -20,6 +20,14 @@
 - 写交接时必须写"没做什么"和"为什么没做"，不能只写"已完成"。交接内容与项目文档（PRD、FSFSD 等）的口径必须一致。
 - **交接必须包含"沉淀"栏**：本次沉淀了什么（skill / workflow）、复用了哪一个、若无需沉淀则写明理由。
 
+## 交接快照（CURRENT.md）与续窗衔接（2026-11-18，[ADR-013](../docs/adr/ADR-013-handoff-snapshot.md)）
+
+- **落点固定**：`docs/handoff/CURRENT.md` 是唯一"当前交接"，按 [templates/HANDOFF.md](../templates/HANDOFF.md) 填写；**不设 archive 目录，git 历史即归档**。限 ~30 行，只写 git log 与交付报告看不到的内容（在途状态、未提交半成品、下一个动作）；与 D-1~D-7 重复的内容一律不写。
+- **触发（主次分明，不得靠用户口头提醒）**：主触发——与交付**同一提交**内更新 CURRENT.md；兜底——每日 00:00 复盘比对 `git log -1 -- docs/handoff/CURRENT.md` 与 HEAD，落后即补记；口述收尾仅在"任务未完成就要关窗"时使用（P-002 教训：靠人记必失效）。
+- **续窗衔接**：[02](02-intake-and-dod.md) 的"复述需求"仍是第一动作；读 CURRENT.md 并入复述的边界清单一起报——目标/现状/未决/下一步 + 与文档的差异；冲突时**用户当轮指令 > 交接文档口径**（[13](13-concurrency-and-lifecycle.md) 裁决第 1 位）。
+- **新鲜度**：新窗口先执行 `git log -1 --format='%h %s' -- docs/handoff/CURRENT.md`，与快照所记内容核对；不一致即声明「交接可能过期，以 git log 为准」，不得把过期快照当权威（P-018）。
+- **待确认台账与快照分离**：本册第一节的待确认清单是常青台账，随状态更新、不随任务归档；CURRENT.md 只放指针。
+
 ## 相关分册
 
 - 上级总纲：[AGENTS.md](../AGENTS.md)

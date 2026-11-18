@@ -30,6 +30,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-013-handoff-snapshot.md
 - rules/00-core.md
 - rules/07-pending-and-handoff.md
 - rules/12-context-budget.md
@@ -89,6 +90,8 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-013-handoff-snapshot.md
+- docs/handoff/CURRENT.md
 - rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
 - rules/13-concurrency-and-lifecycle.md
@@ -118,6 +121,7 @@
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-013-handoff-snapshot.md
 - rules/06-quality.md
 - rules/09-precipitation.md
 
@@ -136,6 +140,7 @@
 - docs/ROLE-SWITCH-CHECK.md
 - docs/adr/ADR-007-supersede-budget-threshold.md
 - docs/adr/ADR-009-move-dod-out-of-core.md
+- docs/adr/ADR-013-handoff-snapshot.md
 - rules/00-core.md
 - rules/15-delivery-dod.md
 - skills/S-004-rulebase-onboarding.md
@@ -145,6 +150,8 @@
 - AGENTS.md
 - docs/CLAIMS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-013-handoff-snapshot.md
+- rules/07-pending-and-handoff.md
 - rules/08-alignment-and-versioning.md
 - rules/14-project-bootstrap.md
 - skills/S-003-requirements-intake.md
