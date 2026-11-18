@@ -7,6 +7,7 @@
 0. 同源与版本：先执行 `sh scripts/session_start_check.sh`，把输出整段贴进交付 D-5。
    - 若报「不在 git 仓库内」或脚本不存在：副本过旧或未 clone，先 clone / `git pull --ff-only origin main` 再重来，不得在旧副本上下"文件不存在"的结论（P-018）。
    - 退出码 1：按脚本每条的"处理/结论"修正后重跑；退出码 2：远端未核对，交付须声明。
+   - 平台：POSIX 用 `sh`；Windows 在 Git Bash 中执行（PowerShell 无 `sh`，报 CommandNotFound 时按此处理，不得判定门禁失败）。
 1. 先按顺序读取：`AGENTS.md` → `rules/00-core.md`、`rules/01-user-profile.md`、`rules/02-intake-and-dod.md`；再按 `AGENTS.md` 路由表读与本任务相关的 1~2 册（交付类任务必读 `rules/15-delivery-dod.md`）。
 2. 记录版本：`git rev-parse --short HEAD` 写进交付 D-5；跨 Agent 使用时另报本副本与 `origin/main` 的差值。
 3. 首条回复必须声明加载状态：「已读：<文件清单>」或「未确认加载」，并复述金丝雀串 `CANARY-TRAE-7F3A9C`；该串只能证明副本内容，不证明宿主已加载。

@@ -62,7 +62,10 @@ if [ -f docs/handoff/CURRENT.md ]; then
   if [ -z "$last" ]; then
     echo "[SESSION] 交接快照存在但未入库（untracked）：可能过期，先确认是否本机临时产物"
   else
+    last_full=$(git log -1 --format='%H' -- docs/handoff/CURRENT.md 2>/dev/null)
+    n_since=$(git rev-list --count "$last_full..HEAD" 2>/dev/null)
     echo "[SESSION] 交接快照：$last"
+    echo "[SESSION] 交接快照距今 ${n_since} 个提交（仅供参考：快照按交付更新，不构成失败）"
   fi
 else
   echo "[SESSION] 无交接快照：交付中声明“无交接快照，仅依据仓库与 git log 作答”"

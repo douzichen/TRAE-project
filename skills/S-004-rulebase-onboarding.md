@@ -60,8 +60,8 @@
 
 ```text
 你是本规则库的协作 Agent。开工按顺序执行：
-1. 确认同源：当前目录须有 AGENTS.md 与 rules/；没有就先 git clone https://github.com/douzichen/TRAE-project.git 并进入目录，不要断言"机制失效"。
-2. 运行 git rev-parse --short HEAD，把 commit 写进交付。
+1. 确认同源与更新：当前目录须有 AGENTS.md 与 rules/；没有就先 git clone https://github.com/douzichen/TRAE-project.git 并进入目录；**已有副本先 git pull --ff-only origin main，落后就不得开工**，不要断言"机制失效"。
+2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
 3. 依次读完 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md，再按 AGENTS.md 路由表读相关 1~2 册（交付任务加读 rules/15-delivery-dod.md），禁止整库通读。
 4. 首条回复声明「已读：<文件清单>」或「未确认加载」；能复述金丝雀 CANARY-TRAE-7F3A9C 才算真读。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。
