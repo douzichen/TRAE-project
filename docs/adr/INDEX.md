@@ -9,8 +9,10 @@
 | [ADR-001](ADR-001-adopt-ten-prompts.md) | 采纳"十条提问法"并做分级触发改造 | 2026-11-18 | 已接受 |
 | [ADR-002](ADR-002-fix-conflicts-in-ten-prompts.md) | 修正十条提问法落地条款的三处自相矛盾 | 2026-11-18 | 已接受 |
 | [ADR-003](ADR-003-rules-split-with-bidirectional-links.md) | 规则库改为总纲＋分册＋双向链接 | 2026-11-18 | 已接受 |
-| [ADR-004](ADR-004-context-budget.md) | 为规则库设置上下文预算与按需加载 | 2026-11-18 | 已接受 |
-| [ADR-005](ADR-005-first-self-audit-ruling.md) | 首次自检的三路审计裁定与修复分工 | 2026-11-18 | 已接受 |
+| [ADR-004](ADR-004-context-budget.md) | 为规则库设置上下文预算与按需加载 | 2026-11-18 | 部分被取代 |
+| [ADR-005](ADR-005-first-self-audit-ruling.md) | 首次自检的三路审计裁定与修复分工 | 2026-11-18 | 部分被取代 |
+| [ADR-006](ADR-006-rule-change-two-tier.md) | 规则条款变更改为"是否改变含义"两级制 | 2026-11-18 | 已接受 |
+| [ADR-007](ADR-007-supersede-budget-threshold.md) | 以 160 行取代最小必读集预算阈值（取代 ADR-004/005 阈值条款） | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 

@@ -51,6 +51,8 @@
 - AGENTS.md
 - docs/ROLE-SWITCH-CHECK.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
+- docs/adr/ADR-006-rule-change-two-tier.md
+- docs/adr/ADR-007-supersede-budget-threshold.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
@@ -96,6 +98,7 @@
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
 - docs/ROLE-SWITCH-CHECK.md
+- docs/adr/ADR-007-supersede-budget-threshold.md
 - rules/00-core.md
 
 ## 13-concurrency-and-lifecycle.md
