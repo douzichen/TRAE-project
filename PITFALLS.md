@@ -208,10 +208,10 @@
 
 ### P-018：本地副本落后于远端却被当作"权威"，用过期规则与过期门禁做决策
 - **日期**：2026-11-18
-- **现象**：WorkBuddy 删除旧镜像后自述"权威 `rulebase/` 完好（79 文件、HEAD `4dd1f0f`）"；同一时刻远端 main 已到 `321dc19`（81 文件）。其副本缺 `3ece995`（`link_check` 相对路径修复）与 `321dc19`（[M1-b]），仍会用带 `mktemp` 的旧门禁在 Windows 上失败，并用旧账本做删前核对。
-- **根因**：S-004 只要求"记录 commit"，没有任何环节把 HEAD 与 `origin/main` 做差；clone 一次长期复用，"权威"被理解成"这份拷贝"，而不是"远端 main 的最新提交"。
-- **影响**：修好的坑被重复报告成"机制失效"；决策依据是过期规则；文件数与账本条目核对基于旧版本（79 vs 81）。
-- **防复发机制**：① 机械——`scripts/delivery_report.sh` 的 D-5 段增加"落后远端 N 个提交，先 pull"提示，每次提交可见；② 口径——"权威"指远端 main 的最新提交，交付须同时写"本副本 commit + 与远端差值"；③ 复核——引用 PITFALLS/规则做删除、覆盖类决策前，先确认 `git log -1` 与 `git ls-remote origin main` 一致。
-- **证据**：WorkBuddy 2026-11-18 反馈原文"79 文件、HEAD `4dd1f0f`"；本仓库同日 `git log` 为 `321dc19`、`git ls-files` 81 个文件，差 2 个提交、2 个文件。闭环：WorkBuddy 当日 `git pull --ff-only` 前移至 `d5d8fb8`，`link_check` / `paths_check` 均 exit 0。
-- **关联**：`skills/S-004-rulebase-onboarding.md` 第 2 步；`scripts/delivery_report.sh`；`rules/08`；P-017
-- **状态**：已落实（2026-11-18，delivery_report 增落后提示）
+- **现象**：WorkBuddy 删除旧镜像后自述"权威 `rulebase/` 完好（79 文件、HEAD `4dd1f0f`）"；同一时刻远端 main 已到 `321dc19`（81 文件）。其副本缺 `3ece995`（`link_check` 相对路径修复）与 `321dc19`（[M1-b]），仍会用带 `mktemp` 的旧门禁在 Windows 上失败，并用旧账本做删前核对。**第二次（2026-11-18 晚）**：新窗口在 `d5d8fb8` 副本上做 SESSION-START 首场实测，因未 fetch，`git log --all -- docs/handoff` 无输出，遂断言"交接文件从未入库"；实际远端已到 `94120a3`，该文件就在其中。
+- **根因**：S-004 只要求"记录 commit"，没有任何环节把 HEAD 与 `origin/main` 做差；clone 一次长期复用，"权威"被理解成"这份拷贝"，而不是"远端 main 的最新提交"。**首次的防复发机制只挂在提交时（`delivery_report`），对新窗口"不提交、直接读"的路径完全无效**——这正是"靠提醒不靠机械"的典型失效。
+- **影响**：修好的坑被重复报告成"机制失效"；决策依据是过期规则；文件数与账本条目核对基于旧版本（79 vs 81）。第二次直接导致一份错误结论（"交接文件不存在"）进入交付。
+- **防复发机制**：① 口径——"权威"指远端 main 的最新提交，交付须同时写"本副本 commit + 与远端差值"；② 复核——引用 PITFALLS/规则做删除、覆盖类决策前，先确认 `git log -1` 与 `git ls-remote origin main` 一致；③ **机械（第二次复发后升级）**——`scripts/session_start_check.sh` 在开工时打印 HEAD/远端/落后数/交接快照/金丝雀，`templates/SESSION-START.md` 第 0 步与 `rules/02` 强制先跑（[ADR-014](docs/adr/ADR-014-session-start-selfcheck.md)）；④ 提交侧仍保留 `delivery_report.sh` 的落后提示，两者分工：开工查"读到的是不是最新"，提交查"推的是不是最新"。
+- **证据**：WorkBuddy 2026-11-18 反馈原文"79 文件、HEAD `4dd1f0f`"；本仓库同日 `git log` 为 `321dc19`、`git ls-files` 81 个文件，差 2 个提交、2 个文件。闭环：WorkBuddy 当日 `git pull --ff-only` 前移至 `d5d8fb8`，`link_check` / `paths_check` 均 exit 0。第二例：新窗口自述 HEAD `d5d8fb8`、判定 `docs/handoff/CURRENT.md` "不存在且从未入库"；主仓库实测 HEAD 与远端均为 `94120a3`，该文件 1943 字节。
+- **关联**：`skills/S-004-rulebase-onboarding.md` 第 2 步；`scripts/delivery_report.sh`；`scripts/session_start_check.sh`；`templates/SESSION-START.md`；`rules/02`；`rules/08`；P-017
+- **状态**：已升级（2026-11-18，第二次复发）——机制由"提交时提示"升级为"开工前自检"：新增只读脚本与开工令第 0 步，`rules/02` 同步一行；原 `delivery_report` 提示保留为提交侧防线。

@@ -19,6 +19,7 @@
 | [ADR-011](ADR-011-no-auto-injection.md) | 本宿主无自动注入，改为显式传递与可检产物 | 2026-11-18 | 已接受 |
 | [ADR-012](ADR-012-gate-script-portability.md) | 门禁脚本跨平台可移植性：机械拦截不可移植写法 | 2026-11-18 | 已接受 |
 | [ADR-013](ADR-013-handoff-snapshot.md) | 续窗衔接机制：CURRENT.md 快照随交付更新、不设归档目录 | 2026-11-18 | 已接受 |
+| [ADR-014](ADR-014-session-start-selfcheck.md) | 新窗口开工自检脚本与开工令第 0 步（P-018 二次复发升级） | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 

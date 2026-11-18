@@ -43,7 +43,9 @@
 │
 ├── templates/             # 可直接复制的模板（填写后落到对应目录）
 │   ├── RQ-CARD.md         # 需求卡片模板：编号、验收标准、例外与失败处理
-│   └── ADR-000-project-init.md # 新项目初始化决策模板（每个新项目复制一份）
+│   ├── ADR-000-project-init.md # 新项目初始化决策模板（每个新项目复制一份）
+│   ├── SESSION-START.md   # 新会话开工令：同源自检 → 读规则 → 读交接 → 声明加载状态
+│   └── HANDOFF.md         # 交接快照模板（五要素），落到 docs/handoff/CURRENT.md
 │
 ├── PITFALLS.md            # 坑账本：出坑即记账，落到防复发机制
 ├── reports/               # 三路独立审计报告目录（结构 / 可执行性 / 覆盖性）
@@ -56,6 +58,7 @@
 │   ├── CLAIMS.md          # 并行认领台账（认领人/范围/时间/状态，规则见 rules/13）
 │   ├── BACKLINKS.md       # 反向链接索引（由 scripts/link_check.sh 自动生成）
 │   ├── CONFLICT-MATRIX.md # 分册×分册冲突交叉表（人工维护，规则改动后必须更新）
+│   ├── handoff/           # 交接快照：CURRENT.md 为唯一"当前交接"（规则见 rules/07）
 │   └── adr/               # 决策记录：一条一文件，写清理由与否决项
 │       ├── INDEX.md       # ADR 索引
 │       ├── TEMPLATE.md    # ADR 模板
@@ -66,6 +69,7 @@
 ├── scripts/               # 防复发自检脚本（挂 git hook 自动执行）
 │   ├── md_check.sh        # pre-commit：INDEX 登记、坑编号连续、标题去重、关键分册防误删
 │   ├── link_check.sh      # pre-commit：死链校验、双向链接结构、分册索引登记、生成反向链接
+│   ├── session_start_check.sh # 新窗口开工自检（只读）：同源、版本、交接快照、金丝雀
 │   ├── pre-push-check.sh  # pre-push：凭据自检与密钥自动恢复
 │   ├── delivery_report.sh # pre-commit：每次提交生成交付反馈清单草稿（D-1/D-2/D-3/D-5）
 │   ├── context_budget.sh  # pre-commit：最小必读集与分册行数预算校验
@@ -87,7 +91,7 @@
 | `README.md` | 目录说明与入口，回答"东西该放哪" | 固定名称，唯一 |
 | `skills/` | 一个任务沉淀一个技能，含适用场景、步骤、验收 | `S-001-<英文短名>.md` |
 | `workflows/` | 多个技能按顺序串成的主线路径，含流程图 | `W-001-<英文短名>.md` |
-| `templates/` | 可直接复制的模板：需求卡片、新项目初始化决策；填写后落到对应目录，模板本身不放具体项目内容 | 固定名称，唯一 |
+| `templates/` | 可直接复制的模板：需求卡片、新项目初始化决策、会话开工令、交接快照；填写后落到对应目录，模板本身不放具体项目内容 | 固定名称，唯一 |
 | `PITFALLS.md` | 坑账本：返工/退回/回滚即记账，每条必须落到防复发机制 | `P-001` 起编号，一条一节 |
 | `docs/CLAIMS.md` | 并行认领台账：谁在改哪些文件/目录、预计何时结束；格式与生命周期规则见 `rules/13` | 固定名称，唯一 |
 | `reports/` | 三路独立审计报告（结构 / 可执行性 / 覆盖性），属审计资产，不删除 | `A-`、`B-`、`C-` 前缀 |
@@ -95,7 +99,7 @@
 | `deploy-key.pub` | Deploy key 公钥永久档案：GitHub 登记依据，环境丢失后凭此重新登记 | 固定名称，唯一 |
 | `scripts/` | 防复发自检脚本，挂 pre-commit / pre-push hook 自动拦截 | 一个检查一个脚本 |
 | `.secrets/` | 密钥、凭据等本机文件 | 不入库、不写入任何文档 |
-| `docs/`（待建） | PRD、FSFSD、交接文档、MOC 索引、维护指南 | 项目启动后按文档规范建立 |
+| `docs/`（业务文档待建） | PRD、FSFSD、MOC 索引、维护指南；交接快照已落在 `docs/handoff/CURRENT.md` | 项目启动后按文档规范建立 |
 | `src/`（待建） | 业务代码与脚本 | 项目启动后按技术方案建立 |
 
 ## 新增内容怎么放
