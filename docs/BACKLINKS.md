@@ -158,6 +158,8 @@
 ## 15-delivery-dod.md
 
 - AGENTS.md
+- docs/AGENT-ADAPTER.md
 - rules/02-intake-and-dod.md
 - rules/12-context-budget.md
+- rules/13-concurrency-and-lifecycle.md
 

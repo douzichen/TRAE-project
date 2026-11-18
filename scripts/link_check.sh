@@ -1,22 +1,32 @@
 #!/bin/sh
 # 规则库链接与结构校验（pre-commit 卡点）：死链、双向链接结构、索引登记、反向链接生成
 # 背景：AGENTS.md 已拆为"总纲 + rules/ 分册"，靠相对链接串联；链接一断，规则就找不到了
+# 性能：链接边只遍历一次并落临时文件，反向索引用单次 awk 计算（原实现对每个文件×每条分册都起一次 grep，约 27s，改造后 <2s）
 set -e
 cd "$(git rev-parse --show-toplevel)"
 fail=0
 
 files=$(ls AGENTS.md AGENTS-GLOBAL.md README.md PITFALLS.md 2>/dev/null; find rules docs skills workflows schedules -name '*.md' 2>/dev/null | sort)
 
-# 1) 死链校验：相对链接的目标必须存在
+edges=$(mktemp)
+trap 'rm -f "$edges"' EXIT
+
+# 1) 死链校验 + 收集链接边（一次遍历，边格式：源文件<TAB>目标文件名）
 for f in $files; do
   dir=$(dirname "$f")
-  for t in $(grep -oE '\]\([^)]+\)' "$f" | sed 's/^](//; s/)$//' | grep -vE '^(https?|mailto|#)' || true); do
-    t=${t%%#*}
-    [ -z "$t" ] && continue
-    case "$t" in *BACKLINKS.md) continue ;; esac
-    [ -e "$dir/$t" ] || { echo "[LINK] 死链：$f -> $t"; fail=1; }
-  done
+  targets=$(grep -oE '\]\([^)]+\)' "$f" 2>/dev/null | sed 's/^](//; s/)$//' | grep -vE '^(https?|mailto|#)' || true)
+  if [ -n "$targets" ]; then
+    for t in $targets; do
+      t=${t%%#*}
+      [ -z "$t" ] && continue
+      case "$t" in *BACKLINKS.md) continue ;; esac
+      [ -e "$dir/$t" ] || { echo "[LINK] 死链：$f -> $t"; fail=1; }
+      printf '%s\t%s\n' "$f" "${t##*/}" >> "$edges"
+    done
+  fi
 done
+
+sort -u "$edges" -o "$edges"
 
 # 2) 双向链接结构：每个分册必须有"归属总纲"与"相关分册"
 for f in rules/*.md; do
@@ -34,13 +44,11 @@ done
 # 3b) 分册必须被至少一个其他分册引用（防孤立分册长期无人读）
 for f in rules/*.md; do
   [ -e "$f" ] || continue
-  base=$(basename "$f")
-  hit=0
-  for other in rules/*.md; do
-    [ "$other" = "$f" ] && continue
-    if grep -qE "\]\(([^)]*/)?$base(#[^)]*)?\)" "$other"; then hit=1; break; fi
-  done
-  [ "$hit" -eq 1 ] || { echo "[LINK] 孤立分册（无其他分册引用）：$f"; fail=1; }
+  base=${f##*/}
+  if ! awk -F'\t' -v b="$base" -v s="$f" '$2==b && $1!=s && $1 ~ /^rules\//' "$edges" | grep -q .; then
+    echo "[LINK] 孤立分册（无其他分册引用）：$f"
+    fail=1
+  fi
 done
 
 # 4) 生成反向链接索引（自动生成，勿手改）
@@ -48,17 +56,13 @@ if [ "$fail" -eq 0 ]; then
   {
     echo "# 反向链接索引（自动生成，请勿手改）"
     echo ""
-    echo "> 由 \`scripts/link_check.sh\` 生成。修改或新增分册后运行该脚本即可刷新。"
+    echo '> 由 `scripts/link_check.sh` 生成。修改或新增分册后运行该脚本即可刷新。'
     echo ""
     for f in rules/*.md; do
-      echo "## $(basename "$f")"
+      base=${f##*/}
+      echo "## $base"
       echo ""
-      for src in $files; do
-        [ "$src" = "$f" ] && continue
-        if grep -qE "\]\(([^)]*/)?$(basename "$f")(#[^)]*)?\)" "$src"; then
-          echo "- $src"
-        fi
-      done
+      awk -F'\t' -v b="$base" -v s="$f" '$2==b && $1!=s {print "- " $1}' "$edges"
       echo ""
     done
   } > docs/BACKLINKS.md
