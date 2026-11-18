@@ -11,7 +11,7 @@
 - 上一提交完成：ADR-013、rules/07 交接快照节、HANDOFF 模板、SESSION-START 衔接步、冲突矩阵 07×02/12/13 三格、daily-retro 增 CURRENT.md 比对步并已同步调度器（`._LP-ABG40ZAUH`）、本文件首份实例。
 - 本提交完成：P-018 第二次复发升级——新增只读 `scripts/session_start_check.sh`；SESSION-START 增第 0 步（同源/版本/交接/金丝雀）；rules/02 加一行指针（必读集 158/160）；README 四处同步；ADR-014。
 - 本提交完成：验证型外部 Agent 只读落地——rules/04 新增专节；rules/03 收窄同步推送义务的适用范围；S-004、AGENT-ADAPTER、AGENTS.md、AGENTS-GLOBAL 同步；ADR-015；冲突矩阵 03×04、04×13 补依据。
-- 本提交完成：两处轻级补丁——SESSION-START 第 0 步补 Windows 平台写法；自检脚本第 4 项加"快照距今 N 个提交"提示（不参与判定）；S-004 可粘贴指令第 1、2 条补"已有副本先 pull"与"先跑自检"。
+- 本提交完成：两处轻级补丁——SESSION-START 第 0 步补 Windows 平台写法；自检脚本第 4 项加"快照距今 N 个提交"提示（不参与判定）；S-004 可粘贴指令第 1、2 条补"已有副本先 pull"与"先跑自检"；S-004 四处金丝雀表述统一为"只证明副本内容、不证明宿主加载"。
 - 未提交半成品：无（本提交即全部落地内容）。
 
 ## 已定决策

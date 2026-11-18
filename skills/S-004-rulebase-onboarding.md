@@ -4,7 +4,7 @@
 - **适用场景**：任何 Agent（豆包/千问/DSH/WorkBuddy/Claude Code 等）首次接入本规则库；或换工作区、换会话后确认规则是否真的生效
 - **前置输入**：能执行 `git clone` 与读文件的工作区；本次任务的一句话目标
 - **步骤**：见下方「执行步骤」，共 8 步，每步带判定
-- **判定标准（验收）**：首条回复有加载声明；交付含 D-1~D-7；能复述金丝雀标记
+- **判定标准（验收）**：首条回复有加载声明；交付含 D-1~D-7；能复述金丝雀标记（证明读到文件）
 - **常见坑**：不 clone 就断言"机制失效"（P-016）；用摘要冒充已读；只改名不改规则
 - **来源**：2026-11-18 三次盲测 + 端到端验证，见 [ADR-011](../docs/adr/ADR-011-no-auto-injection.md)
 - **版本**：v1.0
@@ -13,7 +13,7 @@
 
 - 本宿主**不自动注入**任何项目规则文件：`AGENTS.md`、`CLAUDE.md`、`GEMINI.md`、`.cursorrules`、`.trae/rules` 三次盲测全部未生效（[ADR-011](../docs/adr/ADR-011-no-auto-injection.md)）。
 - 实测有效的组合是：**同源工作区（git clone）+ 开工令（显式要求读取并声明加载状态）**。缺任一环，会话表现为「未确认加载」。
-- 金丝雀标记 `CANARY-TRAE-7F3A9C` 用于验证是否真读到：能复述 = 读到；复述不出 = 没读到，不得假装。
+- 金丝雀标记 `CANARY-TRAE-7F3A9C` 用于验证是否真读到文件：能复述 = 读到了这份副本；复述不出 = 没读到，不得假装。它**不证明宿主自动注入了规则**（[ADR-011](../docs/adr/ADR-011-no-auto-injection.md)）。
 
 ## 核心区分：获取全量，读取分层（最容易做错）
 
@@ -29,7 +29,7 @@
 3. **读常驻四件套**：`AGENTS.md`、`rules/00`、`01`、`02`，逐份读完。判定：有文件没读完或被截断，按「失败处理」声明。
 4. **按路由表读相关 1~2 册**；交付类任务加读 [rules/15](../rules/15-delivery-dod.md)。判定：不整库通读。
 5. **声明**：首条回复写「已读：<文件清单>」或「未确认加载」。判定：没有声明 = 未接入。
-6. **金丝雀验证**（可选但推荐）：复述 `AGENTS.md` 中的 `CANARY-TRAE-7F3A9C`。判定：复述不出 → 视为未读。
+6. **金丝雀验证**（可选但推荐）：复述 `AGENTS.md` 中的 `CANARY-TRAE-7F3A9C`。判定：复述不出 → 视为未读该文件；复述得出只证明读到副本，不证明宿主加载。
 7. **按自身能力适配**：只改第 4 节允许改的项，并逐项**声明降级**。
 8. **交付自检**：按 `rules/15-delivery-dod.md` 的 D-1~D-7 逐项对照。
 
@@ -63,7 +63,7 @@
 1. 确认同源与更新：当前目录须有 AGENTS.md 与 rules/；没有就先 git clone https://github.com/douzichen/TRAE-project.git 并进入目录；**已有副本先 git pull --ff-only origin main，落后就不得开工**，不要断言"机制失效"。
 2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
 3. 依次读完 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md，再按 AGENTS.md 路由表读相关 1~2 册（交付任务加读 rules/15-delivery-dod.md），禁止整库通读。
-4. 首条回复声明「已读：<文件清单>」或「未确认加载」；能复述金丝雀 CANARY-TRAE-7F3A9C 才算真读。
+4. 首条回复声明「已读：<文件清单>」或「未确认加载」，并复述金丝雀 CANARY-TRAE-7F3A9C；该串只证明副本内容，不证明宿主加载，真读以 D-1~D-7 产物为准。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。
 6. 交付按 D-1~D-7 逐项自检并附 commit 号；读不到规则时首行写「未确认加载：含规则库」，不得以规则为名下结论。
 7. 只读边界：可本地 commit 以便跑门禁，但禁止 git push、开 PR、上传任何文件到 GitHub；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
