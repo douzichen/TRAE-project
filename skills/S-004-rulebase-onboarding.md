@@ -66,7 +66,7 @@
 4. 首条回复声明「已读：<文件清单>」或「未确认加载」，并复述金丝雀 CANARY-TRAE-7F3A9C；该串只证明副本内容，不证明宿主加载，真读以 D-1~D-7 产物为准。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。
 6. 交付按 D-1~D-7 逐项自检并附 commit 号；读不到规则时首行写「未确认加载：含规则库」，不得以规则为名下结论。
-7. 只读边界：可本地 commit 以便跑门禁，但禁止 git push、开 PR、上传任何文件到 GitHub；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
+7. 只读边界：可本地 commit 以便跑门禁，但禁止 git push、开 PR、上传任何文件到 GitHub；**每个新 clone 先执行 `git config --local credential.helper ""`（空值会重置 helper 列表），再跑 `GIT_TERMINAL_PROMPT=0 git push --dry-run origin main`，必须失败才算通过**——新副本没有这条设置时，全局凭据会重新生效；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
 ```
 
 ## 来源与相关分册

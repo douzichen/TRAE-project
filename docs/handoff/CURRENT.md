@@ -13,6 +13,7 @@
 - 本提交完成：验证型外部 Agent 只读落地——rules/04 新增专节；rules/03 收窄同步推送义务的适用范围；S-004、AGENT-ADAPTER、AGENTS.md、AGENTS-GLOBAL 同步；ADR-015；冲突矩阵 03×04、04×13 补依据。
 - 本提交完成：两处轻级补丁——SESSION-START 第 0 步补 Windows 平台写法；自检脚本第 4 项加"快照距今 N 个提交"提示（不参与判定）；S-004 可粘贴指令第 1、2 条补"已有副本先 pull"与"先跑自检"；S-004 四处金丝雀表述统一为"只证明副本内容、不证明宿主加载"。
 - 本提交完成：WorkBuddy 接入验证回报后的三处文档校正——ROLE-SWITCH-CHECK 问 4 改 D-1~D-7；ADR-008 补注 D 项数沿革；AGENT-ADAPTER 门禁降级改两档（零改动 2 项 / 本地试改全链 8 项）。
+- 本提交完成：WorkBuddy 只读整改回执后的机制补强——S-004 第 7 条与 AGENT-ADAPTER 第五节明确"每个新 clone 都要置空 credential.helper 并 push --dry-run 自证失败"，堵住重 clone 后全局凭据复活的缺口。
 - 未提交半成品：无（本提交即全部落地内容）。
 
 ## 已定决策
