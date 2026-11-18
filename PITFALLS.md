@@ -38,7 +38,7 @@
 - **影响**：用户无法核对文档实际状态，重复返工沟通。
 - **防复发机制**：AGENTS.md 顶部新增"执行前必读（置顶）"章节，把"改动后必须给出新增段 + 全文"写成硬性要求，违反即为不合格。**升级为半自动**：`scripts/delivery_report.sh` 挂 pre-commit，每次提交自动生成 D-1（含全文）及 D-2/D-3/D-5 草稿；聊天输出这一步仍须按清单逐项对照。
 - **证据**：`scripts/delivery_report.sh` 第 12~13 行声明生成 D-1（AGENTS.md / `rules/*.md`），并按 `rules/[0-9]{2}-.*\.md` 匹配。
-- **关联**：rules/00-core.md「执行前必读」；rules/02-intake-and-dod.md「D-1」；scripts/delivery_report.sh
+- **关联**：rules/00-core.md「执行前必读」；rules/15-delivery-dod.md「D-1」；scripts/delivery_report.sh
 - **状态**：已升级（`delivery_report.sh` 已覆盖 AGENTS.md 与 `rules/*.md` 全文草稿——2026-11-18 复盘按 A-4 修复结果复核，原"待主审补 rules 分册全文覆盖"的描述已过期）
 
 **复发记录（2026-11-18，第三次）**：推送完成本轮任务后，回复中以"全文已由 hook 输出，如需我再贴一遍，说一声"把交付推迟给用户，用户当即指出违规。**根因升级**：机制只覆盖"文件改动时生成全文"，没有覆盖"任务完成后必须反馈哪些条目"这件事本身；且清单散落在多条规则里，收尾时无单一对照物，于是用一句"需要的话我再贴"糊弄过去。

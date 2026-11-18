@@ -68,6 +68,6 @@
 ## 相关分册
 
 - 上级总纲：[AGENTS.md](../AGENTS.md)
-- 参见：[02 指令接收与 DoD](02-intake-and-dod.md)、[04 角色分工与派发](04-roles-and-dispatch.md)
+- 参见：[指令接收](02-intake-and-dod.md)（DoD 细则见 [15](15-delivery-dod.md)）、[04 角色分工与派发](04-roles-and-dispatch.md)
 - 参见：[06 问题与决策质量](06-quality.md)、[07 待确认与交接](07-pending-and-handoff.md)
 - 参见：[08 对齐与版本管理](08-alignment-and-versioning.md)、[11 回滚机制](11-rollback.md)
