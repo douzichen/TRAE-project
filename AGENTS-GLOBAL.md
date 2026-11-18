@@ -38,7 +38,7 @@
 
 1. **取规则**：clone 本仓库（或由用户将 AGENTS.md 正文导入新项目环境）。
 2. **落位**：AGENTS.md 放到新项目根目录作为规则库；按新项目改写"项目特定层"，通用层原文不动。
-3. **装门禁**：复制 `scripts/` 与 `.githooks/`，执行 `git config core.hooksPath .githooks`，跑 `sh scripts/md_check.sh` 验证通过后再开工。
+3. **装门禁**：复制 `scripts/` 与 `.githooks/`，执行 `git config core.hooksPath .githooks`，跑 `sh scripts/md_check.sh` 验证通过后再开工。验证型外部 Agent 只读：**只跑 `scripts/` 下的检查，不装 `.githooks`、不配推送凭据**（[rules/04](rules/04-roles-and-dispatch.md)）。
 
 ## 使用纪律
 

@@ -47,13 +47,18 @@
 
 ## 04-roles-and-dispatch.md
 
+- AGENTS-GLOBAL.md
 - AGENTS.md
+- docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-011-no-auto-injection.md
+- docs/handoff/CURRENT.md
+- rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
+- skills/S-004-rulebase-onboarding.md
 
 ## 05-requirement-review.md
 
@@ -151,6 +156,7 @@
 - docs/CLAIMS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-013-handoff-snapshot.md
+- rules/04-roles-and-dispatch.md
 - rules/07-pending-and-handoff.md
 - rules/08-alignment-and-versioning.md
 - rules/14-project-bootstrap.md

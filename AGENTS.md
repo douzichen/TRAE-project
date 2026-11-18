@@ -89,7 +89,7 @@
 ## 跨 Agent 使用（非 TRAE 环境必读）
 
 - 其他 Agent（豆包、豆包工作、千问助手、DSH、WorkBuddy 等）取用本规则库前，必须先读 [docs/AGENT-ADAPTER.md](docs/AGENT-ADAPTER.md)。
-- 核心要求：可按自身角色改名、按自身能力降级，但**不得改写规则原意、不得删除审计资产、不得把降级当合规**。
+- 核心要求：可按自身角色改名、按自身能力降级，但**不得改写规则原意、不得删除审计资产、不得把降级当合规**；并且**只读**——可本地 commit 跑门禁，禁止 push/PR/上传任何文件（[rules/04](rules/04-roles-and-dispatch.md)）。
 - 本规则库的通用层与项目层划分见 [AGENTS-GLOBAL.md](AGENTS-GLOBAL.md)。
 
 ## 变更与维护

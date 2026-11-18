@@ -46,6 +46,7 @@
 **严禁改动**
 
 - 规则原意、阈值数字（以 [scripts/budget.conf](../scripts/budget.conf) 为准）、审计资产（PITFALLS、ADR、reports、审查结论）、D-1~D-7 的项数。
+- **推送权**：验证型 Agent 一律只读——可本地 commit 跑门禁，但禁止 `git push`、开 PR、上传任何文件到 GitHub；不装 `.githooks`（会自动恢复推送凭据）、不配 deploy key / token / `gh auth login`（用户明确限制，见 [rules/04](../rules/04-roles-and-dispatch.md)、[ADR-015](../docs/adr/ADR-015-validation-agents-readonly.md)）。
 
 ## 失败处理
 
@@ -65,6 +66,7 @@
 4. 首条回复声明「已读：<文件清单>」或「未确认加载」；能复述金丝雀 CANARY-TRAE-7F3A9C 才算真读。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。
 6. 交付按 D-1~D-7 逐项自检并附 commit 号；读不到规则时首行写「未确认加载：含规则库」，不得以规则为名下结论。
+7. 只读边界：可本地 commit 以便跑门禁，但禁止 git push、开 PR、上传任何文件到 GitHub；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
 ```
 
 ## 来源与相关分册

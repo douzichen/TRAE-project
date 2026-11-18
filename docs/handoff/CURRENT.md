@@ -10,6 +10,7 @@
 
 - 上一提交完成：ADR-013、rules/07 交接快照节、HANDOFF 模板、SESSION-START 衔接步、冲突矩阵 07×02/12/13 三格、daily-retro 增 CURRENT.md 比对步并已同步调度器（`._LP-ABG40ZAUH`）、本文件首份实例。
 - 本提交完成：P-018 第二次复发升级——新增只读 `scripts/session_start_check.sh`；SESSION-START 增第 0 步（同源/版本/交接/金丝雀）；rules/02 加一行指针（必读集 158/160）；README 四处同步；ADR-014。
+- 本提交完成：验证型外部 Agent 只读落地——rules/04 新增专节；rules/03 收窄同步推送义务的适用范围；S-004、AGENT-ADAPTER、AGENTS.md、AGENTS-GLOBAL 同步；ADR-015；冲突矩阵 03×04、04×13 补依据。
 - 未提交半成品：无（本提交即全部落地内容）。
 
 ## 已定决策
@@ -18,7 +19,8 @@
 
 ## 未决与坑
 
-- 待确认台账指针：rules/07 台账与最近交付 D-6。当前 1 项业务侧待确认：「不上传」约束是项目级红线还是 WorkBuddy 本机环境约束（用户未答复，原话存于该轮交付）。
+- 待确认台账指针：rules/07 台账与最近交付 D-6。业务侧已清零——「不上传」经用户明确为**项目级限制**（外部 Agent 仅用于验证规则、一律只读），已落 [rules/04](../../rules/04-roles-and-dispatch.md#L48-L56) 与 [ADR-015](../adr/ADR-015-validation-agents-readonly.md)。
+- 技术侧待授权：SESSION-START 第 0 步的 Windows 写法补丁、自检脚本加"快照距今 N 个提交"提示（轻级，未动）。
 - D-7 门禁转阻断：事件触发，等首个真实业务/政策文档落地（[ADR-010](../adr/ADR-010-policy-evidence-gate.md)）。
 
 ## 下一步
