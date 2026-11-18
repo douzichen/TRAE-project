@@ -183,3 +183,13 @@
 - **证据**：对应提交 `a5d8af8`（三道门禁在转阻断前完成真实仓库回归）；修正点可复核：`scripts/paths_check.sh` 第 7~8、17 行加仓库目录/根文件白名单并过滤占位符，`scripts/threshold_check.sh` 第 10~12 行只取表格行中的"N 行"，`scripts/claims_audit.sh` 第 14~15 行按表头/分隔行过滤数据。运行 `sh scripts/paths_check.sh` 可复看修正后结果。
 - **关联**：`scripts/paths_check.sh`、`scripts/threshold_check.sh`、`scripts/claims_audit.sh`、`scripts/pitfall_check.sh`；`rules/10`「新门禁上线流程」；P-013
 - **状态**：已落实（2026-11-18）——三道门禁已在 a5d8af8 前完成回归并转阻断；rules/10 已增上线流程。
+
+### P-016：规则写在仓库根，宿主不自动注入，冷会话不生效
+- **日期**：2026-11-18
+- **现象**：新会话（含子会话）未读取任何文件时，无法复述 `AGENTS.md` 中的金丝雀标记 `CANARY-TRAE-7F3A9C`，规则库对冷会话不生效。
+- **根因**：规则文件位于仓库根，宿主未把它当自动注入源；"写了规则"与"规则被加载"是两件事，此前默认等同。
+- **影响**：所有"规则会约束后续会话"的假设失效；规则只对"显式读过它的会话"有效。
+- **防复发机制**：① rules/02 新增冷启动协议，首条回复声明规则加载状态、未确认即声明并先补读；② 派发与交接必须显式写明"先读 /workspace/AGENTS.md"，不得假设对方已知；③ 每次怀疑"规则是否生效"时用金丝雀盲测（新会话+禁用工具），不得凭感觉判定。
+- **证据**：`AGENTS-GLOBAL.md`「金丝雀验证·实测记录」；标记 `CANARY-TRAE-7F3A9C` 已写入根 `AGENTS.md`；两次盲测（子 Agent 禁用工具、用户新开主会话不读文件）均返回"不知道"。
+- **关联**：`AGENTS-GLOBAL.md`「金丝雀验证」；`rules/02-intake-and-dod.md` 冷启动协议；`.trae/rules/project.md`；P-005
+- **状态**：已落实（冷启动协议已写入 rules/02）
