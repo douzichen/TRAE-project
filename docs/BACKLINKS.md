@@ -34,6 +34,7 @@
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
+- rules/15-delivery-dod.md
 
 ## 03-skill-sync.md
 
@@ -130,7 +131,9 @@
 - docs/CONFLICT-MATRIX.md
 - docs/ROLE-SWITCH-CHECK.md
 - docs/adr/ADR-007-supersede-budget-threshold.md
+- docs/adr/ADR-009-move-dod-out-of-core.md
 - rules/00-core.md
+- rules/15-delivery-dod.md
 
 ## 13-concurrency-and-lifecycle.md
 
@@ -145,9 +148,16 @@
 
 - AGENTS-GLOBAL.md
 - AGENTS.md
+- docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/05-requirement-review.md
 - skills/S-002-project-bootstrap.md
 - skills/S-003-requirements-intake.md
 - workflows/W-001-new-project.md
+
+## 15-delivery-dod.md
+
+- AGENTS.md
+- rules/02-intake-and-dod.md
+- rules/12-context-budget.md
 
