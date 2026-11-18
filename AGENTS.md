@@ -20,6 +20,7 @@
 | 回滚手段 | [11](rules/11-rollback.md) |
 | 规则库体积、读不完怎么办、按需加载 | [12](rules/12-context-budget.md) |
 | 多 Agent 并行、结论冲突、功能下线 | [13](rules/13-concurrency-and-lifecycle.md) |
+| 跨册冲突核对（改任何规则前） | [docs/CONFLICT-MATRIX.md](docs/CONFLICT-MATRIX.md) |
 
 - 多条都像时，写入**最贴近的那一册**，并在其"相关分册"补链接；仍无法归类才考虑新建分册，且须先记入待确认事项请用户确认。
 

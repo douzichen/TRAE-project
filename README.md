@@ -49,6 +49,7 @@
 │   ├── AGENT-ADAPTER.md   # 跨 Agent 适配说明（豆包/千问/DSH/WorkBuddy 等取用前必读）
 │   ├── CLAIMS.md          # 并行认领台账（认领人/范围/时间/状态，规则见 rules/13）
 │   ├── BACKLINKS.md       # 反向链接索引（由 scripts/link_check.sh 自动生成）
+│   ├── CONFLICT-MATRIX.md # 分册×分册冲突交叉表（人工维护，规则改动后必须更新）
 │   └── adr/               # 决策记录：一条一文件，写清理由与否决项
 │       ├── INDEX.md       # ADR 索引
 │       ├── TEMPLATE.md    # ADR 模板
@@ -95,6 +96,7 @@
 - 新增技能：复制 `skills/TEMPLATE.md` → 命名 `S-xxx-<短名>.md` → 在 `skills/INDEX.md` 登记。新建前先查索引，同类优先修订。
 - 新增工作流：复制 `workflows/TEMPLATE.md` → 命名 `W-xxx-<短名>.md` → 在 `workflows/INDEX.md` 登记，并写明包含哪些 skill。
 - 任务收尾：按 `AGENTS.md` 的沉淀触发点，明确写清"沉淀了什么 / 复用了哪个 / 为何无需沉淀"。
+- 改规则：先查 `docs/CONFLICT-MATRIX.md` 的对应格子，改动后更新受影响单元格（否则视为未对账）。
 
 ## 当前状态
 
