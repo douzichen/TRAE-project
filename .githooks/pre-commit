@@ -1,0 +1,5 @@
+#!/bin/sh
+cd "$(git rev-parse --show-toplevel)" || exit 1
+"$(git rev-parse --show-toplevel)/scripts/md_check.sh" || exit 1
+# P-002 机械代理：非阻断提醒，改动 AGENTS.md 时生成待粘贴内容
+"$(git rev-parse --show-toplevel)/scripts/agents_diff.sh" >&2
