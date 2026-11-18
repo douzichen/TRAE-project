@@ -18,6 +18,7 @@
 | 沉淀 skill/workflow 的触发与做法 | [09](rules/09-precipitation.md) |
 | 坑的记录、复盘与升级 | [10](rules/10-lessons.md) |
 | 回滚手段 | [11](rules/11-rollback.md) |
+| 规则库体积、读不完怎么办、按需加载 | [12](rules/12-context-budget.md) |
 
 - 多条都像时，写入**最贴近的那一册**，并在其"相关分册"补链接；仍无法归类才考虑新建分册，且须先记入待确认事项请用户确认。
 
@@ -60,6 +61,7 @@
 | 09 | [经验沉淀与工作流](rules/09-precipitation.md) | 任务验收后 |
 | 10 | [坑账本与避坑机制](rules/10-lessons.md) | 出坑、派发任务、复盘时 |
 | 11 | [回滚机制](rules/11-rollback.md) | 任何改动前 |
+| 12 | [上下文预算与按需加载](rules/12-context-budget.md) | 每次会话开始、规则库增长时 |
 
 ## 规则库结构约定（双向链接）
 
@@ -68,7 +70,7 @@
 - 链接一律用**标准 Markdown 相对路径**，不使用 `[[wikilink]]`（GitHub 与多数平台不渲染该语法）。
 - 反向链接由 `scripts/link_check.sh` 扫描生成 [docs/BACKLINKS.md](docs/BACKLINKS.md)，并校验死链；**死链即拦截提交**。
 - 新增分册必须同时：登记本索引表 + 在至少一个分册的"相关分册"中被引用；否则视为孤立文件，校验不通过。
-- 体积红线：单分册超过 120 行须考虑再拆；本总纲超过 100 行须精简——防止总纲重新膨胀成巨石文件。
+- 体积与加载的红线、硬指标、"未读完必须声明"的要求，统一见 [12 上下文预算](rules/12-context-budget.md)；由 `scripts/context_budget.sh` 在提交时机器校验，本总纲超 100 行即拦截。
 
 ## 定时任务（仓库为真源，调度器为运行时副本）
 
@@ -84,5 +86,4 @@
 
 ## 变更与维护
 
-- 改细则 → 改对应 `rules/` 分册；改结构 → 改本总纲并同步索引表，两者必须同一次提交。
-- 任何改动按 [02 交付清单](rules/02-intake-and-dod.md) 的 D-1~D-6 交付，并走 [08 对齐与版本管理](rules/08-alignment-and-versioning.md) 的提交推送流程。
+- 改细则 → 改对应 `rules/` 分册；改结构 → 改本总纲并同步索引表，两者同一次提交；交付按 [02](rules/02-intake-and-dod.md) 的 D-1~D-6，推送按 [08](rules/08-alignment-and-versioning.md) 五步。

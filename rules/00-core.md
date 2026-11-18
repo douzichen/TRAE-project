@@ -12,4 +12,4 @@
 
 - 上级总纲：[AGENTS.md](../AGENTS.md)
 - 参见：[01 用户背景](01-user-profile.md)
-- 参见：[02 指令接收与 DoD](02-intake-and-dod.md)
+- 参见：[02 指令接收与 DoD](02-intake-and-dod.md)、[12 上下文预算](12-context-budget.md)（读不完必须声明）

@@ -9,6 +9,7 @@
 | [ADR-001](ADR-001-adopt-ten-prompts.md) | 采纳"十条提问法"并做分级触发改造 | 2026-11-18 | 已接受 |
 | [ADR-002](ADR-002-fix-conflicts-in-ten-prompts.md) | 修正十条提问法落地条款的三处自相矛盾 | 2026-11-18 | 已接受 |
 | [ADR-003](ADR-003-rules-split-with-bidirectional-links.md) | 规则库改为总纲＋分册＋双向链接 | 2026-11-18 | 已接受 |
+| [ADR-004](ADR-004-context-budget.md) | 为规则库设置上下文预算与按需加载 | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 

@@ -8,6 +8,7 @@
 - docs/AGENT-ADAPTER.md
 - rules/01-user-profile.md
 - rules/02-intake-and-dod.md
+- rules/12-context-budget.md
 
 ## 01-user-profile.md
 
@@ -23,6 +24,7 @@
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - rules/00-core.md
 - rules/07-pending-and-handoff.md
+- rules/12-context-budget.md
 
 ## 03-skill-sync.md
 
@@ -62,6 +64,7 @@
 - rules/03-skill-sync.md
 - rules/07-pending-and-handoff.md
 - rules/11-rollback.md
+- rules/12-context-budget.md
 
 ## 09-precipitation.md
 
@@ -79,4 +82,9 @@
 
 - AGENTS.md
 - rules/08-alignment-and-versioning.md
+
+## 12-context-budget.md
+
+- AGENTS.md
+- rules/00-core.md
 
