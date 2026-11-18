@@ -25,6 +25,7 @@
 - rules/00-core.md
 - rules/07-pending-and-handoff.md
 - rules/12-context-budget.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 03-skill-sync.md
 
@@ -43,13 +44,16 @@
 - rules/01-user-profile.md
 - rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 06-quality.md
 
 - AGENTS.md
+- docs/ROLE-SWITCH-CHECK.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
+- rules/13-concurrency-and-lifecycle.md
 - schedules/daily-retro.md
 
 ## 07-pending-and-handoff.md
@@ -57,6 +61,7 @@
 - AGENTS.md
 - rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
+- rules/13-concurrency-and-lifecycle.md
 
 ## 08-alignment-and-versioning.md
 
@@ -90,10 +95,12 @@
 
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
+- docs/ROLE-SWITCH-CHECK.md
 - rules/00-core.md
 
 ## 13-concurrency-and-lifecycle.md
 
 - AGENTS.md
+- docs/CLAIMS.md
 - rules/08-alignment-and-versioning.md
 

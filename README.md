@@ -47,6 +47,7 @@
 │
 ├── docs/                  # 项目文档
 │   ├── AGENT-ADAPTER.md   # 跨 Agent 适配说明（豆包/千问/DSH/WorkBuddy 等取用前必读）
+│   ├── CLAIMS.md          # 并行认领台账（认领人/范围/时间/状态，规则见 rules/13）
 │   ├── BACKLINKS.md       # 反向链接索引（由 scripts/link_check.sh 自动生成）
 │   └── adr/               # 决策记录：一条一文件，写清理由与否决项
 │       ├── INDEX.md       # ADR 索引
@@ -80,6 +81,7 @@
 | `skills/` | 一个任务沉淀一个技能，含适用场景、步骤、验收 | `S-001-<英文短名>.md` |
 | `workflows/` | 多个技能按顺序串成的主线路径，含流程图 | `W-001-<英文短名>.md` |
 | `PITFALLS.md` | 坑账本：返工/退回/回滚即记账，每条必须落到防复发机制 | `P-001` 起编号，一条一节 |
+| `docs/CLAIMS.md` | 并行认领台账：谁在改哪些文件/目录、预计何时结束；格式与生命周期规则见 `rules/13` | 固定名称，唯一 |
 | `reports/` | 三路独立审计报告（结构 / 可执行性 / 覆盖性），属审计资产，不删除 | `A-`、`B-`、`C-` 前缀 |
 | `CLAUDE.md` / `GEMINI.md` / `.cursorrules` | 各工具入口指针，指向总纲、最小必读集与 12 册，由脚本生成，不手改 | 固定名称，由 `scripts/tool_entrypoints.sh` 生成 |
 | `deploy-key.pub` | Deploy key 公钥永久档案：GitHub 登记依据，环境丢失后凭此重新登记 | 固定名称，唯一 |

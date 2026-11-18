@@ -1,3 +1,7 @@
+> **开工前置条件**：必须先在 [docs/ROLE-SWITCH-CHECK.md](ROLE-SWITCH-CHECK.md) 逐条作答。
+> 并把你对 5 个问题的答案粘贴到交付中。
+> 未答者视为不接受本规则库。
+
 # 跨 Agent 适配说明（TRAE 以外的 Agent 必读）
 
 > 目的：让豆包、豆包工作、千问助手、DSH、WorkBuddy 等 Agent 读到本仓库规则后**不误解、不误用**。
