@@ -95,3 +95,5 @@
 ## 变更与维护
 
 - 改细则 → 改对应 `rules/` 分册；改结构 → 改本总纲并同步索引表，两者同一次提交；交付按 [15](rules/15-delivery-dod.md) 的 D-1~D-7，推送按 [08](rules/08-alignment-and-versioning.md) 五步。
+
+> **金丝雀标记**：`CANARY-TRAE-7F3A9C`（用于验证本规则库是否真被宿主加载；开新会话、不读任何文件，能直接复述此串即说明规则已注入。见 AGENTS-GLOBAL.md「金丝雀验证」）
