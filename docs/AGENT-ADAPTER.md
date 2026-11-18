@@ -7,6 +7,8 @@
 > 目的：让豆包、豆包工作、千问助手、DSH、WorkBuddy 等 Agent 读到本仓库规则后**不误解、不误用**。
 > 原则：**可以改名、可以降级，不可以改写原意**。
 
+**快速接入请直接用 [`../skills/S-004-rulebase-onboarding.md`](../skills/S-004-rulebase-onboarding.md)（含可粘贴指令）。**
+
 ## 一、必读顺序
 
 1. [AGENTS.md](../AGENTS.md)（总纲 + 红线速查）

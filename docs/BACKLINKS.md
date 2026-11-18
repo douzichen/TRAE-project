@@ -138,6 +138,7 @@
 - docs/adr/ADR-009-move-dod-out-of-core.md
 - rules/00-core.md
 - rules/15-delivery-dod.md
+- skills/S-004-rulebase-onboarding.md
 
 ## 13-concurrency-and-lifecycle.md
 
@@ -167,4 +168,5 @@
 - rules/02-intake-and-dod.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
+- skills/S-004-rulebase-onboarding.md
 
