@@ -143,6 +143,7 @@
 
 ## 14-project-bootstrap.md
 
+- AGENTS-GLOBAL.md
 - AGENTS.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - rules/05-requirement-review.md
