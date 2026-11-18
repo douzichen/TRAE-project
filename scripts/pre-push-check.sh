@@ -1,5 +1,6 @@
 #!/bin/sh
-# P-001 凭据自检（pre-push 卡点）：推送前确保认证可用，密钥丢失自动从 .secrets 恢复
+# P-001 凭据自检（pre-push 卡点）：推送前确保认证可用，密钥与 SSH 配置丢失自动从 .secrets 恢复
+# 升级记录：2026-11-18 第二次复发（沙箱重启连 config 一起丢失），按"复发即升级"由检测升级为自动重建
 set -e
 cd "$(git rev-parse --show-toplevel)"
 mkdir -p "$HOME/.ssh"
@@ -14,6 +15,8 @@ if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
   fi
 fi
 if [ ! -f "$HOME/.ssh/config" ]; then
-  echo "[P-001] ~/.ssh/config 缺失（SSH over 443 配置丢失），推送将失败"; exit 1
+  printf 'Host github.com\n  HostName ssh.github.com\n  Port 443\n  User git\n  StrictHostKeyChecking accept-new\n  BatchMode yes\n  ProxyCommand nc -X connect -x 127.0.0.1:18080 %%h %%p\n' > "$HOME/.ssh/config"
+  chmod 600 "$HOME/.ssh/config"
+  echo "-> 已自动重建 ~/.ssh/config（SSH over 443 + 代理）"
 fi
 echo "[P-001] 凭据检查通过"
