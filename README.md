@@ -21,6 +21,8 @@
 │
 ├── PITFALLS.md            # 坑账本：出坑即记账，落到防复发机制
 │
+├── deploy-key.pub         # Deploy key 公钥档案（可入库；私钥在 .secrets/，永不入库）
+│
 ├── scripts/               # 防复发自检脚本（挂 git hook 自动执行）
 │   ├── md_check.sh        # pre-commit：INDEX 登记、坑编号连续、标题去重
 │   ├── pre-push-check.sh  # pre-push：凭据自检与密钥自动恢复
@@ -41,6 +43,7 @@
 | `skills/` | 一个任务沉淀一个技能，含适用场景、步骤、验收 | `S-001-<英文短名>.md` |
 | `workflows/` | 多个技能按顺序串成的主线路径，含流程图 | `W-001-<英文短名>.md` |
 | `PITFALLS.md` | 坑账本：返工/退回/回滚即记账，每条必须落到防复发机制 | `P-001` 起编号，一条一节 |
+| `deploy-key.pub` | Deploy key 公钥永久档案：GitHub 登记依据，环境丢失后凭此重新登记 | 固定名称，唯一 |
 | `scripts/` | 防复发自检脚本，挂 pre-commit / pre-push hook 自动拦截 | 一个检查一个脚本 |
 | `.secrets/` | 密钥、凭据等本机文件 | 不入库、不写入任何文档 |
 | `docs/`（待建） | PRD、FSFSD、交接文档、MOC 索引、维护指南 | 项目启动后按文档规范建立 |
