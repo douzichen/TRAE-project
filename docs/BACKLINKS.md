@@ -18,6 +18,7 @@
 - docs/CONFLICT-MATRIX.md
 - rules/00-core.md
 - rules/05-requirement-review.md
+- rules/07-pending-and-handoff.md
 
 ## 02-intake-and-dod.md
 

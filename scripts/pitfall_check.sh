@@ -13,7 +13,7 @@ for id in $ids; do
   body=$(awk -v id="$id" 'BEGIN{p=0} /^#{2,3} P-[0-9]+/{p=(index($2,id)==1)} p' "$f")
   echo "$body" | grep -q '根因' || { echo "[M4] $id 缺少「根因」字段"; fail=1; }
   echo "$body" | grep -q '状态' || { echo "[M4] $id 缺少「状态」字段"; fail=1; }
-  echo "$body" | grep -qE '证据|现象|文件:|`' || { echo "[M4] 告警：$id 缺少可核查的证据/现象"; warn=1; }
+  echo "$body" | grep -q '证据' || { echo "[M4] $id 缺少「证据」字段（须可复现，不得编造）"; fail=1; }
 done
 
 [ "$fail" -eq 1 ] && exit 1
