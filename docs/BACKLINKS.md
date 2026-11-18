@@ -177,6 +177,7 @@
 
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
+- docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-010-policy-evidence-gate.md
 - rules/02-intake-and-dod.md
 - rules/12-context-budget.md

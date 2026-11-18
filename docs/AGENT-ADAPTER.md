@@ -42,7 +42,7 @@
 
 | 本仓库机制 | 若你没有该能力 | 降级做法 |
 | --- | --- | --- |
-| git hook（`.githooks/`） | 无 hook | 每次会话开始手工跑**完整门禁三件套**：`md_check.sh` + `link_check.sh` + `delivery_report.sh`，提交前另需 `pre-push-check.sh` 等价的凭据检查；缺一不可，并在交付中写明"手工检查" |
+| git hook（`.githooks/`） | 无 hook | 分两档：**零改动的只读验证**跑 `md_check.sh` + `link_check.sh`（另可用 `delivery_report.sh` 取 D 草稿）；**在本地试改过任何文件**须跑 pre-commit 全链 8 项——`secrets_scan.sh`、`md_check.sh`、`link_check.sh`、`context_budget.sh`、`threshold_check.sh`、`paths_check.sh`、`claims_audit.sh`、`pitfall_check.sh`，另做 `pre-push-check.sh` 等价的凭据检查。交付中写明"手工检查"及实际跑了哪几项 |
 | 子 Agent 派发（S-001 模板） | 无子 Agent | 开两个独立会话分别做"撰写"与"反方审查"，并标注"降级：已隔离执行" |
 | 单线程 Agent（无法并行派发） | 无第二执行者 | **必须开第二个会话做独立复审，不得自写自审**；复审结论须落文件 |
 | 定时调度器 | 无定时能力 | 每日首次会话时执行同一任务内容，标注"降级：会话内触发" |

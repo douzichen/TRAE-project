@@ -9,7 +9,7 @@
   1. **有需求文档时**（PRD、需求说明、口径单）：如何从文档走到可运行的骨架，中间不得跳步；
   2. **无需求文档时**：如何先完成需求收集与确认，再建项目，而不是"边写边想"。
 - 同时"自己讨论自己写"的老问题再次出现：同一个执行单元既提出问题、又代拟答案、又宣布需求成立，需求被 Agent 自身假设填满，用户真实口径未进入；到验收时无法区分"用户要的"与"Agent 猜的"，也无法回查是哪一步失守。
-- 既有约束不可绕：用户为财税从业者，技术决策不得推回用户（[01](../../rules/01-user-profile.md)、红线 2）；需求含财税判断须写明政策条款（[05](../../rules/05-requirement-review.md)）；交付须 D-1~D-6（[02](../../rules/02-intake-and-dod.md)）；改变规则含义须 ADR（[06](../../rules/06-quality.md)、[ADR-006](ADR-006-rule-change-two-tier.md)）；审查分工不得自我闭环（[04](../../rules/04-roles-and-dispatch.md)、[ADR-005](ADR-005-first-self-audit-ruling.md)）。
+- 既有约束不可绕：用户为财税从业者，技术决策不得推回用户（[01](../../rules/01-user-profile.md)、红线 2）；需求含财税判断须写明政策条款（[05](../../rules/05-requirement-review.md)）；交付须 D-1~D-7（[02](../../rules/02-intake-and-dod.md)、[15](../../rules/15-delivery-dod.md)；本 ADR 成文时为 D-1~D-6，后增 D-7）；改变规则含义须 ADR（[06](../../rules/06-quality.md)、[ADR-006](ADR-006-rule-change-two-tier.md)）；审查分工不得自我闭环（[04](../../rules/04-roles-and-dispatch.md)、[ADR-005](ADR-005-first-self-audit-ruling.md)）。
 - **已定边界**（用户已确认的口径，本项目后续项目默认继承）：
   - 形态：**内网服务 + 网页**；
   - 数据：真实数据可进测试环境，但**必须脱敏**；
