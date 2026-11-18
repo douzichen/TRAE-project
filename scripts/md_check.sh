@@ -31,6 +31,17 @@ if [ -n "$dups" ]; then
   echo "[P-004] AGENTS.md 存在重复章节：$dups"; fail=1
 fi
 
+# 5) 技能同步门禁：skills/workflows 不允许存在未提交的散改（改了不提交=未同步=任务未完成）
+if ! git diff --quiet -- skills workflows; then
+  echo "[SYNC] skills/workflows 存在未提交改动，视为未同步，禁止提交一部分留一部分"; fail=1
+fi
+
+# 6) 同步核对（非阻断提醒）：领先远端即"未推送=同步未完成"
+ahead=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+if [ "$ahead" -gt 0 ]; then
+  echo "[SYNC] 分支领先远端 $ahead 个提交，未推送=同步未完成（推送后须核对 ahead 0）" >&2
+fi
+
 if [ "$fail" -eq 0 ]; then
   echo "[P-004] md 完整性校验通过"
 else
