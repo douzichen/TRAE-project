@@ -202,9 +202,9 @@
 - **根因**：`link_check.sh` 用 `mktemp` 生成临时文件，并用 `rm -f "$绝对路径"` 清理；Windows/git-bash 与带 safe-delete 包装的环境对"嵌入式盘符"路径（如 `C:\...`）拒绝删除。跨平台路径语义不同，而门禁此前只在 Linux 沙箱验证过，**未在第二平台跑过就转成了阻断**。
 - **影响**：非 Linux 环境 pre-commit 恒失败，用户被迫 `git commit --no-verify`，全部门禁连带失效。与 P-015 同族，属"门禁误伤诱发绕过"。
 - **防复发机制**：① 脚本——临时文件一律用**仓库内相对路径**，禁止 `mktemp` 绝对路径与绝对路径 `rm`；② 机械——`scripts/paths_check.sh` 的 [M1-b] 按 `scripts/portable-deny.txt` 拦截 `mktemp`/`sed -i`/`readlink -f`/绝对路径 `rm`，命中即阻断（决策见 [ADR-012](docs/adr/ADR-012-gate-script-portability.md)）；③ 流程——新门禁转阻断前须在第二个平台（Windows/git-bash 或 macOS）实跑 exit 0 并记录平台、命令、退出码；**未实跑的只能留告警模式，不得转阻断**，不接受"脚本头注明仅验证于 Linux"作为豁免；④ 文本——S-004 补平台提示（面向接入方，不承担门禁作者的验收责任）。
-- **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交；[M1-b] 正向实跑 0 命中、负向探针精确报错，记录见 ADR-012「实跑证据」。
+- **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交；[M1-b] 正向实跑 0 命中、负向探针精确报错，记录见 ADR-012「实跑证据」；**第二平台实跑（2026-11-18，`d5d8fb8`）**：Windows 11（`MINGW64_NT-10.0-22631`）+ git-bash 3.6.9，`sh scripts/link_check.sh` exit 0、`sh scripts/paths_check.sh` exit 0。
 - **关联**：`scripts/link_check.sh`；`scripts/paths_check.sh`（[M1-b]）、`scripts/portable-deny.txt`；[ADR-012](docs/adr/ADR-012-gate-script-portability.md)；`skills/S-004-rulebase-onboarding.md`「失败处理」；`rules/10`「新门禁上线流程」；P-015
-- **状态**：已落实（2026-11-18）——脚本改相对路径；[M1-b] 机械拦截已上线（正向 0 命中、负向探针命中）；rules/10 与 S-004 已同步；**待补**：`link_check` 在 Windows/git-bash 的第二平台实跑证据。
+- **状态**：已落实（2026-11-18）——脚本改相对路径；[M1-b] 机械拦截已上线（正向 0 命中、负向探针命中）；rules/10 与 S-004 已同步；第二平台（Windows/git-bash）实跑已补，`link_check` / `paths_check` 均 exit 0。
 
 ### P-018：本地副本落后于远端却被当作"权威"，用过期规则与过期门禁做决策
 - **日期**：2026-11-18
@@ -212,6 +212,6 @@
 - **根因**：S-004 只要求"记录 commit"，没有任何环节把 HEAD 与 `origin/main` 做差；clone 一次长期复用，"权威"被理解成"这份拷贝"，而不是"远端 main 的最新提交"。
 - **影响**：修好的坑被重复报告成"机制失效"；决策依据是过期规则；文件数与账本条目核对基于旧版本（79 vs 81）。
 - **防复发机制**：① 机械——`scripts/delivery_report.sh` 的 D-5 段增加"落后远端 N 个提交，先 pull"提示，每次提交可见；② 口径——"权威"指远端 main 的最新提交，交付须同时写"本副本 commit + 与远端差值"；③ 复核——引用 PITFALLS/规则做删除、覆盖类决策前，先确认 `git log -1` 与 `git ls-remote origin main` 一致。
-- **证据**：WorkBuddy 2026-11-18 反馈原文"79 文件、HEAD `4dd1f0f`"；本仓库同日 `git log` 为 `321dc19`、`git ls-files` 81 个文件，差 2 个提交、2 个文件。
+- **证据**：WorkBuddy 2026-11-18 反馈原文"79 文件、HEAD `4dd1f0f`"；本仓库同日 `git log` 为 `321dc19`、`git ls-files` 81 个文件，差 2 个提交、2 个文件。闭环：WorkBuddy 当日 `git pull --ff-only` 前移至 `d5d8fb8`，`link_check` / `paths_check` 均 exit 0。
 - **关联**：`skills/S-004-rulebase-onboarding.md` 第 2 步；`scripts/delivery_report.sh`；`rules/08`；P-017
 - **状态**：已落实（2026-11-18，delivery_report 增落后提示）
