@@ -46,6 +46,10 @@ echo ""
 echo "## D-5 验证与同步状态"
 ahead=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo '?')
 echo "- 当前领先远端 $ahead 个提交（本次提交会使该值 +1）；推送后必须核对 ahead 0"
+behind=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo '?')
+if [ "$behind" != "0" ] && [ "$behind" != "?" ]; then
+  echo "- ⚠️ 当前落后远端 $behind 个提交：先 git pull 再干活，否则门禁与规则都是过期版本（P-018）"
+fi
 echo "- 必须粘贴 md_check / pre-push 的实际输出，不得只写“已通过”"
 
 echo ""

@@ -205,3 +205,13 @@
 - **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交；[M1-b] 正向实跑 0 命中、负向探针精确报错，记录见 ADR-012「实跑证据」。
 - **关联**：`scripts/link_check.sh`；`scripts/paths_check.sh`（[M1-b]）、`scripts/portable-deny.txt`；[ADR-012](docs/adr/ADR-012-gate-script-portability.md)；`skills/S-004-rulebase-onboarding.md`「失败处理」；`rules/10`「新门禁上线流程」；P-015
 - **状态**：已落实（2026-11-18）——脚本改相对路径；[M1-b] 机械拦截已上线（正向 0 命中、负向探针命中）；rules/10 与 S-004 已同步；**待补**：`link_check` 在 Windows/git-bash 的第二平台实跑证据。
+
+### P-018：本地副本落后于远端却被当作"权威"，用过期规则与过期门禁做决策
+- **日期**：2026-11-18
+- **现象**：WorkBuddy 删除旧镜像后自述"权威 `rulebase/` 完好（79 文件、HEAD `4dd1f0f`）"；同一时刻远端 main 已到 `321dc19`（81 文件）。其副本缺 `3ece995`（`link_check` 相对路径修复）与 `321dc19`（[M1-b]），仍会用带 `mktemp` 的旧门禁在 Windows 上失败，并用旧账本做删前核对。
+- **根因**：S-004 只要求"记录 commit"，没有任何环节把 HEAD 与 `origin/main` 做差；clone 一次长期复用，"权威"被理解成"这份拷贝"，而不是"远端 main 的最新提交"。
+- **影响**：修好的坑被重复报告成"机制失效"；决策依据是过期规则；文件数与账本条目核对基于旧版本（79 vs 81）。
+- **防复发机制**：① 机械——`scripts/delivery_report.sh` 的 D-5 段增加"落后远端 N 个提交，先 pull"提示，每次提交可见；② 口径——"权威"指远端 main 的最新提交，交付须同时写"本副本 commit + 与远端差值"；③ 复核——引用 PITFALLS/规则做删除、覆盖类决策前，先确认 `git log -1` 与 `git ls-remote origin main` 一致。
+- **证据**：WorkBuddy 2026-11-18 反馈原文"79 文件、HEAD `4dd1f0f`"；本仓库同日 `git log` 为 `321dc19`、`git ls-files` 81 个文件，差 2 个提交、2 个文件。
+- **关联**：`skills/S-004-rulebase-onboarding.md` 第 2 步；`scripts/delivery_report.sh`；`rules/08`；P-017
+- **状态**：已落实（2026-11-18，delivery_report 增落后提示）
