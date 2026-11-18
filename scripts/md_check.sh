@@ -18,9 +18,10 @@ done
 
 # 3) PITFALLS.md 编号从 P-001 起连续递增
 prev=0
-for n in $(grep -oE '^### P-[0-9]{3}' PITFALLS.md | grep -oE '[0-9]{3}'); do
+for raw in $(grep -oE '^### P-[0-9]{3}' PITFALLS.md | grep -oE '[0-9]{3}'); do
+  n=$(echo "$raw" | sed 's/^0*//'); [ -z "$n" ] && n=0
   if [ "$n" -ne $((prev + 1)) ]; then
-    echo "[P-004] 坑编号不连续：期望 P-$(printf '%03d' $((prev + 1)))，实际 P-$n"; fail=1
+    echo "[P-004] 坑编号不连续：期望 P-$(printf '%03d' $((prev + 1)))，实际 P-$raw"; fail=1
   fi
   prev=$n
 done
@@ -42,9 +43,12 @@ if [ "$ahead" -gt 0 ]; then
   echo "[SYNC] 分支领先远端 $ahead 个提交，未推送=同步未完成（推送后须核对 ahead 0）" >&2
 fi
 
-# 7) 关键铁律章节不得被误删（P-006/P-007 防复发：用户背景、指令复述、DoD 等核心章节）
-for sec in "## 用户背景" "## 执行前必读" "## 指令接收与边界确认" "## 任务完成的交付反馈清单" "## 需求定义审查" "## 问题与决策质量"; do
-  grep -qF "$sec" AGENTS.md || { echo "[P-004] AGENTS.md 缺失关键章节：$sec"; fail=1; }
+# 7) 关键铁律分册不得被误删（P-006/P-007 防复发：用户背景、复述、DoD、合规要求等核心条款）
+for f in rules/00-core.md rules/01-user-profile.md rules/02-intake-and-dod.md rules/05-requirement-review.md rules/06-quality.md rules/10-lessons.md; do
+  [ -e "$f" ] || { echo "[P-004] 缺失关键分册：$f"; fail=1; }
+done
+for key in "rules/00-core.md" "rules/01-user-profile.md" "rules/02-intake-and-dod.md" "rules/05-requirement-review.md" "rules/06-quality.md" "rules/10-lessons.md"; do
+  grep -qF "$key" AGENTS.md || { echo "[P-004] 总纲索引未登记：$key"; fail=1; }
 done
 
 if [ "$fail" -eq 0 ]; then
