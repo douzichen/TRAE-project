@@ -8,8 +8,11 @@ fail=0
 
 files=$(ls AGENTS.md AGENTS-GLOBAL.md README.md PITFALLS.md 2>/dev/null; find rules docs skills workflows schedules -name '*.md' 2>/dev/null | sort)
 
-edges=$(mktemp)
-trap 'rm -f "$edges"' EXIT
+# 临时文件一律放在仓库内相对路径（P-017）：mktemp 会返回带盘符/绝对路径，
+# 在 Windows + git-bash 及带 safe-delete 包装的环境里会被拒绝，导致门禁误失败。
+edges=".git/backlinks-edges.tmp"
+: > "$edges" 2>/dev/null || edges="docs/.backlinks-edges.tmp"
+trap 'rm -f .git/backlinks-edges.tmp docs/.backlinks-edges.tmp 2>/dev/null || true' EXIT
 
 # 1) 死链校验 + 收集链接边（一次遍历，边格式：源文件<TAB>目标文件名）
 for f in $files; do

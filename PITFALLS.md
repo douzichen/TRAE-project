@@ -195,3 +195,13 @@
 - 端到端证据：2026-11-18，克隆仓库并粘贴开工令后，会话正确声明"已读 00/01/02/12/15"、复述金丝雀标记与 D-1~D-7 全部正确 → 显式传递+同源工作区为有效组合。
 - **关联**：`AGENTS-GLOBAL.md`「金丝雀验证」；`rules/02-intake-and-dod.md` 冷启动协议；`.trae/rules/project.md`；P-005
 - **状态**：已落实（冷启动协议已写入 rules/02）
+
+### P-017：门禁只在 Linux 验证，Windows/git-bash 下 `link_check` 因 safe-delete 拒绝盘符路径而失败
+- **日期**：2026-11-18
+- **现象**：WorkBuddy（Windows）按 S-004 接入本仓库，`git clone` 成功、规则加载与金丝雀验证全部通过；跑门禁时 `md_check`、`context_budget`、`delivery_report` 均 exit 0，**`link_check` exit 1**——链接校验本身通过、BACKLINKS 已刷新，随后在清理临时文件时报 `[safe-delete][SAFE_DELETE_INVALID_PATH] embedded drive prefix is not allowed`。
+- **根因**：`link_check.sh` 用 `mktemp` 生成临时文件，并用 `rm -f "$绝对路径"` 清理；Windows/git-bash 与带 safe-delete 包装的环境对"嵌入式盘符"路径（如 `C:\...`）拒绝删除。跨平台路径语义不同，而门禁此前只在 Linux 沙箱验证过，**未在第二平台跑过就转成了阻断**。
+- **影响**：非 Linux 环境 pre-commit 恒失败，用户被迫 `git commit --no-verify`，全部门禁连带失效。与 P-015 同族，属"门禁误伤诱发绕过"。
+- **防复发机制**：① 脚本——临时文件一律用**仓库内相对路径**，禁止 `mktemp` 绝对路径与绝对路径 `rm`；② 流程——新门禁上线除"告警模式零误报"外，须在**第二个平台**（Windows/git-bash 或 macOS）实跑一次并记录结果；无第二平台时须在脚本头注明"仅验证于 Linux"；③ 文本——S-004 补平台提示。
+- **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交。
+- **关联**：`scripts/link_check.sh`；`skills/S-004-rulebase-onboarding.md`「失败处理」；`rules/10`「新门禁上线流程」；P-015
+- **状态**：已落实（脚本已改相对路径；S-004 已注明平台差异）
