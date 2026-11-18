@@ -52,7 +52,7 @@
 - 读不到规则 → 首行写「未确认加载：含规则库」，不得以规则为名下任何结论。
 - 工作区为空目录 → 先 clone 再重试，**不得误判为"机制失效"**（[P-016](../PITFALLS.md)）。
 - 只读到摘要或部分文件 → 写「未完整读取：<文件清单>」并说明受限的判断范围。
-- 平台差异 → 门禁脚本在 Linux 验证最充分；Windows/git-bash 报 `safe-delete`、盘符路径类错误时先按 [P-017](../PITFALLS.md) 核对脚本是否为相对路径，**不要直接 `--no-verify`**。
+- 平台差异 → 门禁脚本在 Linux 验证最充分；Windows/git-bash 报 `safe-delete`、盘符路径类错误时先按 [P-017](../PITFALLS.md) 核对脚本是否为相对路径，**不要直接 `--no-verify`**；报错按"平台 / 命令 / 退出码"三栏写进 D-5 可验证事实栏，作为门禁作者补第二平台证据的输入。
 - 交付表述 → D-5 把"实际输出/退出码"与"根因推测"分栏写，推测必须注明"未确认"。
 
 ## 可直接粘贴的执行指令
@@ -69,5 +69,5 @@
 
 ## 来源与相关分册
 
-- 来源：[ADR-011](../docs/adr/ADR-011-no-auto-injection.md)、[P-016](../PITFALLS.md)
+- 来源：[ADR-011](../docs/adr/ADR-011-no-auto-injection.md)、[ADR-012](../docs/adr/ADR-012-gate-script-portability.md)、[P-016](../PITFALLS.md)、[P-017](../PITFALLS.md)
 - 参见：[rules/12 上下文预算](../rules/12-context-budget.md)、[rules/15 交付反馈清单](../rules/15-delivery-dod.md)、[docs/AGENT-ADAPTER.md](../docs/AGENT-ADAPTER.md)

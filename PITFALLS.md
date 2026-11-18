@@ -201,7 +201,7 @@
 - **现象**：WorkBuddy（Windows）按 S-004 接入本仓库，`git clone` 成功、规则加载与金丝雀验证全部通过；跑门禁时 `md_check`、`context_budget`、`delivery_report` 均 exit 0，**`link_check` exit 1**——链接校验本身通过、BACKLINKS 已刷新，随后在清理临时文件时报 `[safe-delete][SAFE_DELETE_INVALID_PATH] embedded drive prefix is not allowed`。
 - **根因**：`link_check.sh` 用 `mktemp` 生成临时文件，并用 `rm -f "$绝对路径"` 清理；Windows/git-bash 与带 safe-delete 包装的环境对"嵌入式盘符"路径（如 `C:\...`）拒绝删除。跨平台路径语义不同，而门禁此前只在 Linux 沙箱验证过，**未在第二平台跑过就转成了阻断**。
 - **影响**：非 Linux 环境 pre-commit 恒失败，用户被迫 `git commit --no-verify`，全部门禁连带失效。与 P-015 同族，属"门禁误伤诱发绕过"。
-- **防复发机制**：① 脚本——临时文件一律用**仓库内相对路径**，禁止 `mktemp` 绝对路径与绝对路径 `rm`；② 流程——新门禁上线除"告警模式零误报"外，须在**第二个平台**（Windows/git-bash 或 macOS）实跑一次并记录结果；无第二平台时须在脚本头注明"仅验证于 Linux"；③ 文本——S-004 补平台提示。
-- **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交。
-- **关联**：`scripts/link_check.sh`；`skills/S-004-rulebase-onboarding.md`「失败处理」；`rules/10`「新门禁上线流程」；P-015
-- **状态**：已落实（脚本已改相对路径；S-004 已注明平台差异）
+- **防复发机制**：① 脚本——临时文件一律用**仓库内相对路径**，禁止 `mktemp` 绝对路径与绝对路径 `rm`；② 机械——`scripts/paths_check.sh` 的 [M1-b] 按 `scripts/portable-deny.txt` 拦截 `mktemp`/`sed -i`/`readlink -f`/绝对路径 `rm`，命中即阻断（决策见 [ADR-012](docs/adr/ADR-012-gate-script-portability.md)）；③ 流程——新门禁转阻断前须在第二个平台（Windows/git-bash 或 macOS）实跑 exit 0 并记录平台、命令、退出码；**未实跑的只能留告警模式，不得转阻断**，不接受"脚本头注明仅验证于 Linux"作为豁免；④ 文本——S-004 补平台提示（面向接入方，不承担门禁作者的验收责任）。
+- **证据**：WorkBuddy 交付反馈（2026-11-18，commit `4dd1f0f`）给出 `link_check` exit 1 与上述错误原文；修复侧临时文件改为仓库内相对路径 `.git/backlinks-edges.tmp`，`trap` 清理同步改用相对路径，见本仓库当次提交；[M1-b] 正向实跑 0 命中、负向探针精确报错，记录见 ADR-012「实跑证据」。
+- **关联**：`scripts/link_check.sh`；`scripts/paths_check.sh`（[M1-b]）、`scripts/portable-deny.txt`；[ADR-012](docs/adr/ADR-012-gate-script-portability.md)；`skills/S-004-rulebase-onboarding.md`「失败处理」；`rules/10`「新门禁上线流程」；P-015
+- **状态**：已落实（2026-11-18）——脚本改相对路径；[M1-b] 机械拦截已上线（正向 0 命中、负向探针命中）；rules/10 与 S-004 已同步；**待补**：`link_check` 在 Windows/git-bash 的第二平台实跑证据。

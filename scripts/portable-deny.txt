@@ -1,0 +1,10 @@
+# 门禁脚本违禁写法清单（[M1-b]，固定字符串匹配，一行一条）
+# 背景：P-017——门禁只在 Linux 验证就转阻断，Windows/git-bash 下 safe-delete 拒绝盘符路径，直接失败。
+# 原则：用可移植写法（仓库内相对路径）代替"跑第二平台才发现"，不给人留自我豁免的口子。
+mktemp
+sed -i
+readlink -f
+rm -f "/
+rm -rf "/
+rm -f /
+rm -rf /
