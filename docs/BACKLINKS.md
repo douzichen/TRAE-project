@@ -49,6 +49,7 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-011-no-auto-injection.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md

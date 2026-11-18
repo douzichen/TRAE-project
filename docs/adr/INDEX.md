@@ -16,6 +16,7 @@
 | [ADR-008](ADR-008-project-bootstrap-and-requirements-intake.md) | 项目启动与需求受理采用"规则＋skill＋模板＋workflow"四件套 | 2026-11-18 | 已接受 |
 | [ADR-009](ADR-009-move-dod-out-of-core.md) | 把 D-1~D-6 交付清单移出最小必读集，换回预算余量 | 2026-11-18 | 已接受 |
 | [ADR-010](ADR-010-policy-evidence-gate.md) | 涉税/政策结论的依据核验门禁（业务类硬约束、技术类软约束） | 2026-11-18 | 已接受 |
+| [ADR-011](ADR-011-no-auto-injection.md) | 本宿主无自动注入，改为显式传递与可检产物 | 2026-11-18 | 已接受 |
 
 ## 何时必须写 ADR
 
