@@ -59,7 +59,6 @@
 - docs/adr/ADR-017-cross-project-operating-model.md
 - docs/adr/ADR-018-clean-copy-repull.md
 - docs/adr/ADR-019-startup-sync-gate.md
-- docs/handoff/CURRENT.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -185,9 +184,12 @@
 
 - AGENTS.md
 - docs/AGENT-ADAPTER.md
+- docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-010-policy-evidence-gate.md
+- rules/00-core.md
 - rules/02-intake-and-dod.md
+- rules/04-roles-and-dispatch.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
 - skills/S-004-rulebase-onboarding.md
