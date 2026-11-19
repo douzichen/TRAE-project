@@ -13,7 +13,7 @@
 
 1. `skills/S-001~S-004` 头部统一为四栏元数据：**触发词／不适用／完成判据／单一来源**。
 2. `skills/INDEX.md` 增加"触发词"列。
-3. 新增 `scripts/skills_index_check.sh`：默认告警模式，`SKILL_META_ENFORCE=1` 时阻断；已挂入 `.githooks/pre-commit` 的 [M6]。当前挂入 pre-commit 为告警模式；转阻断条件：在第二平台（Windows＋git-bash）实跑 `sh scripts/skills_index_check.sh` 得 exit 0 并留存输出（P-017/ADR-012），届时加 `SKILL_META_ENFORCE=1`。
+3. 新增 `scripts/skills_index_check.sh`：默认告警模式，`SKILL_META_ENFORCE=1` 时阻断；已挂入 `.githooks/pre-commit` 的 [M6]。**已于 2026-11-19 转为阻断模式**——第二平台验证通过并留痕：Windows 11 / git-bash（`uname -s` = `MINGW64_NT-10.0-22631`），默认模式 A=0、`SKILL_META_ENFORCE=1` 模式 B=0，HEAD `51a9ec3`，仓库 `D:\TRAE-project`（满足 P-017/ADR-012 的转阻断前置）。注：此前一次验证误在 WSL2（`uname -o`=GNU/Linux）中执行，因与第一平台同源而不算数，已改在真 git-bash 复跑。
 4. 元数据只写"何时用、不能用在哪、怎么算做完、依据在哪"，**不复述规则条款与阈值数字**（防双真相源）。
 
 ## 候选与否决项
