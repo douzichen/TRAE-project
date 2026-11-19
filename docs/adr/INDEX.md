@@ -22,6 +22,7 @@
 | [ADR-014](ADR-014-session-start-selfcheck.md) | 新窗口开工自检脚本与开工令第 0 步（P-018 二次复发升级） | 2026-11-18 | 已接受 |
 | [ADR-015](ADR-015-validation-agents-readonly.md) | 验证型外部 Agent 只读：禁止推送与上传，收窄 rules/03 适用范围 | 2026-11-18 | 已接受 |
 | [ADR-016](ADR-016-stale-terms-gate.md) | 口径漂移机械拦截：[M5] 活文档禁残留旧口径字样，审计资产豁免 | 2026-11-19 | 已接受 |
+| [ADR-017](ADR-017-cross-project-operating-model.md) | 跨项目运行模型：规则唯一通道、写入口唯一、拉取式迭代 | 2026-11-19 | 已接受 |
 
 ## 何时必须写 ADR
 

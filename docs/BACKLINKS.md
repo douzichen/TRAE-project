@@ -18,7 +18,9 @@
 - docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-017-cross-project-operating-model.md
 - rules/00-core.md
+- rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/07-pending-and-handoff.md
 - rules/14-project-bootstrap.md
@@ -53,6 +55,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-011-no-auto-injection.md
+- docs/adr/ADR-017-cross-project-operating-model.md
 - docs/handoff/CURRENT.md
 - rules/03-skill-sync.md
 - rules/06-quality.md

@@ -38,8 +38,15 @@
 ## 新项目引导（bootstrap，三步）
 
 1. **取规则**：clone 本仓库（或由用户将 AGENTS.md 正文导入新项目环境）。
-2. **落位**：AGENTS.md 放到新项目根目录作为规则库；按新项目改写"项目特定层"，通用层原文不动。
+2. **落位**：AGENTS.md 放到新项目根目录作为规则库；按新项目改写"项目特定层"，通用层原文不动。**落位＝复制规则到项目目录，项目本体永不入本仓库**（[rules/04](rules/04-roles-and-dispatch.md)「跨项目运行模型」）。
 3. **装门禁**：复制 `scripts/` 与 `.githooks/`，执行 `git config core.hooksPath .githooks`，跑 `sh scripts/md_check.sh` 验证通过后再开工。验证型外部 Agent 只读：**只跑 `scripts/` 下的检查，不装 `.githooks`、不配推送凭据**（[rules/04](rules/04-roles-and-dispatch.md)）。
+
+## 跨项目运行模型（用户定调 2026-11-19；条款正文唯一来源 [rules/04](rules/04-roles-and-dispatch.md)，决策记录 [ADR-017](docs/adr/ADR-017-cross-project-operating-model.md)）
+
+- **唯一通道与终审归属**：新项目只从本仓库拉取规则；项目 PRD/ADR/代码由执行 Agent 自身的主/子体系按本规则库流程终审，不经主会话复检。
+- **写入口唯一**：规则增改只经主会话（本地 TRAE）、经用户批准；任何子会话、外部验证 Agent、定时任务会话不得改库上传。
+- **拉取式迭代**：开工拉最新规则并记录 commit；规则库更新后由用户下发"重新拉取"指令，执行 Agent 报 `git rev-parse --short HEAD` 供主会话核验；用户不介入项目、不纠偏。
+- **题材域**：无固定题材，典型为 Excel、多维表的数据分析与应用；把多步骤 skill 收拢成一个 workflow。
 
 ## 使用纪律
 
