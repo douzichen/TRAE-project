@@ -1,0 +1,6 @@
+# [M5] 口径漂移违禁清单（数据文件，不是代码；一行一个正则，# 开头为注释）
+# 背景：机制演进后旧口径残留在活文档里（P-019 复盘聚类第 2 类）。
+# 本清单由 scripts/stale_terms_check.sh 在 pre-commit 机械拦截。
+# 豁免：docs/adr/、PITFALLS.md、reports/ 属审计资产，引用历史原文合法。
+D-1~D-6
+D-1～D-6

@@ -70,6 +70,7 @@
 │   ├── md_check.sh        # pre-commit：INDEX 登记、坑编号连续、标题去重、关键分册防误删
 │   ├── link_check.sh      # pre-commit：死链校验、双向链接结构、分册索引登记、生成反向链接
 │   ├── session_start_check.sh # 新窗口开工自检（只读）：同源、版本、交接快照、金丝雀
+│   ├── stale_terms_check.sh  # pre-commit：[M5] 口径漂移拦截，清单见 stale-terms.txt
 │   ├── pre-push-check.sh  # pre-push：凭据自检与密钥自动恢复
 │   ├── delivery_report.sh # pre-commit：每次提交生成交付反馈清单草稿（D-1/D-2/D-3/D-5）
 │   ├── context_budget.sh  # pre-commit：最小必读集与分册行数预算校验

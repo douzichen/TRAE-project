@@ -20,6 +20,8 @@ root="$(git rev-parse --show-toplevel)"
 "$root/scripts/claims_audit.sh" || exit 1
 # [M4-b] 坑账本必填字段
 "$root/scripts/pitfall_check.sh" || exit 1
+# [M5] 口径漂移（ADR-016）：活文档禁残留旧口径字样
+"$root/scripts/stale_terms_check.sh" || exit 1
 
 # [D-7] 涉税/政策依据核验（依 ADR-010 以告警模式上线，按 P-015 零误报后转阻断）
 "$root/scripts/policy_guard.sh" || exit 1
