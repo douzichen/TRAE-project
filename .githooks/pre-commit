@@ -20,6 +20,9 @@ root="$(git rev-parse --show-toplevel)"
 "$root/scripts/claims_audit.sh" || exit 1
 # [M4-b] 坑账本必填字段
 "$root/scripts/pitfall_check.sh" || exit 1
+
+# [M6] 技能元数据（ADR-020）：当前为告警模式；转阻断条件＝在第二平台（Windows/git-bash）实跑 exit 0 并留痕（P-017/ADR-012）。转阻断时加 SKILL_META_ENFORCE=1。
+"$root/scripts/skills_index_check.sh" || exit 1
 # [M5] 口径漂移（ADR-016）：活文档禁残留旧口径字样
 "$root/scripts/stale_terms_check.sh" || exit 1
 

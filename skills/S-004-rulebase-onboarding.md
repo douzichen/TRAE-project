@@ -1,10 +1,13 @@
----
 - **名称**：规则库接入（rulebase onboarding）
 - **编号**：S-004
 - **适用场景**：任何 Agent（豆包/千问/DSH/WorkBuddy/Claude Code 等）首次接入本规则库；或换工作区、换会话后确认规则是否真的生效
 - **前置输入**：能执行 `git clone` 与读文件的工作区；本次任务的一句话目标
 - **步骤**：见下方「执行步骤」，共 8 步，每步带判定
 - **判定标准（验收）**：首条回复有加载声明；交付含 D-1~D-7；能复述金丝雀标记（证明读到文件）
+- **触发词**：「怎么接入这个规则库」「新会话里规则好像没生效」「换了电脑还管用吗」「先把规矩读一遍再干活」「为什么你不记得我的要求了」「clone 下来按里面规则开工」「规则库怎么读」「确认一下规则真的加载了吗」「规则没加载怎么办」
+- **不适用**：① 已在同源工作区、规则正常生效且无加载疑问 → 改走直接执行并按 `AGENTS.md` 行事；② 新项目要建骨架 → 改走 [S-002](S-002-project-bootstrap.md)；③ 需求还没成文 → 改走 [S-003](S-003-requirements-intake.md)
+- **完成判据**：首条回复出现「已读：<文件清单>」或「未确认加载」；能复述 `AGENTS.md` 中的金丝雀标记；交付覆盖 `rules/15-delivery-dod.md` 的各项并附 `git rev-parse --short HEAD` 的 commit 号。
+- **单一来源**：加载策略与预算阈值见 `rules/12-context-budget.md` 与 `scripts/budget.conf`（本文不复述数字），接入机制见 `docs/adr/ADR-011-no-auto-injection.md` 与 `docs/AGENT-ADAPTER.md`，交付清单见 `rules/15-delivery-dod.md`。
 - **常见坑**：不 clone 就断言"机制失效"（P-016）；用摘要冒充已读；只改名不改规则
 - **来源**：2026-11-18 三次盲测 + 端到端验证，见 [ADR-011](../docs/adr/ADR-011-no-auto-injection.md)
 - **版本**：v1.0

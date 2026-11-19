@@ -125,6 +125,7 @@
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-020-skill-metadata-spec.md
 - rules/03-skill-sync.md
 - rules/10-lessons.md
 
