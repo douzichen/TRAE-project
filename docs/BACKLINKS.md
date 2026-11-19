@@ -56,6 +56,7 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-011-no-auto-injection.md
 - docs/adr/ADR-017-cross-project-operating-model.md
+- docs/adr/ADR-018-clean-copy-repull.md
 - docs/handoff/CURRENT.md
 - rules/03-skill-sync.md
 - rules/06-quality.md

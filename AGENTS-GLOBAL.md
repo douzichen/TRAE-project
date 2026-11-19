@@ -35,11 +35,12 @@
 | 通用层（规则 14） | 项目创建与需求收集：[rules/14-project-bootstrap.md](rules/14-project-bootstrap.md)（R1~R6 需求收集、A1~A8 项目创建、内网与数据红线） | 原文照搬，一个字不改 |
 | 项目特定层 | 项目路径（`/workspace/...`）、PITFALLS 中环境特定条目（如 P-001 密钥机制）、Deploy key 与凭据 | 按新项目实际情况改写 |
 
-## 新项目引导（bootstrap，三步）
+## 新项目引导（bootstrap，四步）
 
 1. **取规则**：clone 本仓库（或由用户将 AGENTS.md 正文导入新项目环境）。
 2. **落位**：AGENTS.md 放到新项目根目录作为规则库；按新项目改写"项目特定层"，通用层原文不动。**落位＝复制规则到项目目录，项目本体永不入本仓库**（[rules/04](rules/04-roles-and-dispatch.md)「跨项目运行模型」）。
 3. **装门禁**：复制 `scripts/` 与 `.githooks/`，执行 `git config core.hooksPath .githooks`，跑 `sh scripts/md_check.sh` 验证通过后再开工。验证型外部 Agent 只读：**只跑 `scripts/` 下的检查，不装 `.githooks`、不配推送凭据**（[rules/04](rules/04-roles-and-dispatch.md)）。
+4. **保留干净副本**：项目内保留一份**永不改写**的规则库完整副本（如 `rulebase/` 目录）作为重拉基线；项目根放从副本派生的"项目实例"——副本与实例分离，重拉只动副本与通用层，混合体文件逐段合并（[rules/04](rules/04-roles-and-dispatch.md)「拉取式迭代」、[ADR-018](docs/adr/ADR-018-clean-copy-repull.md)）。**干净副本为源、项目实例为派生，冲突以干净副本为准**，重拉后由副本重新派生实例。
 
 ## 跨项目运行模型（用户定调 2026-11-19；条款正文唯一来源 [rules/04](rules/04-roles-and-dispatch.md)，决策记录 [ADR-017](docs/adr/ADR-017-cross-project-operating-model.md)）
 
