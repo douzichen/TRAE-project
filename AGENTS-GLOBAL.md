@@ -6,6 +6,7 @@
 ## 权威来源
 
 - 仓库：`https://github.com/douzichen/TRAE-project.git`
+- **仓库定位：本仓库仅承载规则文档，永不承载任何新项目及其代码**；任何 Agent（含本地 TRAE）创建新项目一律"只拉规则、异地开发"（用户原话见 [rules/01](rules/01-user-profile.md)，2026-11-19）。
 - 规则正文：仓库根目录 [AGENTS.md](AGENTS.md)
 - 坑账本：仓库根目录 [PITFALLS.md](PITFALLS.md)
 - 派发模板：[skills/S-001-subagent-dispatch.md](skills/S-001-subagent-dispatch.md)
