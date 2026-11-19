@@ -235,3 +235,13 @@
 - **证据**：2026-11-19 破坏演练实测——删掉 `skills/INDEX.md` 中 S-002 行 → `md_check.sh` 输出 `[P-004] 未登记`、exit 1；删掉 `skills/S-002` 的"判定标准（验收）"行并暂存 → `md_check.sh` 输出"校验通过"、exit 0。删除任一头字段（如「判定标准（验收）」）后，新脚本在 `SKILL_META_ENFORCE=1` 下 exit 1、告警模式下如实列出。
 - **关联**：`scripts/md_check.sh`；`scripts/skills_index_check.sh`；`.githooks/pre-commit` [M6]；[ADR-020](docs/adr/ADR-020-skill-metadata-spec.md)；`rules/09`；P-015
 - **状态**：已修复（2026-11-19，ADR-020）。
+
+### P-021：跨平台执行指令未写死运行时——WSL 顶替第二平台、PowerShell 拆坏内联命令
+- **日期**：2026-11-19
+- **现象**：① 给 Windows 端发"第二平台验证"指令只写"Windows"，执行方在其内置 WSL2 沙箱中跑出 `uname -o`=GNU/Linux 的绿灯，与第一平台同源，**不构成第二平台验证**，差点据此假绿灯转阻断；② 指令让 PowerShell 用 `bash -c '<含 $(...) 与 $? 的长串>'` 内联执行，被 PowerShell 参数解析拆坏（`rev-parse: -c: line 2` 报错），白耗两轮调试。
+- **根因**：跨平台指令把"运行时/调用方式"留给了执行方自行选择——CI 行业的做法是运行时必须写进验收判据（`runs-on: windows-latest`、`shell: pwsh`、报告附 `uname -s` 指纹），不能靠执行者自觉。P-017 管脚本侧可移植性，管不了指令侧的执行环境选择，两者互补不重复。
+- **影响**：验证链完整性失效（假阳性绿灯放行阻断门禁）；跨平台指令反复失败、浪费轮次。
+- **防复发机制**：给外部执行方的跨平台指令必须带**运行时自检首行**——`uname -s` 判定（须 `MINGW64_NT-*`/`MSYS_NT-*` 才算 Windows git-bash；输出 Linux 即中止并回报"不构成第二平台"）；长命令一律**写入临时 `.sh` 文件再执行**，禁止 PowerShell 内联含 `$(...)`/`$?` 的长串。自检行不通过不得继续跑门禁。
+- **证据**：2026-11-19 两次实测——WSL2 通道：执行方反馈 `uname -o`=`GNU/Linux`、内核 `microsoft-standard-WSL2`，被判不构成第二平台后改走真 git-bash 复跑得 `MINGW64_NT-10.0-22631` + A=0/B=0（[ADR-020](docs/adr/ADR-020-skill-metadata-spec.md) 决策③留痕）；PowerShell 内联：`bash -lc` 无输出 exit 2、`-c` 内联长串被拆坏报 `rev-parse: -c: line 2`，改写临时 `.sh` 后一次跑通。
+- **关联**：P-017；[ADR-012](docs/adr/ADR-012-gate-script-portability.md)；[ADR-020](docs/adr/ADR-020-skill-metadata-spec.md)；`scripts/paths_check.sh` [M1-b]（脚本侧，指令侧无机械拦截）
+- **状态**：机制已定（2026-11-19，写入本条防复发机制）；机械拦截暂缺——验证指令为人工粘贴文本，暂以模板约束，复发再升级为脚本校验。
