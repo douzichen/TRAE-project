@@ -1,8 +1,8 @@
 #!/bin/sh
 # 新窗口开工自检（只读工作区，不 pull、不改任何文件）
-# 依据：ADR-014；坑账本 P-016（无自动注入）、P-018（副本落后被当权威）
+# 依据：ADR-014（自检脚本）、ADR-019（开工强制握手）；坑账本 P-016（无自动注入）、P-018（副本落后被当权威）
 # 用法：新会话第一条命令 `sh scripts/session_start_check.sh`，把输出整段贴进交付 D-5
-# 退出码：0=可开工；1=需处理（落后/缺文件/金丝雀缺失）；2=无法核对远端（网络或凭据）
+# 退出码：0=可开工；1=需处理（缺文件/金丝雀缺失）；2=无法核对远端（网络或凭据）；3=版本落后（开工强制握手：先 git pull --ff-only origin main 再开工）
 # 说明：fetch 只更新 .git 内的远端引用，不改工作区；本脚本不自动 pull。
 
 root=$(git rev-parse --show-toplevel 2>/dev/null)
@@ -44,8 +44,10 @@ if GIT_TERMINAL_PROMPT=0 git fetch --quiet origin main 2>/dev/null; then
   ahead=$(git rev-list --count FETCH_HEAD..HEAD 2>/dev/null)
   echo "[SESSION] 远端 main：$remote_short｜落后 $behind｜领先 $ahead"
   if [ "$behind" != "0" ]; then
-    echo "[SESSION] 结论：副本落后，先执行 git pull --ff-only origin main 再读规则（P-018）"
-    state=1
+    # 落后即早退给出唯一动作；拉取后重跑本脚本补全交接快照与金丝雀检查
+    echo "[SESSION] 本地落后远端 $behind 个提交：先 git pull --ff-only origin main 再开工（开工强制握手，ADR-019）"
+    echo "[SESSION] 用户要求锁定版本时，在交付声明「落后 $behind、按用户指令锁定」"
+    exit 3
   fi
   if [ "$ahead" != "0" ]; then
     echo "[SESSION] 结论：本地领先远端，属分叉；ff-only 不适用，先确认这些提交是否应推送"

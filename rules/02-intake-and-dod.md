@@ -19,7 +19,7 @@
 - 首条回复必须声明规则加载状态：已读 `AGENTS.md`（+本轮相关 rules 分册）／未确认加载。
 - 未确认加载时首行写「未确认加载：含规则库」，且不得以"按规则"为名下结论。
 - 判断规则未加载时，第一动作是读 `AGENTS.md` 与 `rules/00`、`01`、`02`，再动手。
-- **新会话先自检**：第一条命令执行 `sh scripts/session_start_check.sh`（[ADR-014](../docs/adr/ADR-014-session-start-selfcheck.md)）；落后先 pull，退出码 1 需处理、2 为版本未核对须声明，不得在旧副本上宣布"文件不存在"（P-018）。
+- **新会话先自检**：第一条命令执行 `sh scripts/session_start_check.sh`（[ADR-014](../docs/adr/ADR-014-session-start-selfcheck.md)）；落后先 pull，退出码 1＝缺文件/金丝雀缺失、2＝版本未核对须在交付声明、3＝本地落后远端须先 git pull --ff-only 再开工（[ADR-019](../docs/adr/ADR-019-startup-sync-gate.md)），不得在旧副本上宣布"文件不存在"（P-018）。
 
 ## 相关分册
 
