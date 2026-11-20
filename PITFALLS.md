@@ -272,3 +272,12 @@
 - **证据**：`timeout 90 git push origin main` 输出 `dc436dc..b2bf793`、push_exit=0、ahead 0；`sh scripts/pre-push-check.sh` 输出"已从 .secrets/ 恢复密钥"。
 - **关联**：P-001（本机制本体）、P-022；scripts/pre-push-check.sh。
 - **状态**：已修复（P-022 状态与 ADR-021 已同步更正）。
+
+### P-025：link_check.sh 排序未固定 locale——Windows Git Bash 生成 BACKLINKS.md 与 Linux 不一致，自动暂存弄脏只读工作树
+- **现象**：2026-11-20 外部实测第二棒豆包工作（Windows Git Bash）跑 `link_check.sh` 后，`docs/BACKLINKS.md` 被重排（26 行增删，条目集合不变）并自动进入暂存区；同日第一棒 WorkBuddy 与主会话（Linux/沙箱）跑均无 diff——同一脚本三处观察矛盾。
+- **根因**：脚本内 `sort -u`、`find | sort`、`rules/*.md` glob 均未固定 locale，Git Bash 默认 locale 排序与 Linux 不同；第 72 行设计内 `git add` 使平台差异进入暂存区，与验证型 Agent"零改动只读"红线冲突（AGENT-ADAPTER 降级表把 link_check 列入零改动只读档）。
+- **影响**：只读验证 Agent 跑门禁即弄脏工作树（须 restore）；两棒报告观察矛盾，增加裁决成本。
+- **防复发机制**：脚本开头 `export LC_ALL=C`（2026-11-20 修复，三端生成结果一致后 add 变 no-op）；后续门禁脚本凡含排序/遍历生成文件，一律固定 locale；只读档 Agent 跑完门禁核对 `git status`，有 diff 即 restore 并按「平台/命令/退出码」记录。
+- **证据**：豆包工作报告 `reports/field-test-2-doubaowork-2026-11-20.md` 第 6.1 节；主会话 Linux 复现无 diff；修复后 `LC_ALL=C` 生成结果与 HEAD 一致。
+- **关联**：P-017（平台差异三栏记录）；scripts/link_check.sh；docs/AGENT-ADAPTER.md 降级表。
+- **状态**：已修复（`export LC_ALL=C`，2026-11-20，实测建议采纳）。

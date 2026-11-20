@@ -10,7 +10,7 @@
 - **单一来源**：加载策略与预算阈值见 `rules/12-context-budget.md` 与 `scripts/budget.conf`（本文不复述数字），接入机制见 `docs/adr/ADR-011-no-auto-injection.md` 与 `docs/AGENT-ADAPTER.md`，交付清单见 `rules/15-delivery-dod.md`。
 - **常见坑**：不 clone 就断言"机制失效"（P-016）；用摘要冒充已读；只改名不改规则
 - **来源**：2026-11-18 三次盲测 + 端到端验证，见 [ADR-011](../docs/adr/ADR-011-no-auto-injection.md)
-- **版本**：v1.1
+- **版本**：v1.2
 
 ## 为什么必须有这条 skill
 
@@ -64,12 +64,12 @@
 ```text
 你是本规则库的协作 Agent。开工按顺序执行：
 1. 确认同源与更新：当前目录须有 AGENTS.md 与 rules/；没有就先 git clone https://github.com/douzichen/TRAE-project.git 并进入目录；**已有副本先 git pull --ff-only origin main，落后就不得开工**（开工强制握手，[ADR-019](../docs/adr/ADR-019-startup-sync-gate.md)；锁定版本豁免见 rules/04-roles-and-dispatch.md），不要断言"机制失效"。
-2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
+2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑——显式调用 Git Bash 自带的 bash.exe，勿依赖 PATH 中 bash 的默认解析，可能落到 WSL bash，豆包工作实测 2026-11-20），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
 3. 依次读完 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md，再按 AGENTS.md 路由表读相关 1~2 册（交付任务加读 rules/15-delivery-dod.md），禁止整库通读。
 4. 首条回复声明「已读：<文件清单>」或「未确认加载」，并复述金丝雀 CANARY-TRAE-7F3A9C；该串只证明副本内容，不证明宿主加载，真读以 D-1~D-7 产物为准。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。
 6. 交付按 D-1~D-7 逐项自检并附 commit 号；读不到规则时首行写「未确认加载：含规则库」，不得以规则为名下结论。
-7. 只读边界：可本地 commit 以便跑门禁（**零改动只读验证无需 commit**——两档划分见 [AGENT-ADAPTER](../docs/AGENT-ADAPTER.md) 降级表，勿为凑门禁制造空提交，WorkBuddy 实测建议 2026-11-20），但禁止 git push、开 PR、上传任何文件到 GitHub；**每个新 clone 先执行 `git config --local credential.helper ""`（空值会重置 helper 列表），再跑 `GIT_TERMINAL_PROMPT=0 git push --dry-run origin main`，必须失败才算通过**——新副本没有这条设置时，全局凭据会重新生效；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
+7. 只读边界：可本地 commit 以便跑门禁（**零改动只读验证无需 commit**——两档划分见 [AGENT-ADAPTER](../docs/AGENT-ADAPTER.md) 降级表，勿为凑门禁制造空提交，WorkBuddy 实测建议 2026-11-20），但禁止 git push、开 PR、上传任何文件到 GitHub；**每个新 clone 先执行 `git config --local credential.helper ""`（空值会重置**含 global 层**的 helper 列表——本机 GCM/缓存 token 同样被阻断，豆包工作 2026-11-20 实测其 global 挂 GCM 仍失败），再跑 `GIT_TERMINAL_PROMPT=0 git push --dry-run origin main`，必须失败才算通过**——新副本没有这条设置时，全局凭据会重新生效；不装 .githooks、不配推送凭据；交付写「未推送」并附 git ls-remote origin 前后快照。
 8. 跨项目边界：规则变更唯一入口是主会话 TRAE，你要改规则只能在交付里提建议，不得自行改库上传；自己的新项目仓库自建自管，项目代码与文档都可推入自己的项目仓；上传红线仅指向规则库，项目内容不得推入规则库；规则库更新后重拉时，首条回复报 git rev-parse --short HEAD。重拉以项目内只读干净副本为基，任务片边界才换规，混合体文件逐段合并、禁止整文件覆盖。
 ```
 

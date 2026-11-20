@@ -3,6 +3,7 @@
 # 背景：AGENTS.md 已拆为"总纲 + rules/ 分册"，靠相对链接串联；链接一断，规则就找不到了
 # 性能：链接边只遍历一次并落临时文件，反向索引用单次 awk 计算（原实现对每个文件×每条分册都起一次 grep，约 27s，改造后 <2s）
 set -e
+export LC_ALL=C
 cd "$(git rev-parse --show-toplevel)"
 fail=0
 

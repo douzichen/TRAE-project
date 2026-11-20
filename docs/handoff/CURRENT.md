@@ -17,7 +17,7 @@
 
 ## 坑与未决
 - D-7 门禁转阻断：等首个真实业务/政策文档落地（ADR-010）；scripts 缺 set -e 待评估。
-- 八项缺口处置已执行（ADR-021）：7 项落地（度量/hooksPath 自检/探针题/体检步/灾备脚本/P-022/ADR 合卷）；委托条款经两路子 Agent 正反重审终局裁定不建（蓝图存档 S-005、复活条件入 ADR-021，2026-11-20）；推送链路已恢复实证（纯 git push+钩子恢复，ahead 0；晨间误判见 P-024）；第二远端已闭环（双推验证通过、三端 HEAD 一致 64b0aed，见 ADR-021 ④）；外部 Agent 实测排班（WorkBuddy→豆包工作→Codex）：**第一棒 WorkBuddy 通过**（结论②可行但有降级 2 项，报告 reports/field-test-1-workbuddy-2026-11-20.md；AGENT-ADAPTER 第〇节效力分层实证生效）；其 3 条建议裁决——S-004 零改动免 commit 采纳（轻级）、P-001 环境特定无需改、子 Agent 能力超配不采纳（复发即升级）；待发第二棒豆包工作。
+- 八项缺口处置已执行（ADR-021）：7 项落地（度量/hooksPath 自检/探针题/体检步/灾备脚本/P-022/ADR 合卷）；委托条款经两路子 Agent 正反重审终局裁定不建（蓝图存档 S-005、复活条件入 ADR-021，2026-11-20）；推送链路已恢复实证（纯 git push+钩子恢复，ahead 0；晨间误判见 P-024）；第二远端已闭环（双推验证通过、三端 HEAD 一致 64b0aed，见 ADR-021 ④）；外部 Agent 实测排班（WorkBuddy→豆包工作→Codex）：第一、二棒均通过（结论②可行但有降级 2 项；报告 reports/field-test-1-workbuddy / field-test-2-doubaowork-2026-11-20.md；AGENT-ADAPTER 第〇节效力分层两棒实证生效）。两棒建议裁决：S-004 三条澄清采纳（零改动免 commit/Git Bash 显式路径/helper 空值语义，v1.2）；link_check 排序平台不稳定采纳根因修复（P-025，LC_ALL=C）；P-001 无需改、能力超配与 helper 绕过不采纳（复发即升级）；待发第三棒 Codex。
 - 待确认台账指针：rules/07 常青台账与最近交付 D-6；技术侧当前无悬置。
 
 ## 下一步
