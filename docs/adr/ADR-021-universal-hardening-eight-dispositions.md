@@ -1,7 +1,7 @@
 # ADR-021：通用化加固——八项缺口处置
 
 - **日期**：2026-11-20
-- **状态**：已接受（部分：④ 中第二远端待用户粘 deploy key；条款一终局裁定**不建**，蓝图存档 [S-005](../../skills/S-005-absence-delegation-blueprint.md)，见下）。2026-11-20 经对抗审查裁定。
+- **状态**：已接受（完整：第二远端双推已验证，灾备闭环；条款一终局裁定**不建**，蓝图存档 [S-005](../../skills/S-005-absence-delegation-blueprint.md)，见下）。2026-11-20 经对抗审查裁定。
 - **关联**：[P-021](../../PITFALLS.md)、[P-022](../../PITFALLS.md)；[ADR-012](ADR-012-gate-script-portability.md)（可移植写法）、[ADR-014](ADR-014-session-start-selfcheck.md)（开工自检）、[ADR-016](ADR-016-stale-terms-gate.md)（口径漂移）、[ADR-019](ADR-019-startup-sync-gate.md)（强制握手）；[rules/06](../../rules/06-quality.md)（复盘节奏）。
 
 ## 背景
@@ -32,7 +32,7 @@
 - 新增 `scripts/backup_snapshot.sh`：在仓库父目录生成 `TRAE-project-backup-<日期>-<short-HEAD>.tar.gz` 全量快照（含 .git），重大交付后跑一次；快照不入库。
 - 恢复演练步骤：clone GitHub → 核对 HEAD 与快照 short-HEAD 一致 → 跑 `scripts/session_start_check.sh` → 报告结果。
 - 第二远端（灾备镜像，方案已定 2026-11-20）：GitHub 私有空仓 `douzichen/TRAE-project-backup`，与主远端同平台；凭据用**第二把 deploy key**（GitHub deploy key 单仓绑定，主库的 `deploy-key.pub` 不能复用，新钥公钥落库档案 `deploy-key-2.pub`，沿用仓库公钥档案惯例）。配置五步（在有凭据的环境执行一次，如用户本机 Git Bash）：①`ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_backup -N ""`；②公钥添加到镜像仓 Settings→Deploy keys（勾写权限）；③`~/.ssh/config` 加 `Host github-backup`→`HostName github.com`＋`User git`＋`IdentityFile ~/.ssh/id_ed25519_backup`；④`git remote set-url --add origin git@github-backup:douzichen/TRAE-project-backup.git`（此后单次 `git push origin main` 逐 URL 双推，任一失败按 URL 分别报错、不互相阻断）；⑤推一次并核对两库 HEAD 一致。恢复演练以镜像库为主源。可推翻条件：GitHub 单点故障实际影响同步时，评估异平台（如 Gitee）镜像。
-- 用户已建空私有仓（2026-11-20，`https://github.com/douzichen/TRAE-project-backup.git`）。会话侧已完成：第二密钥生成（`.secrets/id_ed25519_backup`，公钥档案 `deploy-key-2.pub`）、origin 双 URL（`set-url --add`）、pre-push-check.sh 扩展双密钥恢复＋github-backup 主机块、**主远端推送实证恢复（ahead 0，P-024 更正晨间误判）**。用户剩余唯一动作：把 `deploy-key-2.pub` 内容粘到镜像仓 Settings→Deploy keys→Add deploy key（勾选 **Allow write access**）——完成后单次 push 双推自动生效。配置完成前，本地快照（`backup_snapshot.sh`）为兜底。
+- 用户已建空私有仓（2026-11-20，`https://github.com/douzichen/TRAE-project-backup.git`）。会话侧已完成：第二密钥生成（`.secrets/id_ed25519_backup`，公钥档案 `deploy-key-2.pub`）、origin 双 URL（`set-url --add`）、pre-push-check.sh 扩展双密钥恢复＋github-backup 主机块、**主远端推送实证恢复（ahead 0，P-024 更正晨间误判）**。用户动作已完成（2026-11-20 粘贴 deploy key），**双推验证通过**：单次 `git push origin main` → 主库 `Everything up-to-date`＋镜像库 `* [new branch] main -> main`（镜像库收下整条历史）；三端 HEAD 一致 `64b0aedd7a63`（本地＝主库＝镜像库）。灾备三层终态：镜像库（单次 push 自动双推）＋ pre-push 钩子自动恢复双密钥 ＋ 本地快照（`backup_snapshot.sh`）。
 
 ## 对抗审查裁定（2026-11-20，独立 Red Team）
 
