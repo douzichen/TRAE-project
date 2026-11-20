@@ -28,3 +28,4 @@
 | 2026-11-20 | docs(reports): 第一棒 WorkBuddy 实测通过入库——接入8 | 11 门禁 | - |
 | 2026-11-20 | fix(gate): link_check 排序固定 LC_ALL=C——修 W | 11 门禁 | - |
 | 2026-11-20 | docs(adr): ADR-022 实测排班三棒收口——接入可行成立、红线全达 | 11 门禁 | - |
+| 2026-11-20 | chore(reports): 删除误建临时文件 _tmp_check.md（上 | 11 门禁 | - |
