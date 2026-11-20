@@ -290,3 +290,12 @@
 - **证据**：`reports/field-test-3-codex-2026-11-20.md` 5.1/5.3 节；主会话核对三端 HEAD `901fbc6f9fbc`。
 - **关联**：ADR-019（开工同步门禁）；P-017；S-004；[ADR-022](docs/adr/ADR-022-external-agent-field-test.md)。
 - **状态**：已记录（2026-11-20，三棒实测发现；降级表与 ADR-022 同步约束）。
+
+### P-027：`sh <script>` 前缀在部分 MSYS2 运行时失败——exit 126 "cannot execute binary file"
+- **现象**：2026-11-20 第四棒千问（Windows 11 ＋ 内置 MSYS2 bash 5.3.20.2）按文档字面 `sh scripts/md_check.sh` 调用 → 126，报 `/usr/bin/sh: /usr/bin/sh: cannot execute binary file`（路径重复是 stub 故障形态）；同环境 `bash scripts/md_check.sh` 直接执行 → 0。同日主会话 `file` 复核 17 个脚本全为 POSIX UTF-8、shebang 完好，Linux 沙箱 `sh` 调用全程正常——**仓库脚本无缺陷**。
+- **根因**：推测（千问自标未确认，未擅自改脚本）——该 MSYS2 运行时内置 `sh` 转发 stub 与 bash 5.3.20 版本不匹配，`/usr/bin/sh` 无法被 exec；非仓库问题、非 CRLF。
+- **影响**：照抄文档命令的 Windows Agent 会误判"门禁损坏"；实际门禁健康（该棒 9 项全绿）。
+- **防复发机制**：遇 126/"cannot execute binary file" 即改 `bash scripts/xxx.sh` 直接执行（`#!/bin/sh` 脚本为 POSIX 语法，bash 兼容）；不给脚本加 sh 兼容兜底（ADR-022 否决双实现）；S-004 步骤 2 已注明该故障形态。
+- **证据**：`reports/field-test-4-qianwen-2026-11-20.md` 3.8 节（三栏记录＋绕过输出）；主会话 file 复核。
+- **关联**：P-017（平台差异三栏）、P-025（平台差异家族）；S-004；scripts/*.sh；[ADR-022](docs/adr/ADR-022-external-agent-field-test.md)。
+- **状态**：已记录（文档注明＋直接执行法，2026-11-20，实测建议采纳；根因待该运行时方确认）。

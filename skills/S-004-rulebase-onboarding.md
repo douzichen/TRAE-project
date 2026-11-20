@@ -10,7 +10,7 @@
 - **单一来源**：加载策略与预算阈值见 `rules/12-context-budget.md` 与 `scripts/budget.conf`（本文不复述数字），接入机制见 `docs/adr/ADR-011-no-auto-injection.md` 与 `docs/AGENT-ADAPTER.md`，交付清单见 `rules/15-delivery-dod.md`。
 - **常见坑**：不 clone 就断言"机制失效"（P-016）；用摘要冒充已读；只改名不改规则
 - **来源**：2026-11-18 三次盲测 + 端到端验证，见 [ADR-011](../docs/adr/ADR-011-no-auto-injection.md)
-- **版本**：v1.2
+- **版本**：v1.3
 
 ## 为什么必须有这条 skill
 
@@ -64,7 +64,7 @@
 ```text
 你是本规则库的协作 Agent。开工按顺序执行：
 1. 确认同源与更新：当前目录须有 AGENTS.md 与 rules/；没有就先 git clone https://github.com/douzichen/TRAE-project.git 并进入目录；**已有副本先 git pull --ff-only origin main，落后就不得开工**（开工强制握手，[ADR-019](../docs/adr/ADR-019-startup-sync-gate.md)；锁定版本豁免见 rules/04-roles-and-dispatch.md），不要断言"机制失效"。
-2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑——显式调用 Git Bash 自带的 bash.exe，勿依赖 PATH 中 bash 的默认解析，可能落到 WSL bash，豆包工作实测 2026-11-20），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
+2. 先跑 sh scripts/session_start_check.sh（Windows 在 Git Bash 里跑——显式调用 Git Bash 自带的 bash.exe，勿依赖 PATH 中 bash 的默认解析，可能落到 WSL bash，豆包工作实测 2026-11-20；**若 `sh` 前缀报 exit 126 "cannot execute binary file"，属部分 MSYS2 运行时 stub 故障（P-027），改 `bash scripts/xxx.sh` 直接执行**），把输出整段贴进交付 D-5；再运行 git rev-parse --short HEAD 记录 commit。
 3. 依次读完 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md，再按 AGENTS.md 路由表读相关 1~2 册（交付任务加读 rules/15-delivery-dod.md），禁止整库通读。
 4. 首条回复声明「已读：<文件清单>」或「未确认加载」，并复述金丝雀 CANARY-TRAE-7F3A9C；该串只证明副本内容，不证明宿主加载，真读以 D-1~D-7 产物为准。
 5. 按 skills/S-004-rulebase-onboarding.md 做角色改名与能力适配，逐条声明降级（如"降级：无独立复审"）。

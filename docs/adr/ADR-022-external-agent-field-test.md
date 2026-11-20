@@ -10,4 +10,5 @@
 - **影响面**：规则库对外部 Agent 开放接入的可行性由推测转为三平台实证；后续新平台 Agent 接入按本 ADR 的提示词模板＋验收表执行，无需重新排班论证。
 - **复活条件**：新平台 Agent 接入出现"不可接入"级阻塞；降级失真/模拟超授权模式复发；存档蓝图误读复发——任一复发即按"复发即升级"重审。
 - **证据**：`reports/field-test-1-workbuddy-2026-11-20.md`、`reports/field-test-2-doubaowork-2026-11-20.md`、`reports/field-test-3-codex-2026-11-20.md`；裁决与演进落库提交 `4035b87`、`b9b36fe`、`901fbc6` 及本 ADR 提交。
-- **关联**：[ADR-021](ADR-021-universal-hardening-eight-dispositions.md)（八项处置与实测排班渊源）、[ADR-019](ADR-019-startup-sync-gate.md)（落后不得开工——P-026 缺口依据）、[S-004](../../skills/S-004-rulebase-onboarding.md)、[AGENT-ADAPTER](../AGENT-ADAPTER.md)、PITFALLS P-025/P-026。
+- **补充记录：第四棒千问助手（2026-11-20，模板复用验证）**——按本 ADR 定案的提示词模板＋验收表直接复用，无需重排班：**通过**（结论②可行但有降级 3 项），四棒中质量最高：P-026 教训正确应用（ls-remote 对比本地 HEAD、落后 0 才开工）；主动拒跑 `pre-push-check.sh`（读源码发现其写 `~/.ssh` 属凭据动作，超出验证型红线）；效力分层自证表格化；推测全部标"未确认"且不改脚本。新发现记 P-027（部分 MSYS2 运行时 `sh` 前缀 exit 126，直接执行法绕过）；采纳其建议：S-004 v1.3 注明 126 应对、降级表补"复审由维护者承接"例外、自检脚本增打解释器路径行；其建议"加 sh 兜底"由其自身反对、与 ADR-022 否决双实现一致，不采纳。S-004 v1.2 的三条澄清该棒因 clone 时点（v1.2 尚未提交前派单文本已含）无涉。实测方法论闭环：新平台接入＝复用模板＋验收表，裁决后演进入库。
+- **关联**：[ADR-021](ADR-021-universal-hardening-eight-dispositions.md)（八项处置与实测排班渊源）、[ADR-019](ADR-019-startup-sync-gate.md)（落后不得开工——P-026 缺口依据）、[S-004](../../skills/S-004-rulebase-onboarding.md)、[AGENT-ADAPTER](../AGENT-ADAPTER.md)、PITFALLS P-025/P-026/P-027。

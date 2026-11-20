@@ -13,6 +13,7 @@ if [ -z "$root" ]; then
 fi
 cd "$root" || exit 1
 echo "[SESSION] 仓库根：$root"
+echo "[SESSION] 解释器：$(command -v bash 2>/dev/null || command -v sh)（bash ${BASH_VERSION:-版本未知}）"
 state=0
 
 # 1) 必读文件存在性（15 不属启动必读，见 rules/12）

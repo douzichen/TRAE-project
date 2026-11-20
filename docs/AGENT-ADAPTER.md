@@ -56,7 +56,7 @@
 | --- | --- | --- |
 | git hook（`.githooks/`） | 无 hook | 分两档：**零改动的只读验证**跑 `md_check.sh` + `link_check.sh`（另可用 `delivery_report.sh` 取 D 草稿）；**在本地试改过任何文件**须跑 pre-commit 全链 11 项——`secrets_scan.sh`、`md_check.sh`、`link_check.sh`、`context_budget.sh`、`threshold_check.sh`、`paths_check.sh`、`claims_audit.sh`、`pitfall_check.sh`、`skills_index_check.sh`（M6）、`stale_terms_check.sh`（M5）、`policy_guard.sh`（D-7），另做 `pre-push-check.sh` 等价的凭据检查。交付中写明"手工检查"及实际跑了哪几项 |
 | 子 Agent 派发（S-001 模板） | 无子 Agent | 开两个独立会话分别做"撰写"与"反方审查"，并标注"降级：已隔离执行" |
-| 单线程 Agent（无法并行派发） | 无第二执行者 | **必须开第二个会话做独立复审，不得自写自审**；复审结论须落文件 |
+| 单线程 Agent（无法并行派发） | 无第二执行者 | **必须开第二个会话做独立复审，不得自写自审**；复审结论须落文件。验证型只读任务例外：若第二执行者无法取得第一执行者的会话内证据（重跑≠复审），可声明「降级：未独立复审，复审由维护者主会话承接」（千问实测 2026-11-20，见 [ADR-022](../docs/adr/ADR-022-external-agent-field-test.md) 补充记录） |
 | 定时调度器 | 无定时能力 | 每日首次会话时执行同一任务内容，标注"降级：会话内触发" |
 | bash 脚本 | 无终端 | 逐项手工对照清单，并在交付中列出对照结果；**不得自建模拟脚本替代**——模拟即实现偏移（Codex 实测 2026-11-20 教训，见 [ADR-022](../docs/adr/ADR-022-external-agent-field-test.md)） |
 | ADR / 分册拆分 | 平台不支持多文件 | 单文件内按同等层级组织，但**不得删减条款** |
