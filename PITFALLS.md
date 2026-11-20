@@ -254,3 +254,12 @@
 - **证据**：2026-11-20 诊断链完整记录（ssh -T 22 超时、ssh.github.com:443 超时、代理通道 Host key/publickey 两段、find 扫描无密钥）。
 - **关联**：P-021；[ADR-021](docs/adr/ADR-021-universal-hardening-eight-dispositions.md)；灾备机制。
 - **状态**：机制部分落地（三态报告+自包含指令+备份脚本）；第二远端待用户。
+
+### P-023：pre-commit 阶段读 .git/COMMIT_EDITMSG 会取到上一提交的旧消息
+- **现象**：2026-11-20 提交 c920c06 时度量钩子追加的行记录的是上一提交 c23603d 的消息，而非本次提交——COMMIT_EDITMSG 在 pre-commit 运行时点尚未写入本次消息，读到的是上次遗留值。
+- **根因**：误把 COMMIT_EDITMSG 当作"本次提交消息"的可靠来源；git 对该文件的写入时点不保证早于 pre-commit 钩子。
+- **影响**：度量账本消息归属错位；任何在 pre-commit 里依赖"本次提交消息"的后续门禁都会踩同一坑。
+- **防复发机制**：metrics_collect.sh 改为"滞后一行"语义——提交 N 的钩子读 `git log -1 --format=%s`（HEAD=提交 N−1）记录其事件，归属始终准确；禁止在 pre-commit 读 COMMIT_EDITMSG 推断本次消息。
+- **证据**：docs/METRICS.md 2026-11-20 行"docs(handoff): 行业痛点分析结论入交接快照…"系在 c920c06 提交过程中追加（16 文件 +180/-5），而该消息属 c23603d。
+- **关联**：P-022；[ADR-021](docs/adr/ADR-021-universal-hardening-eight-dispositions.md) 决策①；scripts/metrics_collect.sh。
+- **状态**：已修复（滞后一行语义已落脚本与 ADR-021 决策①）。

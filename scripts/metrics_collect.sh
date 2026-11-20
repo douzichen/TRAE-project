@@ -1,5 +1,6 @@
 #!/bin/sh
-# 度量采集（ADR-021 决策①）：每次 commit 自动向 docs/METRICS.md 追加一行提交事件
+# 度量采集（ADR-021 决策①）：每次 commit 向 docs/METRICS.md 追加一行提交事件
+# 滞后一行语义（P-023）：提交 N 的钩子记录提交 N-1 的事件，读 HEAD 而非 COMMIT_EDITMSG。
 # 挂载：.githooks/pre-commit 末尾（delivery_report.sh 之后），非阻断度量，不计入门禁序号。
 # 非阻断约束：本脚本身处 pre-commit 中，任何失败都不得阻断提交——结尾恒 exit 0，追加失败仅打警告。
 # 防递归：只做 >> 追加，不 git add、不改门禁逻辑，不会触发新一轮钩子。
@@ -12,11 +13,9 @@ if [ ! -f "$f" ]; then
   exit 0
 fi
 
-# 取本次提交信息首行（pre-commit 阶段消息已写入 COMMIT_EDITMSG；读不到不阻断）
-msg=""
-if [ -f .git/COMMIT_EDITMSG ]; then
-  msg=$(head -n 1 .git/COMMIT_EDITMSG 2>/dev/null)
-fi
+# 取上一提交（HEAD）主题首行——pre-commit 阶段本次消息尚未写入 .git/COMMIT_EDITMSG，
+# 实测读到的是上一提交遗留的旧消息（P-023），故禁止读它推断本次消息。
+msg=$(git log -1 --format=%s 2>/dev/null | head -n 1)
 [ -n "$msg" ] || msg="（未取得提交信息）"
 
 # 表格安全化：竖线会破坏行格式，反引号会被裸路径校验扫描，统一替换；截 40 字

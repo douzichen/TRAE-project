@@ -14,7 +14,7 @@
 
 ### ① 度量机制（非阻断）
 
-- 新增 `scripts/metrics_collect.sh`：每次 commit 自动向 `docs/METRICS.md` 追加一行提交事件，格式 `| 日期 | 提交信息首行截 40 字 | 11 门禁 | - |`。
+- 新增 `scripts/metrics_collect.sh`：每次 commit 自动向 `docs/METRICS.md` 追加一行提交事件，格式 `| 日期 | 提交信息首行截 40 字 | 11 门禁 | - |`。滞后一行语义：提交 N 的钩子记录提交 N−1 的事件（读 HEAD，不读 COMMIT_EDITMSG——pre-commit 阶段其内容陈旧，见 [P-023](../../PITFALLS.md)）。
 - 挂载在 `.githooks/pre-commit` 末尾（`delivery_report.sh` 之后）：**非阻断度量，不计入门禁序号**；脚本身处 pre-commit，任何失败只打警告、结尾恒 exit 0，不得阻断提交；只做 `>>` 追加防递归。
 - 新增 `docs/METRICS.md` 记三类指标：提交事件（脚本自动记）、拦截事件（提交被门禁拦截时，修复提交须补记一行）、坑复发（在对应 P 条目加"复发 N 次"，METRICS 记日期索引）。
 
