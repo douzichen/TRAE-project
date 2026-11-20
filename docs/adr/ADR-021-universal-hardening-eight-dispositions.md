@@ -1,7 +1,7 @@
 # ADR-021：通用化加固——八项缺口处置
 
 - **日期**：2026-11-20
-- **状态**：已接受（部分：④ 中第二远端待用户；条款一否决待重构，见下）。2026-11-20 经对抗审查裁定。
+- **状态**：已接受（部分：④ 中第二远端方案已定待配置；条款一否决、用户已授权按要件重构，见下）。2026-11-20 经对抗审查裁定。
 - **关联**：[P-021](../../PITFALLS.md)、[P-022](../../PITFALLS.md)；[ADR-012](ADR-012-gate-script-portability.md)（可移植写法）、[ADR-014](ADR-014-session-start-selfcheck.md)（开工自检）、[ADR-016](ADR-016-stale-terms-gate.md)（口径漂移）、[ADR-019](ADR-019-startup-sync-gate.md)（强制握手）；[rules/06](../../rules/06-quality.md)（复盘节奏）。
 
 ## 背景
@@ -31,7 +31,8 @@
 
 - 新增 `scripts/backup_snapshot.sh`：在仓库父目录生成 `TRAE-project-backup-<日期>-<short-HEAD>.tar.gz` 全量快照（含 .git），重大交付后跑一次；快照不入库。
 - 恢复演练步骤：clone GitHub → 核对 HEAD 与快照 short-HEAD 一致 → 跑 `scripts/session_start_check.sh` → 报告结果。
-- 第二远端 URL：**待用户提供**（保留未决）；配置前本地快照为唯一兜底。
+- 第二远端（灾备镜像，方案已定 2026-11-20）：GitHub 私有空仓 `douzichen/TRAE-project-backup`，与主远端同平台；凭据用**第二把 deploy key**（GitHub deploy key 单仓绑定，主库的 `deploy-key.pub` 不能复用，新钥公钥落库档案 `deploy-key-2.pub`，沿用仓库公钥档案惯例）。配置五步（在有凭据的环境执行一次，如用户本机 Git Bash）：①`ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_backup -N ""`；②公钥添加到镜像仓 Settings→Deploy keys（勾写权限）；③`~/.ssh/config` 加 `Host github-backup`→`HostName github.com`＋`User git`＋`IdentityFile ~/.ssh/id_ed25519_backup`；④`git remote set-url --add origin git@github-backup:douzichen/TRAE-project-backup.git`（此后单次 `git push origin main` 逐 URL 双推，任一失败按 URL 分别报错、不互相阻断）；⑤推一次并核对两库 HEAD 一致。恢复演练以镜像库为主源。可推翻条件：GitHub 单点故障实际影响同步时，评估异平台（如 Gitee）镜像。
+- 用户侧唯一动作：在 GitHub 创建空私有仓库（命名 `TRAE-project-backup`，**不初始化 README**）；其余五步由任一有凭据的会话机械执行。配置完成前，本地快照（`backup_snapshot.sh`）为唯一兜底。
 
 ## 对抗审查裁定（2026-11-20，独立 Red Team）
 
@@ -50,7 +51,7 @@
 | 项 | 可推翻条件 |
 | --- | --- |
 | 度量机制 | 造成提交变慢超过 2s 即撤（回退 pre-commit 挂载行即可，账本保留） |
-| 用户缺席委托条款 | 已否决未生效；重构版须先满足"对抗审查裁定"节的重构要件并重审通过 |
+| 用户缺席委托条款 | 已否决未生效；用户已授权重构（2026-11-20），重构版须先满足"对抗审查裁定"节的重构要件并重新对抗审查通过 |
 | hooksPath 自检 | 告警被证实干扰只读 Agent 正常开工即降级为维护者文档说明 |
 | 规则体检步 | 连续 4 周产出零候选即降频为每月一次 |
 | ADR 合卷条款 | 可数阈值：摘要与原文行号不符累计 3 处，或出现 1 次"凭摘要下结论"被证实，即撤回分卷改为全量展开 |
