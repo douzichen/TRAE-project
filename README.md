@@ -82,7 +82,9 @@
 │   ├── pitfall_check.sh   # pre-commit：[M4-b] 坑账本必填字段（根因/状态/证据，缺失即阻断）
 │   ├── skills_index_check.sh # pre-commit：[M6] 技能头部元数据校验（ADR-020）
 │   ├── policy_guard.sh    # pre-commit：[D-7] 涉税/政策依据核验（ADR-010，告警模式）
-│   └── secrets_scan.sh    # pre-commit：密钥/敏感信息扫描
+│   ├── secrets_scan.sh    # pre-commit：密钥/敏感信息扫描
+│   ├── metrics_collect.sh # pre-commit 末尾：度量采集，追加 docs/METRICS.md（非阻断，滞后一行语义，ADR-021/P-023）
+│   └── backup_snapshot.sh # 仓库父目录生成全量快照（含 .git），重大交付后手动执行（ADR-021）
 │
 ├── .githooks/             # git hooks（core.hooksPath 指向此处）
 │
@@ -106,7 +108,7 @@
 | `reports/` | 三路独立审计报告（结构 / 可执行性 / 覆盖性），属审计资产，不删除 | `A-`、`B-`、`C-` 前缀 |
 | `CLAUDE.md` / `GEMINI.md` / `.cursorrules` | 各工具入口指针，指向总纲、最小必读集与 12 册，由脚本生成，不手改 | 固定名称，由 `scripts/tool_entrypoints.sh` 生成 |
 | `deploy-key.pub` | Deploy key 公钥永久档案：GitHub 登记依据，环境丢失后凭此重新登记 | 固定名称，唯一 |
-| `scripts/` | 防复发自检脚本，挂 pre-commit / pre-push hook 自动拦截 | 一个检查一个脚本 |
+| `scripts/` | 防复发自检脚本，挂 pre-commit / pre-push hook 自动拦截（`metrics_collect.sh` 为非阻断度量、`backup_snapshot.sh` 为手动灾备，二者不拦截） | 一个检查一个脚本 |
 | `.secrets/` | 密钥、凭据等本机文件 | 不入库、不写入任何文档 |
 | `docs/`（业务文档待建） | PRD、FSFSD、MOC 索引、维护指南；交接快照已落在 `docs/handoff/CURRENT.md` | 项目启动后按文档规范建立 |
 | `src/`（待建） | 业务代码与脚本 | 项目启动后按技术方案建立 |
