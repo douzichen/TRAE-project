@@ -250,10 +250,10 @@
 - **现象**：2026-11-20 同一会话两次 push 失败；诊断链：端口 22/443 直连 github.com 全超时→经沙箱代理（127.0.0.1:18080）TCP 可达→卡 `Permission denied (publickey)`→全盘扫描确认无 SSH 私钥（~/.ssh 空）、无 GitHub 令牌、无 gh 登录。昨日推送成功、今日环境已换——沙箱每日重建，SSH 密钥与出口端口均不可依赖。
 - **根因**：把"能推送"当成环境常量，实际是环境变量；且无第二远端兜底。
 - **影响**：交付声称"已推送"有虚报风险；仓库单点。
-- **防复发机制**：推送失败按三态如实报告（成功/失败+诊断链/未尝试）；调度任务指令自包含（已改）；重大交付后跑 `scripts/backup_snapshot.sh` 留本地快照；第二远端方案已定（ADR-021 ④：GitHub 私有镜像仓+第二 deploy key），待用户建仓与凭据环境配置。
+- **防复发机制**：推送失败按三态如实报告（成功/失败+诊断链/未尝试）；调度任务指令自包含（已改）；重大交付后跑 `scripts/backup_snapshot.sh` 留本地快照；第二远端：空仓已建、双 URL 已配、deploy-key-2.pub 待用户粘贴（ADR-021 ④）。
 - **证据**：2026-11-20 诊断链完整记录（ssh -T 22 超时、ssh.github.com:443 超时、代理通道 Host key/publickey 两段、find 扫描无密钥）。
 - **关联**：P-021；[ADR-021](docs/adr/ADR-021-universal-hardening-eight-dispositions.md)；灾备机制。
-- **状态**：机制部分落地（三态报告+自包含指令+备份脚本）；第二远端方案已定待配置（ADR-021 ④），配置完成前本地快照为唯一兜底。
+- **状态**：推送链路已恢复并实证（纯 `git push`+钩子自动恢复，2026-11-20 ahead 0；晨间"无凭据"误判由 P-024 更正）；第二远端：镜像空仓已建、第二密钥已生成（deploy-key-2.pub 待用户粘到镜像仓 Deploy keys），配置完成前本地快照兜底。
 
 ### P-023：pre-commit 阶段读 .git/COMMIT_EDITMSG 会取到上一提交的旧消息
 - **现象**：2026-11-20 提交 c920c06 时度量钩子追加的行记录的是上一提交 c23603d 的消息，而非本次提交——COMMIT_EDITMSG 在 pre-commit 运行时点尚未写入本次消息，读到的是上次遗留值。
@@ -263,3 +263,12 @@
 - **证据**：docs/METRICS.md 2026-11-20 行"docs(handoff): 行业痛点分析结论入交接快照…"系在 c920c06 提交过程中追加（16 文件 +180/-5），而该消息属 c23603d。
 - **关联**：P-022；[ADR-021](docs/adr/ADR-021-universal-hardening-eight-dispositions.md) 决策①；scripts/metrics_collect.sh。
 - **状态**：已修复（滞后一行语义已落脚本与 ADR-021 决策①）。
+
+### P-024：诊断推送失败时用 GIT_SSH_COMMAND 覆盖参数，绕过钩子凭据自动恢复，误判"沙箱无凭据"
+- **现象**：2026-11-20 晨推送 2 次失败后诊断为"沙箱无凭据"；同日午后纯 `git push`（无任何覆盖参数）一次成功——.secrets/ 主 deploy key 与 pre-push 恢复机制全程有效。
+- **根因**：诊断与推送时手动附加 `GIT_SSH_COMMAND`（自定义 ProxyCommand/BatchMode），覆盖了 pre-push 钩子重建的 `~/.ssh/config` 链路（ssh.github.com:443+代理），把"被自己覆盖导致的失败"当成"环境无凭据"。
+- **影响**：P-022 初版结论"沙箱无凭据"失真；6 笔提交积压约半天未推送；一次误判导向"等凭据恢复"的错误等待。
+- **防复发机制**：推送一律用纯 `git push`（凭据恢复由 pre-push 钩子负责）；推送失败先跑 `sh scripts/pre-push-check.sh` 并核对 `~/.ssh` 内容，再做其他诊断；禁止用 GIT_SSH_COMMAND 附加参数替代钩子链路。
+- **证据**：`timeout 90 git push origin main` 输出 `dc436dc..b2bf793`、push_exit=0、ahead 0；`sh scripts/pre-push-check.sh` 输出"已从 .secrets/ 恢复密钥"。
+- **关联**：P-001（本机制本体）、P-022；scripts/pre-push-check.sh。
+- **状态**：已修复（P-022 状态与 ADR-021 已同步更正）。

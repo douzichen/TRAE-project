@@ -20,3 +20,4 @@
 | 2026-11-20 | docs(adr): ADR-021 八项缺口处置落地——度量/hooksPat | 11 门禁 | - |
 | 2026-11-20 | fix(metrics): 度量改滞后一行语义——pre-commit 读 CO | 11 门禁 | - |
 | 2026-11-20 | docs(readup): README 登记 metrics_collect/ | 11 门禁 | - |
+| 2026-11-20 | docs(dr): 第二远端方案定案——GitHub 私有镜像仓+第二 depl | 11 门禁 | - |
