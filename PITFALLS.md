@@ -281,3 +281,12 @@
 - **证据**：豆包工作报告 `reports/field-test-2-doubaowork-2026-11-20.md` 第 6.1 节；主会话 Linux 复现无 diff；修复后 `LC_ALL=C` 生成结果与 HEAD 一致。
 - **关联**：P-017（平台差异三栏记录）；scripts/link_check.sh；docs/AGENT-ADAPTER.md 降级表。
 - **状态**：已修复（`export LC_ALL=C`，2026-11-20，实测建议采纳）。
+
+### P-026：fetch 受限环境下用本地 origin/main 内部 ref 声明"与远端一致"——假阴性
+- **现象**：2026-11-20 外部实测第三棒 Codex（沙盒拒写 `.git/FETCH_HEAD`，exit 255）改用 `git rev-list --count HEAD..origin/main` 得"落后 0 领先 0"并声明"与远端一致（降级等效）"；实际本地 `b9b36fe` 落后远端 `901fbc6` 一版——其报告中 ls-remote 输出与本地 HEAD 两证据并存却未对比。
+- **根因**：内部 ref（origin/main）只反映上次成功 fetch 的时点，fetch 失败时必然陈旧；把"内部 ref 无差异"当"与远端一致"的证据，且未自查报告内并存的两处版本证据。
+- **影响**：违反"落后不得开工"红线（ADR-019），该棒读到的 S-004 为 v1.1（缺最新三条澄清）；"降级等效"声明失真，属降级方法质量缺陷而非虚报（全部证据如实提供，矛盾可检测）。
+- **防复发机制**：版本核对唯一权威证据＝只读网络命令 `git ls-remote origin main` 输出对比本地 `git rev-parse HEAD`，两值并列并标差异；fetch/pull 被拒时禁止用本地 origin/main ref 得出"已同步"结论；交付前核对报告内所有版本证据一致性。
+- **证据**：`reports/field-test-3-codex-2026-11-20.md` 5.1/5.3 节；主会话核对三端 HEAD `901fbc6f9fbc`。
+- **关联**：ADR-019（开工同步门禁）；P-017；S-004；[ADR-022](docs/adr/ADR-022-external-agent-field-test.md)。
+- **状态**：已记录（2026-11-20，三棒实测发现；降级表与 ADR-022 同步约束）。

@@ -27,6 +27,7 @@
 | [ADR-019](ADR-019-startup-sync-gate.md) | 开工强制握手——本地落后远端即先拉再开工 | 2026-11-19 | 已接受 |
 | [ADR-020](ADR-020-skill-metadata-spec.md) | 技能元数据化采用四栏规格＋机械校验，不做自动触发 | 2026-11-19 | 已接受 |
 | [ADR-021](ADR-021-universal-hardening-eight-dispositions.md) | 通用化加固：八项缺口处置 | 2026-11-20 | 已接受（完整：第二远端双推已验证；条款一终局裁定不建） |
+| [ADR-022](ADR-022-external-agent-field-test.md) | 外部 Agent 实测排班三棒收口：接入可行，红线全达成 | 2026-11-20 | 已接受 |
 
 ## 何时必须写 ADR
 
