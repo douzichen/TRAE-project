@@ -22,3 +22,4 @@
 | 2026-11-20 | docs(readup): README 登记 metrics_collect/ | 11 门禁 | - |
 | 2026-11-20 | docs(dr): 第二远端方案定案——GitHub 私有镜像仓+第二 depl | 11 门禁 | - |
 | 2026-11-20 | docs(adr): 条款一终局裁定不建（两路正反重审，四理由）——rules/ | 11 门禁 | - |
+| 2026-11-20 | docs(dr): 第二远端落地——第二 deploy key 生成+双 URL | 11 门禁 | - |
