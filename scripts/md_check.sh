@@ -70,6 +70,11 @@ if [ -n "$adr_head" ] && [ "${adr_now:-0}" -lt "${adr_head:-0}" ]; then
   echo "[P-010] 审计资产被删减：ADR $adr_head → $adr_now，决策记录只增不减"; fail=1
 fi
 
+# 9) ADR 合卷门禁（rules/13 / ADR-021）：达 50 条而 INDEX 未分卷即拦截，不靠人眼
+if [ "${adr_now:-0}" -ge 50 ] && ! grep -q '当前卷' docs/adr/INDEX.md 2>/dev/null; then
+  echo "[P-004] ADR 已达 $adr_now 条（≥50），INDEX 未分'当前卷/历史卷'，须按 rules/13 合卷"; fail=1
+fi
+
 if [ "$fail" -eq 0 ]; then
   echo "[P-004] md 完整性校验通过"
 else

@@ -58,6 +58,12 @@ else
   state=2
 fi
 
+# 3b) hooksPath 自检（ADR-021 决策②）：只告警、不改退出码——验证型 Agent 未装 hook 属合法状态
+hooks_path=$(git config core.hooksPath 2>/dev/null)
+if [ "$hooks_path" != ".githooks" ]; then
+  echo "[SESSION] hooksPath 未设为 .githooks：本地门禁不会自动运行（验证型 Agent 未装 hook 属合法状态；维护者主会话须先 git config core.hooksPath .githooks）"
+fi
+
 # 4) 交接快照
 if [ -f docs/handoff/CURRENT.md ]; then
   last=$(git log -1 --format='%h %s' -- docs/handoff/CURRENT.md 2>/dev/null)

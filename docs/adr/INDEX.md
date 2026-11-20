@@ -26,6 +26,7 @@
 | [ADR-018](ADR-018-clean-copy-repull.md) | 在途项目重拉采用干净副本基线与任务片边界换规 | 2026-11-19 | 已接受 |
 | [ADR-019](ADR-019-startup-sync-gate.md) | 开工强制握手——本地落后远端即先拉再开工 | 2026-11-19 | 已接受 |
 | [ADR-020](ADR-020-skill-metadata-spec.md) | 技能元数据化采用四栏规格＋机械校验，不做自动触发 | 2026-11-19 | 已接受 |
+| [ADR-021](ADR-021-universal-hardening-eight-dispositions.md) | 通用化加固：八项缺口处置 | 2026-11-20 | 已接受（部分：第二远端待用户；委托条款否决待重构） |
 
 ## 何时必须写 ADR
 

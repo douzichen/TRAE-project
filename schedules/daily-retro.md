@@ -18,10 +18,10 @@
 ## 任务内容（与调度器 message 必须逐字一致）
 
 ```text
-对 GitHub 仓库 douzichen/TRAE-project 做每日复盘。你可能运行在全新沙箱：若当前目录没有 AGENTS.md 与 rules/，先执行 git clone https://github.com/douzichen/TRAE-project.git /workspace/TRAE-project 并进入该目录再开始（公开仓库，匿名克隆即可）；克隆失败就输出'仓库不可用'并停止，不要新建空仓库冒充交付。步骤：1) 读 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md、PITFALLS.md；2) 用 git log 与 git diff 统计最近 24 小时的提交，找出返工、回滚、重复修改、被中断、反复沟通的事项；3) 检查 docs/handoff/CURRENT.md 是否落后于最后一次交付提交（git log -1 -- docs/handoff/CURRENT.md 与 HEAD 比对），落后就标注'已过期，以 git log 为准'（ADR-013）；4) 不要只统计发生了什么，必须横向聚类分析共同根因（例如：机制只覆盖机械部分、口径漂移、同步失败、规则膨胀）；5) 把可预防的共性根因写成防复发机制建议，优先级：自动检查脚本 > 模板/清单条目 > 规则文本；6) 输出复盘报告：本次聚类的共同根因、建议新增或升级的防复发机制、仍未关闭的待确认事项；若确实没有新问题，明确写'本日无新增坑'，不得编造问题。本沙箱没有推送凭据：不要尝试 git push，不要配置任何凭据或 token；把完整复盘报告直接输出在回复里，结尾写'未推送（沙箱无凭据，属预期）；落库由主会话完成'。
+对 GitHub 仓库 douzichen/TRAE-project 做每日复盘。你可能运行在全新沙箱：若当前目录没有 AGENTS.md 与 rules/，先执行 git clone https://github.com/douzichen/TRAE-project.git /workspace/TRAE-project 并进入该目录再开始（公开仓库，匿名克隆即可）；克隆失败就输出'仓库不可用'并停止，不要新建空仓库冒充交付。步骤：1) 读 AGENTS.md、rules/00-core.md、rules/01-user-profile.md、rules/02-intake-and-dod.md、PITFALLS.md；2) 用 git log 与 git diff 统计最近 24 小时的提交，找出返工、回滚、重复修改、被中断、反复沟通的事项；3) 检查 docs/handoff/CURRENT.md 是否落后于最后一次交付提交（git log -1 -- docs/handoff/CURRENT.md 与 HEAD 比对），落后就标注'已过期，以 git log 为准'（ADR-013）；4) 不要只统计发生了什么，必须横向聚类分析共同根因（例如：机制只覆盖机械部分、口径漂移、同步失败、规则膨胀）；5) 把可预防的共性根因写成防复发机制建议，优先级：自动检查脚本 > 模板/清单条目 > 规则文本；6) 输出复盘报告：本次聚类的共同根因、建议新增或升级的防复发机制、仍未关闭的待确认事项；若确实没有新问题，明确写'本日无新增坑'，不得编造问题。7) 每周日追加一步"规则体检"：扫一遍 rules/ 16 册与 ADR 索引，产出"过时/冗余/建议退役"候选清单（只列不改，附 file:line 依据），报用户裁决；非周日跳过本步。本沙箱没有推送凭据：不要尝试 git push，不要配置任何凭据或 token；把完整复盘报告直接输出在回复里，结尾写'未推送（沙箱无凭据，属预期）；落库由主会话完成'。
 ```
 
-> 调度器同步状态（2026-11-19）：**已同步**——经用户指令（原话"同步"）确认后，调度器实例 `._LP-ABG40ZAUH` 的 message 已更新为本文第 21 行原文，逐字一致，下次执行 2026-11-20 00:00:42（Asia/Shanghai）。此前一次更新曾被用户取消，教训已记 P-019：同步操作前须确认实例实际状态，不假设"已同步"或"已取消"。
+> 调度器同步状态（2026-11-19）：**已同步**——经用户指令（原话"同步"）确认后，调度器实例 `._LP-ABG40ZAUH` 的 message 已更新为本文第 21 行原文，逐字一致，下次执行 2026-11-20 00:00:42（Asia/Shanghai）。此前一次更新曾被用户取消，教训已记 P-019：同步操作前须确认实例实际状态，不假设"已同步"或"已取消"。2026-11-20：本文件任务内容增补第 7 步（每周日"规则体检"，见 [ADR-021](../docs/adr/ADR-021-universal-hardening-eight-dispositions.md)），调度器实例**尚未同步**——外部 Agent 排班保留未决，以本文件为准，待用户指令后再同步调度器。
 
 ## 平台约束（2026-11-19 截图证实，不得假设相反）
 

@@ -245,3 +245,12 @@
 - **证据**：2026-11-19 两次实测——WSL2 通道：执行方反馈 `uname -o`=`GNU/Linux`、内核 `microsoft-standard-WSL2`，被判不构成第二平台后改走真 git-bash 复跑得 `MINGW64_NT-10.0-22631` + A=0/B=0（[ADR-020](docs/adr/ADR-020-skill-metadata-spec.md) 决策③留痕）；PowerShell 内联：`bash -lc` 无输出 exit 2、`-c` 内联长串被拆坏报 `rev-parse: -c: line 2`，改写临时 `.sh` 后一次跑通。
 - **关联**：P-017；[ADR-012](docs/adr/ADR-012-gate-script-portability.md)；[ADR-020](docs/adr/ADR-020-skill-metadata-spec.md)；`scripts/paths_check.sh` [M1-b]（脚本侧，指令侧无机械拦截）
 - **状态**：机制已定（2026-11-19，写入本条防复发机制）；机械拦截暂缺——验证指令为人工粘贴文本，暂以模板约束，复发再升级为脚本校验。
+
+### P-022：推送链路依赖单沙箱环境——密钥不持久、出口端口不稳
+- **现象**：2026-11-20 同一会话两次 push 失败；诊断链：端口 22/443 直连 github.com 全超时→经沙箱代理（127.0.0.1:18080）TCP 可达→卡 `Permission denied (publickey)`→全盘扫描确认无 SSH 私钥（~/.ssh 空）、无 GitHub 令牌、无 gh 登录。昨日推送成功、今日环境已换——沙箱每日重建，SSH 密钥与出口端口均不可依赖。
+- **根因**：把"能推送"当成环境常量，实际是环境变量；且无第二远端兜底。
+- **影响**：交付声称"已推送"有虚报风险；仓库单点。
+- **防复发机制**：推送失败按三态如实报告（成功/失败+诊断链/未尝试）；调度任务指令自包含（已改）；重大交付后跑 `scripts/backup_snapshot.sh` 留本地快照；第二远端 URL 由用户提供（待定）。
+- **证据**：2026-11-20 诊断链完整记录（ssh -T 22 超时、ssh.github.com:443 超时、代理通道 Host key/publickey 两段、find 扫描无密钥）。
+- **关联**：P-021；[ADR-021](docs/adr/ADR-021-universal-hardening-eight-dispositions.md)；灾备机制。
+- **状态**：机制部分落地（三态报告+自包含指令+备份脚本）；第二远端待用户。
