@@ -19,3 +19,4 @@
 | 2026-11-20 | docs(handoff): 行业痛点分析结论入交接快照；定时任务改自包含 | 11 门禁 | - |
 | 2026-11-20 | docs(adr): ADR-021 八项缺口处置落地——度量/hooksPat | 11 门禁 | - |
 | 2026-11-20 | fix(metrics): 度量改滞后一行语义——pre-commit 读 CO | 11 门禁 | - |
+| 2026-11-20 | docs(readup): README 登记 metrics_collect/ | 11 门禁 | - |

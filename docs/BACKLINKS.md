@@ -34,6 +34,7 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-013-handoff-snapshot.md
 - docs/adr/ADR-019-startup-sync-gate.md
+- docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - rules/00-core.md
 - rules/07-pending-and-handoff.md
 - rules/12-context-budget.md
@@ -59,6 +60,7 @@
 - docs/adr/ADR-017-cross-project-operating-model.md
 - docs/adr/ADR-018-clean-copy-repull.md
 - docs/adr/ADR-019-startup-sync-gate.md
+- docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -103,6 +105,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-013-handoff-snapshot.md
+- docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/handoff/CURRENT.md
 - rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
