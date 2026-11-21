@@ -1,5 +1,6 @@
 .uploads/
 .secrets/
+.local/
 .DS_Store
 *.log
 .env

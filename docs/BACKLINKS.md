@@ -19,6 +19,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-017-cross-project-operating-model.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - rules/00-core.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
@@ -62,6 +63,7 @@
 - docs/adr/ADR-018-clean-copy-repull.md
 - docs/adr/ADR-019-startup-sync-gate.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -119,7 +121,10 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- rules/01-user-profile.md
 - rules/03-skill-sync.md
+- rules/04-roles-and-dispatch.md
 - rules/07-pending-and-handoff.md
 - rules/11-rollback.md
 - rules/12-context-budget.md
@@ -140,6 +145,8 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-013-handoff-snapshot.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- rules/04-roles-and-dispatch.md
 - rules/06-quality.md
 - rules/09-precipitation.md
 
@@ -159,6 +166,7 @@
 - docs/adr/ADR-007-supersede-budget-threshold.md
 - docs/adr/ADR-009-move-dod-out-of-core.md
 - docs/adr/ADR-013-handoff-snapshot.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - rules/00-core.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/15-delivery-dod.md
@@ -184,6 +192,8 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
+- docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- rules/01-user-profile.md
 - rules/05-requirement-review.md
 - skills/S-002-project-bootstrap.md
 - skills/S-003-requirements-intake.md
@@ -202,4 +212,5 @@
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
 - skills/S-004-rulebase-onboarding.md
+- skills/S-007-external-scan.md
 
