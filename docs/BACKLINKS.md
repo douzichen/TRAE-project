@@ -20,6 +20,7 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-017-cross-project-operating-model.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- docs/adr/ADR-024-external-agent-instruction-observation.md
 - rules/00-core.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
@@ -64,6 +65,7 @@
 - docs/adr/ADR-019-startup-sync-gate.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- docs/adr/ADR-024-external-agent-instruction-observation.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -118,10 +120,12 @@
 ## 08-alignment-and-versioning.md
 
 - AGENTS.md
+- docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-003-rules-split-with-bidirectional-links.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- docs/adr/ADR-024-external-agent-instruction-observation.md
 - rules/01-user-profile.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
@@ -206,6 +210,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-010-policy-evidence-gate.md
+- docs/adr/ADR-024-external-agent-instruction-observation.md
 - rules/00-core.md
 - rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md

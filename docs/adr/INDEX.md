@@ -29,6 +29,7 @@
 | [ADR-021](ADR-021-universal-hardening-eight-dispositions.md) | 通用化加固：八项缺口处置 | 2026-11-20 | 已接受（完整：第二远端双推已验证；条款一终局裁定不建） |
 | [ADR-022](ADR-022-external-agent-field-test.md) | 外部 Agent 实测排班三棒收口：接入可行，红线全达成 | 2026-11-20 | 已接受 |
 | [ADR-023](ADR-023-rulebase-evolution-mechanisms.md) | 规则库进化双机制：指令喜好双层结构（试用期至 2026-12-21）＋外部规则月度收集并入周日体检 | 2026-11-21 | 已接受 |
+| [ADR-024](ADR-024-external-agent-instruction-observation.md) | 外部 Agent 指令偏好学习适配：平台分档原始层＋脱敏候选回传（扩展 ADR-023，限外部 Agent） | 2026-11-21 | 已接受 |
 
 ## 何时必须写 ADR
 

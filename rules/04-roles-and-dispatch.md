@@ -54,6 +54,7 @@
 - **接入方式**：HTTPS 匿名 clone，`GIT_TERMINAL_PROMPT=0`。公开仓库无法阻止任意第三方 fork 或开 PR，本条约束的是自愿配合验证的 Agent。
 - **交付要求**：D-5 须写"未推送"，并附任务前后 `git ls-remote origin` 的 HEAD/分支快照；主 Agent 以此核验，不只听自述。
 - **写入权**：仅主 Agent。外部 Agent 确需写入时，须用户单独授权并记 ADR，否则视为违规。
+- **外部 Agent 本地原始层（[ADR-024](../docs/adr/ADR-024-external-agent-instruction-observation.md) 扩展，2026-11-21 起，试用期至 2026-12-21）**：经该 ADR 授权，A/B 档外部 Agent 可在其**自身副本内**记本地未追踪原始层文件（等价 `.local/instruction-log.md`，`.gitignore` 收录 `.local/` 不入库不推送）——原话仅落该文件，提炼层一律脱敏转述（[rules/08](08-alignment-and-versioning.md)），禁止把原话写入任何入库文件或交付正文；禁 `git add -f .local/`，其余 push/上传/凭据禁令照旧（上文），除原始层文件外禁写任何文件。观察结果仅以**脱敏候选**（固定格式见 [docs/AGENT-ADAPTER.md](../docs/AGENT-ADAPTER.md) 第七节）经 D-4 回传，无权写 [rules/01](01-user-profile.md)，候选不得直接入册；C 档（无终端/会话即弃）声明「原始层不适用，降级为会话内观察」，降级须声明不得假装执行。本条豁免仅及上述本地未追踪文件，「写入口唯一」（上文）不因此放宽。
 - **不参与并行**：外部 Agent 不认领 `docs/CLAIMS.md`，不触发并发协议（[13](13-concurrency-and-lifecycle.md)）；其副本分叉不影响主线。
 
 ## 跨项目运行模型：规则唯一通道与写入口（2026-11-19，用户定调，见 [ADR-017](../docs/adr/ADR-017-cross-project-operating-model.md)）
