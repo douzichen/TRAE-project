@@ -28,5 +28,15 @@ for f in rules/*.md; do
     echo "[P-010] 超限：$f ${n} 行 > ${FILE_MAX}，必须再拆分"; fail=1; }
 done
 
+# [ADR-024 可推翻条件 4 / ADR-026] docs/AGENT-ADAPTER.md 自设上限（阈值取自 scripts/budget.conf）：先告警、不阻断（rules/10）
+if [ -f docs/AGENT-ADAPTER.md ]; then
+  n=$(lines docs/AGENT-ADAPTER.md)
+  if [ "$n" -gt "$ADAPTER_MAX" ]; then
+    echo "[WARN] docs/AGENT-ADAPTER.md ${n} 行 > 自设上限 ${ADAPTER_MAX} 行（ADR-024）：须压缩或外移增补节"
+  elif [ "$n" -ge $((ADAPTER_MAX - ADAPTER_HEADROOM)) ]; then
+    echo "[WARN] docs/AGENT-ADAPTER.md ${n} 行，距自设上限 ${ADAPTER_MAX} 行仅 $((ADAPTER_MAX - n)) 行余量（ADR-024）"
+  fi
+fi
+
 [ "$fail" -eq 1 ] && exit 1
 echo "[P-010] 上下文预算校验通过（必读集 ${core}/${CORE_MAX}｜总纲 ${idx}/${INDEX_MAX}｜单册上限 ${FILE_MAX}）"

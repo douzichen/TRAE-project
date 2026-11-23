@@ -16,17 +16,17 @@
 
 ## 坑与未决
 - 提炼层残余风险：每轮"用户指令观察"仍靠主会话自觉，无机械保障；漏记按 rules/10 复发即升级。
-- 原始层红线：`.local/` 永不入库不推送，违规即停（ADR-023 推翻条件 4）；脱敏判定标准缺口（reports/C-coverage-audit.md ③）仍开，试点期从严。
-- 11-22 周日体检的 9 条修剪候选**未裁决**，等用户逐条定夺（只列不改）。
-- 试用期复审条件（2026-12-21）：记录条数／重复模式数／确认入册数／命中率。
+- 原始层红线：`.local/` 永不入库不推送，违规即停（ADR-023 推翻条件 4）；脱敏判定标准已闭环（rules/08「脱敏判定标准」，ADR-026），残余＝语义级判定仍靠人工。
+- 11-22 体检 9 条候选**已裁决**（ADR-026）：6 项轻级落地、1 项告警档脚本、2 项不采纳（.trae 入口维持、rules/03 原话不动）。
+- 试用期复审条件（2026-12-21）：记录条数／重复模式数／确认入册数／命中率；开工自检已加期限告警（剩 ≤30 天提示）。
 - 既有未决沿用：D-7 门禁转阻断等首个真实业务/政策文档（ADR-010）。
 
 ## 下一步
 - 每日开工必跑 `sh scripts/retro_pending_check.sh`（有缺口当日补跑）与 `sh scripts/fact_digest.sh`（报告数字只取此处）。
-- 2026-12-06 首扫：候选清单须过 `sh scripts/scan_candidate_check.sh`，不过即清单无效。
+- 2026-12-06 首扫：候选清单须过 `sh scripts/scan_candidate_check.sh`（已写入 daily-retro「机械验收」条），不过即清单无效；零误报后才可转 `--strict`。
 
 ## 沉淀
-- skills/S-007 v1.1；ADR-025；scripts/{fact_digest,retro_pending_check,scan_candidate_check}.sh。
+- skills/S-007 v1.1；ADR-025、ADR-026；scripts/{fact_digest,retro_pending_check,scan_candidate_check}.sh；规则体检 9 项裁决落地（rules/04/06/08/09/14）。
 
 ## 新鲜度核对
 - 读者执行 `git log -1 --format='%h %s' -- docs/handoff/CURRENT.md` 与本文件核对，不一致以 git log 为准（P-018）。

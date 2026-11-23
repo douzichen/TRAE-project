@@ -22,6 +22,7 @@
 - docs/adr/ADR-017-cross-project-operating-model.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/00-core.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
@@ -67,6 +68,7 @@
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -99,6 +101,7 @@
 - docs/adr/ADR-007-supersede-budget-threshold.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
@@ -127,6 +130,7 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/01-user-profile.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
@@ -142,6 +146,7 @@
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-020-skill-metadata-spec.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/03-skill-sync.md
 - rules/10-lessons.md
 
@@ -151,8 +156,10 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-013-handoff-snapshot.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/04-roles-and-dispatch.md
 - rules/06-quality.md
+- rules/08-alignment-and-versioning.md
 - rules/09-precipitation.md
 
 ## 11-rollback.md
@@ -198,6 +205,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
+- docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - rules/01-user-profile.md
 - rules/05-requirement-review.md
 - skills/S-002-project-bootstrap.md

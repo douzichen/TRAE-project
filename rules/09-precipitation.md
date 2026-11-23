@@ -20,7 +20,7 @@
 - **交接必填**：每次交接必须写明"本次沉淀了什么 / 复用了哪个 skill 或 workflow / 为什么无需沉淀"，作为固定栏目。
 - **新建先查索引**：建新 skill 前先查 `skills/INDEX.md`，同类者优先修订，不另起一套。
 - **复用率衡量**：统计任务中引用已有 skill 的比例，复用率过低说明沉淀没生效。
-- **检查即脚本**：防复发机制优先做成脚本并挂 git hook（`git config core.hooksPath .githooks`）：`scripts/md_check.sh`（pre-commit，校验 INDEX 登记、坑编号连续、标题去重）、`scripts/pre-push-check.sh`（pre-push，凭据自检与密钥自动恢复）、`scripts/delivery_report.sh`（pre-commit，每次提交自动生成交付报告草稿：新增段+全文+改动清单+对账+同步状态）。机器能拦的不再依赖清单。
+- **检查即脚本**：防复发机制优先做成脚本并挂 git hook（`git config core.hooksPath .githooks`）；现有门禁清单与串联顺序以 `scripts/` 与 `.githooks/pre-commit` 为准（如 `md_check.sh` 校验 INDEX 登记与坑编号连续、`pre-push-check.sh` 做凭据自检、`delivery_report.sh` 生成交付草稿），本册不逐一枚举，避免脚本增减后清单漂移。机器能拦的不再依赖清单。
 - **派发必用模板**：派发子 Agent 任务必须使用 `skills/S-001-subagent-dispatch.md`，填齐依据、边界、产出与验收；子 Agent 返回时按模板逐项核对。任务级具体约束只写进提示词，不写入本文件。
 
 ## 相关分册

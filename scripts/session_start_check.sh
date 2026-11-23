@@ -91,6 +91,26 @@ fi
 # [ADR-025] 复盘落库缺口告警（非阻断：不改 state、不影响退出码）
 sh scripts/retro_pending_check.sh 7 2>/dev/null || true
 
+# [ADR-026] ADR 试用期/复审期限告警（非阻断：日期取自 ADR 正文，不在脚本里硬编码，防双源漂移）
+today=$(TZ=Asia/Shanghai date +%Y-%m-%d 2>/dev/null || date +%Y-%m-%d)
+if [ -d docs/adr ]; then
+  grep -HoE '(试用期至|有效期至|复审|到期|截止)[^0-9]*20[0-9]{2}-[0-9]{2}-[0-9]{2}' docs/adr/ADR-*.md 2>/dev/null \
+    | sed -E 's/^([^:]+):.*(20[0-9]{2}-[0-9]{2}-[0-9]{2}).*/\1 \2/' | sort -u \
+    | while read -r f d; do
+        days=$(awk -v a="$today" -v b="$d" '
+          function jd(s, p,y,m,d) { split(s,p,"-"); y=p[1]+0; m=p[2]+0; d=p[3]+0
+            if (m<=2) { y--; m+=12 }
+            return 365*y+int(y/4)-int(y/100)+int(y/400)+int((153*(m-3)+2)/5)+d }
+          BEGIN { print jd(b)-jd(a) }')
+        src=$(basename "$f")
+        if [ "$days" -lt 0 ]; then
+          echo "[SESSION] 期限告警：$src $d 已过期 $((0 - days)) 天，须处理并更新 ADR 状态（状态更新后告警才消失）"
+        elif [ "$days" -le 30 ]; then
+          echo "[SESSION] 期限告警：$src $d 剩 $days 天，须按期执行（复审/首扫/到期项）"
+        fi
+      done
+fi
+
 case "$state" in
   0) echo "[SESSION] 自检通过：可以开工（本次未改工作区）" ;;
   1) echo "[SESSION] 自检未通过：按上面每条的“处理/结论”修正后重跑" ;;
