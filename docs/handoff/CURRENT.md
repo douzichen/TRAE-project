@@ -10,6 +10,7 @@
 - 调度器：`._LP-ABG40ZAUH` message 与真源第 21 行逐字一致；`S.KN9NA53ZX_LB` 为例行简报（≤15 行）。
 - **2026-11-23 补跑**：11-21～11-23 三日复盘合并落库（审查报告 [reports/R4](../../reports/R4-review-daily-2026-11-23.md)），账本 P-033 → **P-037**；九项问题处置见 [ADR-025](../adr/ADR-025-mechanical-root-cause-elimination.md)（六项机械化、两项模板降级、一项文本）；落库台账 [RETRO-LOG](RETRO-LOG.md)。
 - **2026-11-23 既有项目接入**：Qoder 三轮实测（既有财税项目，代号"项目 L"，规则库外置）后落 [ADR-027](../adr/ADR-027-legacy-project-onboarding.md) 与 [rules/14](../../rules/14-project-bootstrap.md) C 节（外置引用/只追加/快照范围/只读档作用域）；项目侧 `AGENTS.md` §20 已追加、未提交，待项目自身 §15/§17 流程。
+- **2026-11-23 度量与门禁修订**：账本 P-041~P-043（状态码通配符误判、体积/合计口径、正则筛候选假阴性）落库；[ADR-028](../adr/ADR-028-measurement-and-gate-revision.md) 定：METRICS 自动追加移出工作区（`.git/metrics.log` + `--flush` 人工并入）、`closure_check.sh` 非阻断不计序号、pre-push 仅阻 secrets 与 BACKLINKS 新鲜度、PS 最小层。遗留：CI no-go（无 push 权限/依赖暂存区/事后性）；PS 仅 2 个脚本，Windows 侧不构成完整门禁。
 
 ## 已定决策
 - handoff v2：随交付同提交更新、不设 archive、~30 行不入固定必读集（ADR-013）。
@@ -25,6 +26,8 @@
 
 ## 下一步
 - 每日开工必跑 `sh scripts/retro_pending_check.sh`（有缺口当日补跑）与 `sh scripts/fact_digest.sh`（报告数字只取此处）。
+- 按 [ADR-028](../adr/ADR-028-measurement-and-gate-revision.md) 落地顺序：`closure_check.sh`（含 ` M`/`.prev` 负样例自测）→ `metrics_collect.sh --flush` 与 post-commit 改写 `.git/metrics.log` → pre-push 区间复核 → 两个 PS 脚本与 fixtures 对拍；每步贴命令输出，未落地不得宣称已生效。
+- 遗留不变：CI no-go；PS 仅 2 个脚本（closure_check/triage_untracked），Windows 侧非完整门禁；`--flush` 与 `closure_check` 均依赖人工主动调用。
 - 2026-12-06 首扫：候选清单须过 `sh scripts/scan_candidate_check.sh`（已写入 daily-retro「机械验收」条），不过即清单无效；零误报后才可转 `--strict`。
 
 ## 沉淀

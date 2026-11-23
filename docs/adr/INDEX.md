@@ -33,6 +33,7 @@
 | [ADR-025](ADR-025-mechanical-root-cause-elimination.md) | 复盘与调查审查九项问题的机械化处置（三脚本＋台账制＋两处如实降级） | 2026-11-23 | 已接受 |
 | [ADR-026](ADR-026-nine-item-rulings-deadline-desensitization.md) | 规则体检九项裁决＋ADR 期限告警＋脱敏判定标准＋首扫机械验收 | 2026-11-23 | 已接受 |
 | [ADR-027](ADR-027-legacy-project-onboarding.md) | 既有项目接入：外置引用、只追加不覆盖、快照范围、只读档作用域 | 2026-11-23 | 已接受 |
+| [ADR-028](ADR-028-measurement-and-gate-revision.md) | 度量与门禁修订：METRICS 移出工作区、closure_check 非阻断、pre-push 复核、PS 最小层 | 2026-11-23 | 已接受 |
 
 ## 何时必须写 ADR
 
