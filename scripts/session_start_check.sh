@@ -88,6 +88,9 @@ else
   state=1
 fi
 
+# [ADR-025] 复盘落库缺口告警（非阻断：不改 state、不影响退出码）
+sh scripts/retro_pending_check.sh 7 2>/dev/null || true
+
 case "$state" in
   0) echo "[SESSION] 自检通过：可以开工（本次未改工作区）" ;;
   1) echo "[SESSION] 自检未通过：按上面每条的“处理/结论”修正后重跑" ;;

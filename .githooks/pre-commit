@@ -32,5 +32,8 @@ SKILL_META_ENFORCE=1 "$root/scripts/skills_index_check.sh" || exit 1
 # 交付反馈清单机械代理：每次提交即生成 D-1/D-2/D-3/D-5 草稿（非阻断）
 "$root/scripts/delivery_report.sh" >&2
 
+# [ADR-025] 复盘落库缺口告警（非阻断，参照 P-015 告警模式）
+"$root/scripts/retro_pending_check.sh" 7 >&2
+
 # 非阻断度量，不计入门禁序号（ADR-021 决策①）：每次提交向 docs/METRICS.md 追加一行提交事件
 "$root/scripts/metrics_collect.sh" >&2

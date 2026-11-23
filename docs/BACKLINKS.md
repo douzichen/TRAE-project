@@ -15,6 +15,7 @@
 
 - AGENTS-GLOBAL.md
 - AGENTS.md
+- PITFALLS.md
 - docs/AGENT-ADAPTER.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
