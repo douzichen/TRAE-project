@@ -104,6 +104,7 @@
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
+- docs/adr/ADR-028-measurement-and-gate-revision.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
@@ -119,8 +120,10 @@
 - docs/adr/ADR-013-handoff-snapshot.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/handoff/CURRENT.md
+- rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
+- rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
 
 ## 08-alignment-and-versioning.md
@@ -160,6 +163,7 @@
 - docs/adr/ADR-013-handoff-snapshot.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-028-measurement-and-gate-revision.md
 - rules/04-roles-and-dispatch.md
 - rules/06-quality.md
 - rules/08-alignment-and-versioning.md

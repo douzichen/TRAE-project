@@ -54,9 +54,7 @@
 
 | 编号 | 分册 | 何时必读 |
 | --- | --- | --- |
-| 00 | [执行前必读](rules/00-core.md) | 每次会话开始 |
-| 01 | [用户背景](rules/01-user-profile.md) | 每次会话开始 |
-| 02 | [指令接收与边界确认](rules/02-intake-and-dod.md) | 每次会话开始 |
+| 00/01/02 | [执行前必读](rules/00-core.md)、[用户背景](rules/01-user-profile.md)、[指令接收与边界确认](rules/02-intake-and-dod.md) | 每次会话开始 |
 | 03 | [技能同步规则](rules/03-skill-sync.md) | 修改 skills/ 或 workflows/ 时 |
 | 04 | [角色分工与子 Agent 派发](rules/04-roles-and-dispatch.md) | 派发子 Agent、拆解任务时 |
 | 05 | [需求定义审查](rules/05-requirement-review.md) | 需求含财税判断或用户定义可能有误时 |
