@@ -1,5 +1,5 @@
 #!/bin/sh
-# [M4-b] 坑账本字段审计：每条坑必须有「根因」与「状态」；缺证据/现象仅告警
+# [M4-b] 坑账本字段审计：每条坑必须有「根因」「状态」「证据」，缺任一项即阻断
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
 f=PITFALLS.md
