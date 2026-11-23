@@ -84,8 +84,8 @@
 ```
 $ ls -la D:/Documents/qwen-agent/3lg9yo4hhw/TRAE-project
 total 0
-drwxr-xr-x 1 ITLT-088 None 0 Nov 20 12:31 .
-drwxr-xr-x 1 ITLT-088 None 0 Nov 20 12:31 ..
+drwxr-xr-x 1 <user> None 0 Nov 20 12:31 .
+drwxr-xr-x 1 <user> None 0 Nov 20 12:31 ..
 $ ls -d D:/Documents/qwen-agent/3lg9yo4hhw/TRAE-project/.git
 ls: cannot access '.../.git': No such file or directory
 
@@ -137,7 +137,7 @@ $ git status --porcelain
 **关于脚本调用方式的平台事实（重要，非失败）**：本次按任务要求在 Windows 上**显式使用绝对路径的 bash 解释器**调用脚本，未依赖 PATH 默认解析：
 
 ```
-调用器：C:/Users/ITLT-088/AppData/Local/Qianwen/User Data/qwen-agent/resources/components/bash/versions/5.3.20.2/usr/bin/bash.exe
+调用器：C:/Users/<user>/AppData/Local/Qianwen/User Data/qwen-agent/resources/components/bash/versions/5.3.20.2/usr/bin/bash.exe
 调用形式：<上述绝对路径> scripts/session_start_check.sh
 ```
 
@@ -261,7 +261,7 @@ manager
 EXIT=0
 
 $ git config --show-origin --get-all credential.helper
-file:C:/Users/ITLT-088/AppData/Local/Qianwen/User Data/qwen-agent/resources/components/bash/versions/5.3.20.2/git/etc/gitconfig    manager
+file:C:/Users/<user>/AppData/Local/Qianwen/User Data/qwen-agent/resources/components/bash/versions/5.3.20.2/git/etc/gitconfig    manager
 file:.git/config
 ```
 

@@ -72,7 +72,7 @@ Already up to date.
 
 ```text
 $ sh scripts/session_start_check.sh
-[SESSION] 仓库根：C:/Users/ITLT-088/WorkBuddy/spaces/2026_11_18_17-31-37/TRAE-project
+[SESSION] 仓库根：C:/Users/<user>/WorkBuddy/spaces/2026_11_18_17-31-37/TRAE-project
 [SESSION] 存在：AGENTS.md
 [SESSION] 存在：rules/00-core.md
 [SESSION] 存在：rules/01-user-profile.md

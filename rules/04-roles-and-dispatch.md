@@ -49,6 +49,7 @@
 ## 验证型 Agent 只读（2026-11-18，用户明确限制，见 [ADR-015](../docs/adr/ADR-015-validation-agents-readonly.md)）
 
 - **定位**：豆包、豆包工作、千问助手、DSH、WorkBuddy 等外部 Agent 接入本规则库，是为了**实测规则能否被正确执行**，不是参与维护。
+- **作用域**：本节"只读"指**规则库与远端**；项目目录的写入须按本节「写入权」条经用户单独授权并记 ADR，不因"只读"档而放宽。
 - **允许**：clone / pull / 读取 / 在自己副本试跑脚本与门禁 / 为跑门禁做**本地** commit（`md_check` 会拦未提交散改）。
 - **禁止**：`git push`、开 PR、改远端任何分支或标签、把任何文档上传到 GitHub；不得安装 `.githooks`（`pre-push-check.sh` 会自动恢复推送凭据），不得配置 deploy key / token / `gh auth login`。
 - **接入方式**：HTTPS 匿名 clone，`GIT_TERMINAL_PROMPT=0`。公开仓库无法阻止任意第三方 fork 或开 PR，本条约束的是自愿配合验证的 Agent。

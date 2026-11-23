@@ -69,6 +69,7 @@
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-027-legacy-project-onboarding.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -102,6 +103,7 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-027-legacy-project-onboarding.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
@@ -131,6 +133,7 @@
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-027-legacy-project-onboarding.md
 - rules/01-user-profile.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
@@ -202,10 +205,13 @@
 
 - AGENTS-GLOBAL.md
 - AGENTS.md
+- PITFALLS.md
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-027-legacy-project-onboarding.md
+- docs/handoff/CURRENT.md
 - rules/01-user-profile.md
 - rules/05-requirement-review.md
 - skills/S-002-project-bootstrap.md

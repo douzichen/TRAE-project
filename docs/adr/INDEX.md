@@ -32,6 +32,7 @@
 | [ADR-024](ADR-024-external-agent-instruction-observation.md) | 外部 Agent 指令偏好学习适配：平台分档原始层＋脱敏候选回传（扩展 ADR-023，限外部 Agent） | 2026-11-21 | 已接受 |
 | [ADR-025](ADR-025-mechanical-root-cause-elimination.md) | 复盘与调查审查九项问题的机械化处置（三脚本＋台账制＋两处如实降级） | 2026-11-23 | 已接受 |
 | [ADR-026](ADR-026-nine-item-rulings-deadline-desensitization.md) | 规则体检九项裁决＋ADR 期限告警＋脱敏判定标准＋首扫机械验收 | 2026-11-23 | 已接受 |
+| [ADR-027](ADR-027-legacy-project-onboarding.md) | 既有项目接入：外置引用、只追加不覆盖、快照范围、只读档作用域 | 2026-11-23 | 已接受 |
 
 ## 何时必须写 ADR
 

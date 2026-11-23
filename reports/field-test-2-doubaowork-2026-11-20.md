@@ -4,7 +4,7 @@
 - **实测日期**：2026-11-20（Asia/Shanghai）
 - **目标仓库**：https://github.com/douzichen/TRAE-project.git
 - **实测 commit**：`b9b36fe`（`git rev-parse --short HEAD`）
-- **实测平台**：Windows 11（主机名 ITLT-088）＋ Git Bash `E:\Git\bin\bash.exe`；git 2.56.0.windows.4
+- **实测平台**：Windows 11（主机名 <host>）＋ Git Bash `E:\Git\bin\bash.exe`；git 2.56.0.windows.4
 - **总判定**：**② 可行但有降级**（接入 8 步全部走通，存在 2 项能力降级 + 3 条待裁决建议，详见第六、九节）
 
 ---
@@ -173,7 +173,7 @@ b9b36fe
 $ git config --local --get credential.helper
 （空，local 原本未配）
 $ git config --global --get credential.helper
-!"C:/Users/ITLT-088/.workbuddy/binaries/PortableGit/versions/1.2.0/mingw64/bin/git-credential-manager.exe"
+!"C:/Users/<user>/.workbuddy/binaries/PortableGit/versions/1.2.0/mingw64/bin/git-credential-manager.exe"
 
 # 规定动作：清空 local helper
 $ git config --local credential.helper ""
