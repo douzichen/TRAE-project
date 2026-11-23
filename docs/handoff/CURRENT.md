@@ -8,7 +8,7 @@
 ## 现状
 - ADR-023：指令喜好双层结构（提炼层 rules/01「指令偏好」＋原始层 `.local/` 本地不入库）；外部收集并入周日体检第 8 步，首扫 2026-12-06，沉淀 skills/S-007；外部候选不入常驻集（rules/12 失败模式 ④）。
 - 调度器：`._LP-ABG40ZAUH` message 与真源第 21 行逐字一致；`S.KN9NA53ZX_LB` 为例行简报（≤15 行）。
-- **2026-11-23 补跑**：11-21～11-23 三日复盘合并落库（审查报告 [reports/R4](../../reports/R4-review-daily-2026-11-23.md)），账本 P-033 → **P-037**；八项问题处置见 [ADR-025](../adr/ADR-025-mechanical-root-cause-elimination.md)（六项机械化、两项如实降级）；落库台账 [RETRO-LOG](RETRO-LOG.md)。
+- **2026-11-23 补跑**：11-21～11-23 三日复盘合并落库（审查报告 [reports/R4](../../reports/R4-review-daily-2026-11-23.md)），账本 P-033 → **P-037**；九项问题处置见 [ADR-025](../adr/ADR-025-mechanical-root-cause-elimination.md)（六项机械化、两项模板降级、一项文本）；落库台账 [RETRO-LOG](RETRO-LOG.md)。
 
 ## 已定决策
 - handoff v2：随交付同提交更新、不设 archive、~30 行不入固定必读集（ADR-013）。
