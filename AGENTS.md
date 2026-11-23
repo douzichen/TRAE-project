@@ -43,7 +43,7 @@
 | 3 | 收到指令先复述需求、列出边界，确认后再动手 | [02](rules/02-intake-and-dod.md) |
 | 4 | 交付必须给全 D-1~D-7（细则见 [15](rules/15-delivery-dod.md)），禁止"如需再贴请说"式推迟 | [15](rules/15-delivery-dod.md) |
 | 5 | 财税判断必须写出政策条款并核实清楚，不确定不得下结论 | [05](rules/05-requirement-review.md) |
-| 6 | 口径先行—子 Agent 撰写—主 Agent 审查，审查通过才算交付 | [04](rules/04-roles-and-dispatch.md) |
+| 6 | 口径先行—子 Agent 撰写—主 Agent 审查，审查通过才算交付（链式相对化见 04 册） | [04](rules/04-roles-and-dispatch.md) |
 | 7 | 文档与文档、文档与实现必须对齐；改动须给影响面表 | [08](rules/08-alignment-and-versioning.md)（对齐）、[06](rules/06-quality.md)（影响面表） |
 | 8 | 坑必须落成防复发机制；复发即升级；每日复盘 | [10](rules/10-lessons.md)、[06](rules/06-quality.md) |
 | 9 | 改前备回滚；审计资产（账本、审查结论、ADR）永不删 | [11](rules/11-rollback.md)、[06](rules/06-quality.md) |

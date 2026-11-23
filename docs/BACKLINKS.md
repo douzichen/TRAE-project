@@ -70,6 +70,7 @@
 - docs/adr/ADR-024-external-agent-instruction-observation.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
+- docs/adr/ADR-029-layered-agent-chains-and-role-relativization.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
@@ -105,6 +106,7 @@
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
 - docs/adr/ADR-028-measurement-and-gate-revision.md
+- rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
@@ -137,6 +139,7 @@
 - docs/adr/ADR-024-external-agent-instruction-observation.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
+- docs/adr/ADR-029-layered-agent-chains-and-role-relativization.md
 - rules/01-user-profile.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
