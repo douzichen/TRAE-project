@@ -47,3 +47,4 @@
 | 2026-11-23 | feat(scripts): closure_check 非阻断门禁＋metri | 11 门禁 | - |
 | 2026-11-23 | chore(metrics): 入账本轮提交事件（--flush 幂等） | 11 门禁 | - |
 | 2026-11-23 | feat(rules): 层级协作链与角色相对化（rules/04 新节＋ADR | 11 门禁 | - |
+| 2026-11-23 | feat(templates): 角色实例表登记模板（承接 ADR-029 形态 | 11 门禁 | - |
