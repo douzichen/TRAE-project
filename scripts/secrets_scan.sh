@@ -14,7 +14,8 @@ IFS='
 for f in $files; do
   [ -f "$f" ] || continue
   case "$f" in .secrets/*|*.jpg|*.jpeg|*.png|*.zip) continue ;; esac
-  if grep -nEI "$patterns" "$f" >/dev/null 2>&1; then
+  # 必须用 -e：$patterns 以 "-----BEGIN" 开头，不加 -e 会被 grep 当作选项，整条规则静默失效
+  if grep -nE -e "$patterns" "$f" >/dev/null 2>&1; then
     echo "[SECRET] 疑似凭据泄露：$f（命中私钥/Token 特征）"; fail=1
   fi
   if grep -nEI 'password[[:space:]]*=[[:space:]]*[^ "]{6,}' "$f" >/dev/null 2>&1; then

@@ -83,13 +83,16 @@
 │   ├── skills_index_check.sh # pre-commit：[M6] 技能头部元数据校验（ADR-020）
 │   ├── policy_guard.sh    # pre-commit：[D-7] 涉税/政策依据核验（ADR-010，告警模式）
 │   ├── secrets_scan.sh    # pre-commit：密钥/敏感信息扫描
-│   ├── metrics_collect.sh # pre-commit 末尾：度量采集，追加 docs/METRICS.md（非阻断，滞后一行语义，ADR-021/P-023）
+│   ├── metrics_collect.sh # pre-commit 末尾：只写 .git/metrics.log（TSV，不改工作区）；--flush 幂等并入 docs/METRICS.md
+│   ├── closure_check.sh   # 手动闭合校验：included+ignored=total 且 total=baseline-vanished；无参跳过、--strict 才阻断
 │   └── backup_snapshot.sh # 仓库父目录生成全量快照（含 .git），重大交付后手动执行（ADR-021）
 │
 ├── .githooks/             # git hooks（core.hooksPath 指向此处）
 │
 └── .secrets/              # 本地密钥等敏感文件（已 gitignore，不入库）
 ```
+
+> 脚本以 `sh` 为规范实现；同名的 PowerShell 版本（如 `scripts/closure_check.ps1`）仅为 Windows 辅助，结论须与 sh 版一致，不作为门禁依据。
 
 ## 各目录职责
 
