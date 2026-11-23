@@ -25,6 +25,13 @@ if ! TZ=Asia/Shanghai date -d '-1 day' +%Y-%m-%d >/dev/null 2>&1; then
   exit 0
 fi
 
+# 防"长时间无提交 → 旧缺口滑出固定窗口"：以台账最新 RETRO 日期为起点补足回看天数（上限 30）
+last=$(grep '^RETRO ' "$log" 2>/dev/null | awk '{print $2}' | sort | tail -1)
+if [ -n "$last" ] && TZ=Asia/Shanghai date -d "$last" +%s >/dev/null 2>&1; then
+  gd=$(( ( $(TZ=Asia/Shanghai date +%s) - $(TZ=Asia/Shanghai date -d "$last" +%s) ) / 86400 ))
+  [ "$gd" -gt "$days" ] && days=$gd
+  [ "$days" -gt 30 ] && days=30
+fi
 echo "[RETRO] 回看 $days 天（Asia/Shanghai），判定依据：$log 的 RETRO 行"
 first=$(git log --reverse --format='%ad' --date=short 2>/dev/null | head -1)
 missing=""
