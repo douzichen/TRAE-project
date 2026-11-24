@@ -106,6 +106,7 @@
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
 - docs/adr/ADR-028-measurement-and-gate-revision.md
+- docs/adr/ADR-030-version-identity-and-external-drafts.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
@@ -140,6 +141,7 @@
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
 - docs/adr/ADR-029-layered-agent-chains-and-role-relativization.md
+- docs/adr/ADR-030-version-identity-and-external-drafts.md
 - rules/01-user-profile.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
@@ -156,6 +158,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-020-skill-metadata-spec.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-030-version-identity-and-external-drafts.md
 - rules/03-skill-sync.md
 - rules/10-lessons.md
 
@@ -221,6 +224,7 @@
 - docs/handoff/CURRENT.md
 - rules/01-user-profile.md
 - rules/05-requirement-review.md
+- rules/08-alignment-and-versioning.md
 - skills/S-002-project-bootstrap.md
 - skills/S-003-requirements-intake.md
 - workflows/W-001-new-project.md

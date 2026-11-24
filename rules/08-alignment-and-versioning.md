@@ -20,6 +20,7 @@
 - 项目采用 Git 单一仓库（monorepo）：文档、脚本、JSON、代码同仓管理，确保同一次提交内"文档与实现"处于同一版本，天然满足对齐要求。
 - **单 Agent 顺序作业时直推 main**；多 Agent 并行时必须按 [13 册](13-concurrency-and-lifecycle.md) 认领，必要时开分支，禁止对同一文件并行直推。分支落地前须完成审查（含引用矩阵与审查结论），合并历史即"三件套审计"的存档。
 - 口径版本用 tag 标记（如 `prd-v1.2`）；交接文档中引用 tag 与 commit，不靠口头描述。
+- **规则库版本标识＝commit 号（唯一）**：跨项目同步登记 `git rev-parse --short HEAD`，以 `git ls-remote origin main` 对验；不设 vN.Y 版本号、不建 RULES-CHANGELOG（[ADR-030](../docs/adr/ADR-030-version-identity-and-external-drafts.md)）；上条口径 tag 用于口径基线与项目冻结（[14 R6](14-project-bootstrap.md)），不作规则库版本。
 - 回滚即版本操作：改错了用 revert 或切回指定 commit，历史资料永久可追溯、可拉取恢复。
 - 仓库为唯一权威副本（remote 与本地镜像并行），本地不留未入库的"临时最终版"。
 - 敏感信息不入库：真实财税数据须脱敏，密钥、Token、本地配置一律不提交；凭据类信息不写入本记忆文件，也不写进任何会提交的文档。

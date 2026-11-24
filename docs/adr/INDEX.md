@@ -35,6 +35,7 @@
 | [ADR-027](ADR-027-legacy-project-onboarding.md) | 既有项目接入：外置引用、只追加不覆盖、快照范围、只读档作用域 | 2026-11-23 | 已接受 |
 | [ADR-028](ADR-028-measurement-and-gate-revision.md) | 度量与门禁修订：METRICS 移出工作区、closure_check 非阻断、pre-push 复核、PS 最小层 | 2026-11-23 | 已接受 |
 | [ADR-029](ADR-029-layered-agent-chains-and-role-relativization.md) | 层级协作链与角色相对化 | 2026-11-23 | 已接受 |
+| [ADR-030](ADR-030-version-identity-and-external-drafts.md) | 规则库版本标识＝commit 号；外部治理草案不入库 | 2026-11-24 | 已接受 |
 
 ## 何时必须写 ADR
 
