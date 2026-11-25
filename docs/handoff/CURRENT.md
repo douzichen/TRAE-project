@@ -1,4 +1,4 @@
-# 当前交接（最后更新：2026-11-24，与交付同一提交内更新）
+# 当前交接（最后更新：2026-11-25，与交付同一提交内更新）
 
 > 唯一"当前交接"，细则见 [rules/07](../../rules/07-pending-and-handoff.md)、[ADR-013](../adr/ADR-013-handoff-snapshot.md)；只写 git log 与交付报告看不到的内容，限 ~30 行。
 
@@ -23,13 +23,13 @@
 - P-038~P-040（老项目接入无流程／嵌套规则库建仓风险／"自动注入"自称不实）已由 ADR-027 与 rules/14 C 节承接；项目侧 §20 尚未提交，属已知悬置。
 - 试用期复审条件（2026-12-21）：记录条数／重复模式数／确认入册数／命中率；开工自检已加期限告警（剩 ≤30 天提示）。
 - 既有未决沿用：D-7 门禁转阻断等首个真实业务/政策文档（ADR-010）。
-- 2026-11-24 六项外部待确认已裁决（[ADR-030](../adr/ADR-030-version-identity-and-external-drafts.md)）：版本＝commit、三草案不入库（抬头改「草案·待入库」转豆包）、`rulebase/` 限项目实例；遗留＝项目 L 路径未提供，对撞挂起，2026-12-01 到期。
+- 到期看板（2026-11-25 登记）：ADR-030 12-01（项目 L 路径未提供，对撞挂起）｜ADR-026 12-06（首扫，候选清单须过 `scan_candidate_check.sh`，不过即无效）｜ADR-023/024/026 12-21（试用期/观察期复审）；开工自检剩 ≤30 天告警。
 
 ## 下一步
 - 每日开工必跑 `sh scripts/retro_pending_check.sh`（有缺口当日补跑）与 `sh scripts/fact_digest.sh`（报告数字只取此处）。
 - 按 [ADR-028](../adr/ADR-028-measurement-and-gate-revision.md) 落地顺序：`closure_check.sh`（含 ` M`/`.prev` 负样例自测）→ `metrics_collect.sh --flush` 与 post-commit 改写 `.git/metrics.log` → pre-push 区间复核 → 两个 PS 脚本与 fixtures 对拍；每步贴命令输出，未落地不得宣称已生效。
 - 遗留不变：CI no-go；PS 仅 2 个脚本（closure_check/triage_untracked），Windows 侧非完整门禁；`--flush` 与 `closure_check` 均依赖人工主动调用。
-- 2026-12-06 首扫：候选清单须过 `sh scripts/scan_candidate_check.sh`（已写入 daily-retro「机械验收」条），不过即清单无效；零误报后才可转 `--strict`。
+- `docs/AGENT-ADAPTER.md` 现 128/130：冻结增补，下次改动前先合并重复的"只读/降级/回传"表述，腾出 ≥10 行再谈新增；豆包 2026-11-25 已确认暂停增补。
 
 ## 沉淀
 - skills/S-007 v1.1；ADR-025、ADR-026、ADR-027；scripts/{fact_digest,retro_pending_check,scan_candidate_check}.sh；规则体检 9 项裁决落地（rules/04/06/08/09/14）；rules/14 C 节（既有项目接入）。
