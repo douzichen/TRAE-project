@@ -11,7 +11,7 @@
 | 收到指令后的行为（复述、边界确认、交付格式） | [02](rules/02-intake-and-dod.md) |
 | 交付反馈清单与 D-1~D-7 细则 | [15](rules/15-delivery-dod.md) |
 | skill/workflow 的同步与副本一致性 | [03](rules/03-skill-sync.md) |
-| 主/子 Agent 分工、派发、执行控制 | [04](rules/04-roles-and-dispatch.md) |
+| 主/子 Agent 分工、派发、执行控制、工具调用路径判定 | [04](rules/04-roles-and-dispatch.md) |
 | 需求是否成立、财税合规依据 | [05](rules/05-requirement-review.md) |
 | 决策方法、审查方法、复盘节奏、任务分级 | [06](rules/06-quality.md) |
 | 待确认事项、会话交接 | [07](rules/07-pending-and-handoff.md) |
@@ -56,7 +56,7 @@
 | --- | --- | --- |
 | 00/01/02 | [执行前必读](rules/00-core.md)、[用户背景](rules/01-user-profile.md)、[指令接收与边界确认](rules/02-intake-and-dod.md) | 每次会话开始 |
 | 03 | [技能同步规则](rules/03-skill-sync.md) | 修改 skills/ 或 workflows/ 时 |
-| 04 | [角色分工与子 Agent 派发](rules/04-roles-and-dispatch.md) | 派发子 Agent、拆解任务时 |
+| 04 | [角色分工与子 Agent 派发](rules/04-roles-and-dispatch.md) | 派发子 Agent、拆解任务、调用外部系统时 |
 | 05 | [需求定义审查](rules/05-requirement-review.md) | 需求含财税判断或用户定义可能有误时 |
 | 06 | [问题与决策质量](rules/06-quality.md) | 方案设计、审查、复盘时 |
 | 07 | [待确认事项与交接](rules/07-pending-and-handoff.md) | 开工前汇总、会话交接时 |

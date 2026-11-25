@@ -40,6 +40,7 @@
 - docs/adr/ADR-019-startup-sync-gate.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
 - rules/00-core.md
+- rules/04-roles-and-dispatch.md
 - rules/07-pending-and-handoff.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
@@ -71,10 +72,12 @@
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-027-legacy-project-onboarding.md
 - docs/adr/ADR-029-layered-agent-chains-and-role-relativization.md
+- docs/adr/ADR-031-tool-path-judgement.md
 - rules/03-skill-sync.md
 - rules/06-quality.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
+- skills/S-001-subagent-dispatch.md
 - skills/S-004-rulebase-onboarding.md
 
 ## 05-requirement-review.md
@@ -107,6 +110,7 @@
 - docs/adr/ADR-027-legacy-project-onboarding.md
 - docs/adr/ADR-028-measurement-and-gate-revision.md
 - docs/adr/ADR-030-version-identity-and-external-drafts.md
+- docs/adr/ADR-031-tool-path-judgement.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
@@ -179,6 +183,8 @@
 
 - AGENTS.md
 - docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-031-tool-path-judgement.md
+- rules/04-roles-and-dispatch.md
 - rules/08-alignment-and-versioning.md
 - rules/13-concurrency-and-lifecycle.md
 

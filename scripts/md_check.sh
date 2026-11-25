@@ -52,10 +52,18 @@ for key in "rules/00-core.md" "rules/01-user-profile.md" "rules/02-intake-and-do
 done
 
 # 7b) 内容级校验：关键分册必须含其核心条款关键词（防"章节被清空但文件还在"）
-for pair in "rules/01-user-profile.md:财税从业者" "rules/01-user-profile.md:提问只问业务" "rules/02-intake-and-dod.md:D-1" "rules/02-intake-and-dod.md:复述" "rules/05-requirement-review.md:政策" "rules/12-context-budget.md:未完整读取" "rules/13-concurrency-and-lifecycle.md:认领"; do
+for pair in "rules/01-user-profile.md:财税从业者" "rules/01-user-profile.md:提问只问业务" "rules/02-intake-and-dod.md:D-1" "rules/02-intake-and-dod.md:复述" "rules/05-requirement-review.md:政策" "rules/12-context-budget.md:未完整读取" "rules/13-concurrency-and-lifecycle.md:认领" "rules/04-roles-and-dispatch.md:执行路径卡" "rules/04-roles-and-dispatch.md:失败不漂移"; do
   f=${pair%%:*}; k=${pair#*:}
   [ -e "$f" ] || continue
   grep -qF "$k" "$f" || { echo "[P-004] 核心条款缺失：$f 不含关键词「$k」"; fail=1; }
+done
+
+# 7c) 工具与执行路径判定节结构校验（ADR-031）：标题＋7 条锚点＋模板与 ADR 必须存在
+[ -e templates/TOOL-PATH-CARD.md ] || { echo "[P-045] 缺失执行路径卡模板"; fail=1; }
+[ -e docs/adr/ADR-031-tool-path-judgement.md ] || { echo "[P-045] 缺失 ADR-031"; fail=1; }
+grep -qF '## 工具与执行路径判定' rules/04-roles-and-dispatch.md 2>/dev/null || { echo "[P-045] rules/04 缺失「工具与执行路径判定」节"; fail=1; }
+for k in 路径卡先行 通道优先级 权限不足 失败不漂移 写前幂等盘点 授权由用户亲手确认 动作必回读; do
+  grep -qF "$k" rules/04-roles-and-dispatch.md 2>/dev/null || { echo "[P-045] 工具路径条款缺失：$k"; fail=1; }
 done
 
 # 8) 审计资产只增不减（C-3：删掉末条坑或整份 ADR 也能过检 → 补此检查）
