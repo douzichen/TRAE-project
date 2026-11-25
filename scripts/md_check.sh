@@ -52,7 +52,7 @@ for key in "rules/00-core.md" "rules/01-user-profile.md" "rules/02-intake-and-do
 done
 
 # 7b) 内容级校验：关键分册必须含其核心条款关键词（防"章节被清空但文件还在"）
-for pair in "rules/01-user-profile.md:财税从业者" "rules/01-user-profile.md:提问只问业务" "rules/02-intake-and-dod.md:D-1" "rules/02-intake-and-dod.md:复述" "rules/05-requirement-review.md:政策" "rules/12-context-budget.md:未完整读取" "rules/13-concurrency-and-lifecycle.md:认领" "rules/04-roles-and-dispatch.md:执行路径卡" "rules/04-roles-and-dispatch.md:失败不漂移"; do
+for pair in "rules/01-user-profile.md:财税从业者" "rules/01-user-profile.md:提问只问业务" "rules/02-intake-and-dod.md:D-1" "rules/02-intake-and-dod.md:复述" "rules/05-requirement-review.md:政策" "rules/12-context-budget.md:未完整读取" "rules/13-concurrency-and-lifecycle.md:认领" "rules/04-roles-and-dispatch.md:执行路径卡" "rules/04-roles-and-dispatch.md:失败不漂移" "rules/08-alignment-and-versioning.md:客户数据入库" "rules/08-alignment-and-versioning.md:底稿默认不入 git" "rules/08-alignment-and-versioning.md:未列即禁" "rules/08-alignment-and-versioning.md:无远端不等于不外流"; do
   f=${pair%%:*}; k=${pair#*:}
   [ -e "$f" ] || continue
   grep -qF "$k" "$f" || { echo "[P-004] 核心条款缺失：$f 不含关键词「$k」"; fail=1; }
