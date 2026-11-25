@@ -1,3 +1,4 @@
+- 读本 skill 前先 git pull --ff-only origin main 并报出 commit；沉淀资产一律以仓库最新版为准，不凭记忆执行。
 - **名称**：规则库接入（rulebase onboarding）
 - **编号**：S-004
 - **适用场景**：任何 Agent（豆包/千问/DSH/WorkBuddy/Claude Code 等）首次接入本规则库；或换工作区、换会话后确认规则是否真的生效

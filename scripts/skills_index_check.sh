@@ -1,5 +1,5 @@
 #!/bin/sh
-# 技能元数据校验（S-001~S-004 十栏 + INDEX 触发词列）
+# 技能元数据校验（S-001~S-004 十栏 + INDEX 触发词/适用角色列）
 #
 # 用途：
 #   1) 每个 skills/S-*.md 必须含十栏且内容非空：
@@ -7,9 +7,10 @@
 #      触发词 / 不适用 / 完成判据 / 单一来源。
 #      字段值去掉空白后为空，或含「待填」「TODO」「<」等占位字样，均判为问题。
 #   2) 每个 S-*.md 必须登记在 skills/INDEX.md；只认以「| S-00x」开头的表格行
-#      （锚定 ^| *S-00x），按 | 分列后「触发词」列必须存在且去除空白后非空。
+#      （锚定 ^| *S-00x），按 | 分列后「触发词」「适用角色」列必须存在且去除空白后非空。
 #      不使用全局首个匹配，避免误认正文中的编号引用。
-#   3) INDEX 表头必须有「触发词」列。
+#   3) INDEX 表头必须有「触发词」与「适用角色」列；「适用角色」列还须匹配
+#      白名单前缀（主会话 / 主会话+子 / 外部验证型 / 存档蓝图），告警级。
 #
 # 两种模式（默认不阻断）：
 #   告警模式（默认）：逐条打印 [SKILL-META] <文件>：<问题>，最后打印
@@ -56,11 +57,16 @@ field() { # $1=文件  $2=字段名（不含 ** 号），输出该栏内容（�
 [ -f "$INDEX" ] || report "$INDEX" "索引文件缺失"
 
 col=""
+rolecol=""
 if [ -f "$INDEX" ]; then
   col=$(awk -F'|' 'index($0, "触发词") > 0 && /^[[:space:]]*\|/ {
     for (i = 1; i <= NF; i++) if (index($i, "触发词") > 0) { print i; exit }
   }' "$INDEX")
   [ -n "$col" ] || report "$INDEX" "表头缺少「触发词」列"
+  rolecol=$(awk -F'|' 'index($0, "适用角色") > 0 && /^[[:space:]]*\|/ {
+    for (i = 1; i <= NF; i++) if (index($i, "适用角色") > 0) { print i; exit }
+  }' "$INDEX")
+  [ -n "$rolecol" ] || report "$INDEX" "表头缺少「适用角色」列"
 fi
 
 for f in skills/S-*.md; do
@@ -82,11 +88,14 @@ for f in skills/S-*.md; do
     fi
   done
 
-  # 2) 已登记在 INDEX：只认锚定的表格行 | S-00x
+  # 2) 已登记在 INDEX：只认锚定的表格行 | S-00x（带行号，供「适用角色」白名单告警定位）
   [ -f "$INDEX" ] || continue
   row=""
+  rowline=""
   if [ -n "$id" ]; then
-    row=$(grep -E "^[[:space:]]*[|][[:space:]]*${id}[[:space:]]*[|]" "$INDEX" | head -n 1)
+    rowraw=$(grep -nE "^[[:space:]]*[|][[:space:]]*${id}[[:space:]]*[|]" "$INDEX" | head -n 1)
+    rowline=${rowraw%%:*}
+    row=${rowraw#*:}
   fi
   if [ -z "$row" ]; then
     report "$f" "未在 ${INDEX} 登记（需以 | ${id} 开头的表格行）"
@@ -99,6 +108,17 @@ for f in skills/S-*.md; do
     cell=$(printf '%s' "$cell" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
     if [ -z "$cell" ]; then
       report "$f" "INDEX ${id} 行「触发词」列为空"
+    fi
+  fi
+
+  # 4) INDEX 该行「适用角色」列：非空且须匹配白名单前缀（ADR-033/R2，告警级）
+  if [ -n "$rolecol" ]; then
+    cell=$(printf '%s\n' "$row" | awk -F'|' -v c="$rolecol" '{ print $c }')
+    cell=$(printf '%s' "$cell" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+    if [ -z "$cell" ]; then
+      report "$f" "INDEX L${rowline} ${id} 行「适用角色」列为空"
+    elif ! printf '%s' "$cell" | grep -qE '^(主会话\+子|主会话|外部验证型|存档蓝图)'; then
+      report "$f" "INDEX L${rowline} ${id} 行「适用角色」值「${cell}」不在白名单（允许前缀：主会话、主会话+子、外部验证型、存档蓝图）"
     fi
   fi
 done

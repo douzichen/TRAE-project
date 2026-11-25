@@ -38,6 +38,7 @@
 | [ADR-030](ADR-030-version-identity-and-external-drafts.md) | 规则库版本标识＝commit 号；外部治理草案不入库 | 2026-11-24 | 已接受 |
 | [ADR-031](ADR-031-tool-path-judgement.md) | 工具调用路径判定：先探能力、再选路径、失败不漂移 | 2026-11-25 | 已接受 |
 | [ADR-032](ADR-032-customer-data-landing.md) | 客户数据入库判定：按去向分档，底稿默认不入 git | 2026-11-25 | 已接受 |
+| [ADR-033](ADR-033-precipitation-dispatch-and-mirror.md) | 沉淀分发与读取：扩既有索引补契约＋飞书只读镜像机制化 | 2026-11-25 | 已接受 |
 
 ## 何时必须写 ADR
 

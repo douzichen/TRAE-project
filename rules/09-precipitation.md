@@ -23,8 +23,13 @@
 - **检查即脚本**：防复发机制优先做成脚本并挂 git hook（`git config core.hooksPath .githooks`）；现有门禁清单与串联顺序以 `scripts/` 与 `.githooks/pre-commit` 为准（如 `md_check.sh` 校验 INDEX 登记与坑编号连续、`pre-push-check.sh` 做凭据自检、`delivery_report.sh` 生成交付草稿），本册不逐一枚举，避免脚本增减后清单漂移。机器能拦的不再依赖清单。
 - **派发必用模板**：派发子 Agent 任务必须使用 `skills/S-001-subagent-dispatch.md`，填齐依据、边界、产出与验收；子 Agent 返回时按模板逐项核对。任务级具体约束只写进提示词，不写入本文件。
 
+## 外部 Agent 读取沉淀的标准动作（2026-11-25，[ADR-033](../docs/adr/ADR-033-precipitation-dispatch-and-mirror.md)）
+
+- **读沉淀四步**：① `git pull --ff-only origin main` 并报出拉取前后 commit——本地无未推送提交时须与 `git ls-remote origin main` 一致，有本地提交时改报 ahead 数（一次会话已按 [04](04-roles-and-dispatch.md) ADR-019 握手 pull 过的，①豁免）；② 按总纲路由表定位分册；③ 按任务检索 [skills/INDEX.md](../skills/INDEX.md)、[workflows/INDEX.md](../workflows/INDEX.md) 的触发词列定位沉淀文件（或 `grep -l "<触发词>" skills/*.md`；无终端无 git 的降级档按已同步的静态 INDEX 检索并在交付中声明版本滞后风险）；④ 已加载哪些沉淀资产并入 [09](09-precipitation.md)「交接必填」栏声明，不单列。
+- 外部验证型 Agent 按本节读取，不安装 skills 副本、不写任何镜像；降级申报见 [AGENT-ADAPTER.md](../docs/AGENT-ADAPTER.md)；"先同步最新版再工作"的派发侧要求见 [04](04-roles-and-dispatch.md) 与 S-001。
+
 ## 相关分册
 
 - 上级总纲：[AGENTS.md](../AGENTS.md)
-- 参见：[03 技能同步规则](03-skill-sync.md)
 - 参见：[10 坑账本](10-lessons.md)
+- 参见：[03 技能同步](03-skill-sync.md)（副本同步与外部只读镜像）

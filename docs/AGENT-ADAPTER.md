@@ -29,6 +29,7 @@
 4. [rules/02-intake-and-dod.md](../rules/02-intake-and-dod.md)（复述与边界确认 + 交付清单）
 5. [rules/12-context-budget.md](../rules/12-context-budget.md)（上下文预算与按需加载，**未完整读取必须声明**）
 6. 按任务类型读对应分册（见总纲索引表）
+7. 需要取用沉淀资产（skills/workflows）时，按 [rules/09](../rules/09-precipitation.md)「外部 Agent 读取沉淀的标准动作」执行：先 pull 对验 commit、按 INDEX 触发词定位；不安装 skills 副本、不写任何镜像。
 
 ## 二、三步适配（照做即可，不要自行发挥）
 

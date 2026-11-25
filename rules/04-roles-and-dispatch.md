@@ -93,6 +93,7 @@
 - **授权由用户亲手确认**：OAuth 设备码、refresh token、scope 授予只由用户本人确认；Agent 只生成设备码/链接，不代点、不代填；授权前说明主体、scope、有效期与回收动作（如 `auth logout`），按最小权限申请，并记录用户原话与确认时间；本条只约束第三方凭据授予，不改变 [02](02-intake-and-dod.md) 预先授权与 [06](06-quality.md) 定时任务授权边界。
 - **动作必回读、失败必上报**：每个外部写动作完成后用回读命令验证，交付附「命令＋退出码/关键输出＋回读结果」；无回读即视为未完成。
 - **不放宽既有边界**：验证型只读、写入口唯一、禁 deploy key/token/`gh auth login` 等原有约束原样有效；本条不授予任何外部 Agent 用户凭据，换身份仅限主 Agent 已获授权的范围（[ADR-015](../docs/adr/ADR-015-validation-agents-readonly.md)）。
+- 派发子 Agent 必用 [S-001 派发模板](../skills/S-001-subagent-dispatch.md)（触发条件与沉淀来源见 [09](09-precipitation.md)）；读沉淀资产的同步动作按 [09](09-precipitation.md)「外部 Agent 读取沉淀的标准动作」执行。
 
 ## 相关分册
 
