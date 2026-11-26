@@ -23,6 +23,7 @@
 - docs/adr/ADR-023-rulebase-evolution-mechanisms.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
+- docs/adr/ADR-036-nightly-full-review.md
 - rules/00-core.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
@@ -53,6 +54,7 @@
 - docs/CONFLICT-MATRIX.md
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-033-precipitation-dispatch-and-mirror.md
+- docs/adr/ADR-035-local-only-rules.md
 - rules/09-precipitation.md
 
 ## 04-roles-and-dispatch.md
@@ -117,6 +119,8 @@
 - docs/adr/ADR-030-version-identity-and-external-drafts.md
 - docs/adr/ADR-031-tool-path-judgement.md
 - docs/adr/ADR-034-retro-ledger-enforcement.md
+- docs/adr/ADR-035-local-only-rules.md
+- docs/adr/ADR-036-nightly-full-review.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
@@ -186,6 +190,7 @@
 - docs/adr/ADR-028-measurement-and-gate-revision.md
 - docs/adr/ADR-032-customer-data-landing.md
 - docs/adr/ADR-034-retro-ledger-enforcement.md
+- docs/adr/ADR-036-nightly-full-review.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
 - rules/06-quality.md

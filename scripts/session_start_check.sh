@@ -111,6 +111,12 @@ if [ -d docs/adr ]; then
       done
 fi
 
+# [ADR-035] 本地专属规则（.local-rules，正常流程不入库）完整性核对（非阻断：不改 state）
+# 仅当本机存在本地规则入口时运行；告警模式恒退 0，不影响开工判定。
+if ls .local-rules/ENTRY-IRON-*.md >/dev/null 2>&1; then
+  sh scripts/local_rules_check.sh 2>/dev/null || true
+fi
+
 case "$state" in
   0) echo "[SESSION] 自检通过：可以开工（本次未改工作区）" ;;
   1) echo "[SESSION] 自检未通过：按上面每条的“处理/结论”修正后重跑" ;;

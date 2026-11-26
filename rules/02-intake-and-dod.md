@@ -11,6 +11,7 @@
 
 - **交付清单（DoD）**：D-1~D-7 的细则只存在于 [15 交付反馈清单](15-delivery-dod.md)；开工前先读、收尾逐项对照，禁止"如需再贴一遍"式推迟。
 - **冷启动协议**：原文见 [07 冷启动自检](07-pending-and-handoff.md#冷启动自检)（加载声明、未确认首行、启动自检与退出码）。
+- **本地专属规则（若存在则必读）**：开工前检查本机是否存在 `.local-rules/ENTRY-*.md`（工作区根目录，不入库）。存在则必须读取其正文并在本次任务中遵守，交付时写明"已加载本地规则 <ID>"；哈希校验由 `scripts/session_start_check.sh` 调用 `scripts/local_rules_check.sh` 完成，正文被改动时先按入口登记的 SHA256 复核再执行。机制见 [ADR-035](../docs/adr/ADR-035-local-only-rules.md)。
 
 ## 相关分册
 

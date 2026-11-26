@@ -1,3 +1,38 @@
 #!/bin/sh
+# pre-push 钩子：转调 scripts/pre-push-check.sh（凭据恢复 / 推送区间密钥扫描 / BACKLINKS 新鲜度）
+# 真实接法：本文件只做转调，既有门禁逻辑在 scripts/pre-push-check.sh；[ADR-035]
+#   本地专属规则闸门追加在本文件末尾（转调之后），因为 .local-rules/ 是否被跟踪与密钥/链接无关。
 cd "$(git rev-parse --show-toplevel)" || exit 1
-"$(git rev-parse --show-toplevel)/scripts/pre-push-check.sh"
+root="$(git rev-parse --show-toplevel)"
+"$root/scripts/pre-push-check.sh" || exit 1
+
+# ---------------- [ADR-035] 本地专属规则不得上传（阻断） ----------------
+# .local-rules/ 只存在于工作区（.git/info/exclude 排除）；一旦被跟踪或出现在待推送区间，
+# 说明规则正文/入口已进入 git 对象库——一次误推即外泄，故直接拒绝推送。
+if git rev-parse --verify -q '@{u}' >/dev/null 2>&1; then
+  lr_range='@{u}..HEAD'
+elif git rev-parse --verify -q origin/main >/dev/null 2>&1; then
+  lr_range='origin/main..HEAD'
+else
+  lr_range=''
+fi
+lr_hit=''
+if [ -n "$lr_range" ]; then
+  lr_hit=$(git diff --name-only "$lr_range" 2>/dev/null | grep '^\.local-rules/' || true)
+fi
+lr_tracked=$(git ls-files | grep '^\.local-rules/' || true)
+if [ -n "$lr_hit" ] || [ -n "$lr_tracked" ]; then
+  echo '[PRE-PUSH][LOCAL-RULES] 拒绝推送：本地专属规则不得上传（.local-rules/ 永不入库）'
+  if [ -n "$lr_tracked" ]; then
+    echo '  [已被 git 跟踪]'
+    printf '%s\n' "$lr_tracked" | sed -n '1,10p'
+  fi
+  if [ -n "$lr_hit" ]; then
+    echo "  [推送区间 $lr_range 内]"
+    printf '%s\n' "$lr_hit" | sed -n '1,10p'
+  fi
+  echo '  处理：git rm --cached -r .local-rules，确认 .git/info/exclude 含 .local-rules/ 后再推送'
+  exit 1
+fi
+echo '[PRE-PUSH][LOCAL-RULES] 本地专属规则闸门通过（.local-rules 未被跟踪、不在推送区间）'
+exit 0

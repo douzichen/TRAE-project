@@ -501,3 +501,13 @@
 - **证据**：`docs/handoff/RETRO-LOG.md` 原 14 行"无新增坑"原文；`PITFALLS.md` P-034"编号被重复占用"自述；2026-11-26 审计实测 `sh scripts/retro_pending_check.sh 5` 报 11-25 缺口。
 - **关联**：ADR-034；P-034/P-019/P-036；docs/handoff/RETRO-LOG.md；schedules/daily-retro.md「执行后验证」
 - **状态**：已落实（2026-11-26，ADR-034 落库）
+
+### P-048：定时机制只写进真源文档、未写进调度器 message，机制空转
+- **日期**：2026-11-26
+- **现象**：ADR-036 与 `schedules/daily-retro.md` 新增「夜间全库审查」节，但调度器实例只执行 message（L21 的 text 块）；新节不在 message 内。若非对抗审查发现，夜间仍只跑原 1~8 步，全库审查永不执行。
+- **根因**：真源（文档正文）与运行时副本（调度器 message）两处维护，新增步骤只写正文、未同步副本；当时注记还写着"L21 未改动、无需同步"，把"未同步"误当成正确做法。
+- **影响**：机制宣布即空转，属"声称已落地但机制不存在"（P-011 同构），且无任何告警。
+- **防复发机制**：① ADR-036 决策 8 明确 message 必须含该步骤、主会话按 P-019 核实并更新实例；② `schedules/daily-retro.md:21` 已写入第 9 步；③ 夜间审查首项即核对真源与运行时实例一致性，差异写进当日报告；④ 旧实例 Expired 时重建并删除，避免同刻双跑。
+- **证据**：`schedules/daily-retro.md:21`（第 9 步原文）、`:75`（实例 ID `I-KJ0OWCZ2WAVB`）；`docs/adr/ADR-036-nightly-full-review.md` 决策 8。
+- **关联**：ADR-036；P-011/P-019；schedules/daily-retro.md
+- **状态**：已落实（2026-11-26）
