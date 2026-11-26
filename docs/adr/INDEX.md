@@ -39,6 +39,7 @@
 | [ADR-031](ADR-031-tool-path-judgement.md) | 工具调用路径判定：先探能力、再选路径、失败不漂移 | 2026-11-25 | 已接受 |
 | [ADR-032](ADR-032-customer-data-landing.md) | 客户数据入库判定：按去向分档，底稿默认不入 git | 2026-11-25 | 已接受 |
 | [ADR-033](ADR-033-precipitation-dispatch-and-mirror.md) | 沉淀分发与读取：扩既有索引补契约＋飞书只读镜像机制化 | 2026-11-25 | 已接受 |
+| [ADR-034](ADR-034-retro-ledger-enforcement.md) | 复盘台账强制：覆盖 sha＋阻断，状态/证据机检，fact_digest 强制粘贴 | 2026-11-26 | 已接受 |
 
 ## 何时必须写 ADR
 

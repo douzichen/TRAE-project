@@ -18,8 +18,8 @@ root="$(git rev-parse --show-toplevel)"
 "$root/scripts/paths_check.sh" || exit 1
 # [M4-a] 认领表格式
 "$root/scripts/claims_audit.sh" || exit 1
-# [M4-b] 坑账本必填字段
-"$root/scripts/pitfall_check.sh" || exit 1
+# [M4-b] 坑账本必填字段＋状态枚举/证据实质校验（ADR-034，ENFORCE=1 阻断）
+ENFORCE=1 "$root/scripts/pitfall_check.sh" || exit 1
 
 # [M6] 技能元数据（ADR-020）：阻断模式。2026-11-19 第二平台验证通过并留痕：Windows 11 / MINGW64_NT-10.0-22631，A=0（默认）与 B=0（SKILL_META_ENFORCE=1），HEAD 51a9ec3（P-017/ADR-012）。
 SKILL_META_ENFORCE=1 "$root/scripts/skills_index_check.sh" || exit 1
@@ -32,8 +32,8 @@ SKILL_META_ENFORCE=1 "$root/scripts/skills_index_check.sh" || exit 1
 # 交付反馈清单机械代理：每次提交即生成 D-1/D-2/D-3/D-5 草稿（非阻断）
 "$root/scripts/delivery_report.sh" >&2
 
-# [ADR-025] 复盘落库缺口告警（非阻断，参照 P-015 告警模式）
-"$root/scripts/retro_pending_check.sh" 7 >&2
+# [ADR-034] 复盘落库缺口检测（覆盖锚＋ENFORCE 阻断；P-034 第 2 次复发后由 ADR-025 告警版升级）
+ENFORCE=1 "$root/scripts/retro_pending_check.sh" 7 >&2 || exit 1
 
 # 非阻断度量，不计入门禁序号（ADR-021 决策①）：每次提交向 docs/METRICS.md 追加一行提交事件
 "$root/scripts/metrics_collect.sh" >&2

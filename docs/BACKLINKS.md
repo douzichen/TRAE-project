@@ -116,6 +116,7 @@
 - docs/adr/ADR-028-measurement-and-gate-revision.md
 - docs/adr/ADR-030-version-identity-and-external-drafts.md
 - docs/adr/ADR-031-tool-path-judgement.md
+- docs/adr/ADR-034-retro-ledger-enforcement.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
@@ -184,6 +185,7 @@
 - docs/adr/ADR-026-nine-item-rulings-deadline-desensitization.md
 - docs/adr/ADR-028-measurement-and-gate-revision.md
 - docs/adr/ADR-032-customer-data-landing.md
+- docs/adr/ADR-034-retro-ledger-enforcement.md
 - rules/03-skill-sync.md
 - rules/04-roles-and-dispatch.md
 - rules/06-quality.md
