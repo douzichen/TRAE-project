@@ -9,9 +9,9 @@
 - 用户当轮已把边界说清并明确批准（如"批准通过"）时，仍需先复述再直接执行；目的是把"理解偏差"挡在执行之前，而不是靠返工发现。
 - **指令内部冲突**：同一指令中出现两条互相冲突的要求时（如"不要执行 git"与"用 git log 统计"），按从严执行（禁止性要求优先），并在回复首句声明冲突与所采口径。
 
-- **交付清单（DoD）**：D-1~D-7 的细则只存在于 [15 交付反馈清单](15-delivery-dod.md)；开工前先读、收尾逐项对照，禁止"如需再贴一遍"式推迟。
+- **交付清单（DoD）**：D-1~D-7 的细则只存在于 [15 交付反馈清单](15-delivery-dod.md)；开工前先读、收尾逐项对照，禁止"如需再贴一遍"式推迟；交付前还须按 [16 逐功能点测试覆盖](16-feature-test-coverage.md) 逐功能点自查；涉及交付的项目还须在边界确认时产出功能点清单（供 [16](16-feature-test-coverage.md) 使用）。
 - **冷启动协议**：原文见 [07 冷启动自检](07-pending-and-handoff.md#冷启动自检)（加载声明、未确认首行、启动自检与退出码）。
-- **本地专属规则（若存在则必读）**：开工前检查本机是否存在 `.local-rules/ENTRY-*.md`（工作区根目录，不入库）。存在则必须读取其正文并在本次任务中遵守，交付时写明"已加载本地规则 <ID>"；哈希校验由 `scripts/session_start_check.sh` 调用 `scripts/local_rules_check.sh` 完成，正文被改动时先按入口登记的 SHA256 复核再执行。机制见 [ADR-035](../docs/adr/ADR-035-local-only-rules.md)。
+- **本地专属规则（若存在且未停用则必读）**：开工前检查本机 `.local-rules/ENTRY-*.md`；仅当 L-INDEX 未标注"停用/归档"时读取正文并遵守，交付写明"已加载本地规则 <ID>"；已被通用条款取代的（如 IRON-0002→[16](16-feature-test-coverage.md)）不加载。哈希校验由 `scripts/session_start_check.sh` 调用 `scripts/local_rules_check.sh` 完成。机制见 [ADR-035](../docs/adr/ADR-035-local-only-rules.md)。
 
 ## 相关分册
 

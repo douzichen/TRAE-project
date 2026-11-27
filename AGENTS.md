@@ -9,7 +9,7 @@
 | --- | --- |
 | 用户身份、职业边界、沟通偏好 | [01](rules/01-user-profile.md) |
 | 收到指令后的行为（复述、边界确认、交付格式） | [02](rules/02-intake-and-dod.md) |
-| 交付反馈清单与 D-1~D-7 细则 | [15](rules/15-delivery-dod.md) |
+| 交付反馈清单与 D-1~D-7 细则、逐功能点测试覆盖 | [15](rules/15-delivery-dod.md)、[16](rules/16-feature-test-coverage.md) |
 | skill/workflow 的同步与副本一致性 | [03](rules/03-skill-sync.md) |
 | 主/子 Agent 分工、派发、执行控制、工具调用路径判定 | [04](rules/04-roles-and-dispatch.md) |
 | 需求是否成立、财税合规依据 | [05](rules/05-requirement-review.md) |
@@ -49,6 +49,7 @@
 | 9 | 改前备回滚；审计资产（账本、审查结论、ADR）永不删 | [11](rules/11-rollback.md)、[06](rules/06-quality.md) |
 | 10 | 改任何 Skill 必须同步副本并核对报出结果 | [03](rules/03-skill-sync.md) |
 | 11 | 向用户提问必须先自检：技术问题自己定，不得推回用户 | [01](rules/01-user-profile.md) |
+| 12 | 交付前每个功能点 3~5 个测试项，双视角齐备、角度互异 | [16](rules/16-feature-test-coverage.md) |
 
 ## 分册索引
 
@@ -67,7 +68,7 @@
 | 12 | [上下文预算与按需加载](rules/12-context-budget.md) | 规则库增长或触达预算阈值时 |
 | 13 | [并发认领与生命周期](rules/13-concurrency-and-lifecycle.md) | 多 Agent 并行作业、需求变更或下线时 |
 | 14 | [项目创建、既有项目接入与需求收集](rules/14-project-bootstrap.md) | 新项目立项、老项目接入、从需求收集到骨架跑通时 |
-| 15 | [交付反馈清单（DoD）](rules/15-delivery-dod.md) | 每次交付时 |
+| 15/16 | [交付反馈清单（DoD）](rules/15-delivery-dod.md)、[逐功能点测试覆盖](rules/16-feature-test-coverage.md) | 每次交付时、项目验收前 |
 
 ## 规则库结构约定（双向链接）
 

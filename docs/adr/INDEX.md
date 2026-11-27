@@ -43,6 +43,7 @@
 | [ADR-034](ADR-034-retro-ledger-enforcement.md) | 复盘台账强制：覆盖 sha＋阻断，状态/证据机检，fact_digest 强制粘贴 | 2026-11-26 | 已接受 |
 | [ADR-035](ADR-035-local-only-rules.md) | 本地专属规则机制（.local-rules 不入 git）与本地决策 L 系列编号 | 2026-11-26 | 已接受 |
 | [ADR-036](ADR-036-nightly-full-review.md) | 夜间全库审查：每日随 00:00 复盘，机械自修＋语义只报 | 2026-11-26 | 已接受 |
+| [ADR-037](ADR-037-promote-feature-test-coverage.md) | 逐功能点测试覆盖升格为通用条款（rules/16），IRON-0002 退役 | 2026-11-27 | 已接受 |
 
 ## 何时必须写 ADR
 

@@ -1,5 +1,7 @@
 # ADR-035：本地专属规则机制（.local-rules 不入 git）与本地决策 L 系列编号
 
+> 注（2026-11-27，ADR-037）：IRON-0002 已升格为 rules/16；本 ADR 的外置机制保留，仅用于确实不宜上传的内容。
+
 - 日期：2026-11-26
 - 状态：已接受（2026-11-26，用户要求"本地规则不上传 GitHub 且不被覆盖"）
 - 关联：[ADR-017](ADR-017-cross-project-operating-model.md)、[ADR-030](ADR-030-version-identity-and-external-drafts.md)、[ADR-033](ADR-033-precipitation-dispatch-and-mirror.md)、[ADR-034](ADR-034-retro-ledger-enforcement.md)
@@ -44,7 +46,7 @@
 1. 在外部机器把本地 ADR-033(IRON) 改名登记为 L-001（文件移到其本地规则目录，不占 ADR 全局号）。
 2. 导出其 5 个未推送提交的 diff 存档（`git format-patch origin/main..HEAD -o <备份目录>`）。
 3. `git fetch origin && git reset --hard origin/main` 丢弃未推送提交（先完成第 2 步备份）。
-4. 在该机重跑 `scripts/local_rules_install.sh` 安装 IRON-0002（回填本机路径与哈希）。
+4. 在该机如需恢复历史本地规则再跑 `scripts/local_rules_install.sh`（回填本机路径与哈希）；IRON-0002 已退役，不再安装。
 5. 把原 5 个提交的能力按本仓 ADR-035 与 `docs/adr/ADR-036-nightly-full-review.md` 重新落，不直接 merge，避免与全局 ADR-033/034/035/036 撞号。
 
 ## 残余风险

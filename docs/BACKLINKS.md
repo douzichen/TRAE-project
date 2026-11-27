@@ -40,6 +40,7 @@
 - docs/adr/ADR-013-handoff-snapshot.md
 - docs/adr/ADR-019-startup-sync-gate.md
 - docs/adr/ADR-021-universal-hardening-eight-dispositions.md
+- docs/adr/ADR-037-promote-feature-test-coverage.md
 - rules/00-core.md
 - rules/04-roles-and-dispatch.md
 - rules/07-pending-and-handoff.md
@@ -47,6 +48,7 @@
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
 - rules/15-delivery-dod.md
+- rules/16-feature-test-coverage.md
 
 ## 03-skill-sync.md
 
@@ -121,11 +123,13 @@
 - docs/adr/ADR-034-retro-ledger-enforcement.md
 - docs/adr/ADR-035-local-only-rules.md
 - docs/adr/ADR-036-nightly-full-review.md
+- docs/adr/ADR-037-promote-feature-test-coverage.md
 - rules/04-roles-and-dispatch.md
 - rules/05-requirement-review.md
 - rules/10-lessons.md
 - rules/13-concurrency-and-lifecycle.md
 - rules/14-project-bootstrap.md
+- rules/16-feature-test-coverage.md
 - schedules/daily-retro.md
 - skills/S-002-project-bootstrap.md
 
@@ -262,11 +266,21 @@
 - docs/adr/ADR-008-project-bootstrap-and-requirements-intake.md
 - docs/adr/ADR-010-policy-evidence-gate.md
 - docs/adr/ADR-024-external-agent-instruction-observation.md
+- docs/adr/ADR-037-promote-feature-test-coverage.md
 - rules/00-core.md
 - rules/02-intake-and-dod.md
 - rules/04-roles-and-dispatch.md
 - rules/12-context-budget.md
 - rules/13-concurrency-and-lifecycle.md
+- rules/16-feature-test-coverage.md
 - skills/S-004-rulebase-onboarding.md
 - skills/S-007-external-scan.md
+
+## 16-feature-test-coverage.md
+
+- AGENTS.md
+- docs/CONFLICT-MATRIX.md
+- docs/adr/ADR-037-promote-feature-test-coverage.md
+- rules/02-intake-and-dod.md
+- rules/15-delivery-dod.md
 
